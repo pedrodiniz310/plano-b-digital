@@ -1,0 +1,8 @@
+/* Ana Paula Fiório — Design System
+ * Entry point: link this single file to load all tokens, fonts and effects.
+ * Consumers import this one file only; do not add inline rules here.
+ */
+@import "./tokens/colors.css";
+@import "./tokens/typography.css";
+@import "./tokens/spacing.css";
+@import "./tokens/effects.css";

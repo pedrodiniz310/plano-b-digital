@@ -1,0 +1,2419 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<template id="__bundler_thumbnail">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#123B5D"></rect><path d="M100 52 68 64v34c0 24 14 42 32 48 18-6 32-24 32-48V64l-32-12Z" fill="#246BFD" stroke="#EAF2FF" stroke-width="4" stroke-linejoin="round"></path><text x="100" y="112" text-anchor="middle" font-family="Poppins,system-ui,sans-serif" font-size="38" font-weight="700" fill="#fff">B</text><path d="M76 130c9 0 7-10 24-10s15 10 24 10" stroke="#5CE0A0" stroke-width="5" stroke-linecap="round" fill="none"></path></svg>
+</template>
+<helmet>
+<link rel="stylesheet" href="_ds/ana-paula-fi-rio-design-system-6bd756eb-b104-4801-a60a-2c658330a1d1/tokens/colors.css">
+<link rel="stylesheet" href="_ds/ana-paula-fi-rio-design-system-6bd756eb-b104-4801-a60a-2c658330a1d1/tokens/typography.css">
+<link rel="stylesheet" href="_ds/ana-paula-fi-rio-design-system-6bd756eb-b104-4801-a60a-2c658330a1d1/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/ana-paula-fi-rio-design-system-6bd756eb-b104-4801-a60a-2c658330a1d1/tokens/effects.css">
+<link rel="stylesheet" href="_ds/ana-paula-fi-rio-design-system-6bd756eb-b104-4801-a60a-2c658330a1d1/styles.css">
+<script src="_ds/ana-paula-fi-rio-design-system-6bd756eb-b104-4801-a60a-2c658330a1d1/_ds_bundle.js"></script>
+<style>
+body{margin:0;background:#EDF0F5;font-family:"Poppins",system-ui,sans-serif;color:#172033}
+a{color:#246BFD;text-decoration:none}a:hover{color:#123B5D}
+[data-pb]{--pb-deep:#123B5D;--pb-blue:#246BFD;--pb-blue-ink:#1B54CC;--pb-tint:#EAF2FF;--pb-green:#2DBE78;--pb-amber:#F4B740;--pb-red:#E5484D;--pb-bg:#F7F9FC;--pb-surface:#FFFFFF;--pb-card:#FFFFFF;--pb-text:#172033;--pb-text2:#667085;--pb-border:#E4EAF2;--pb-soft:rgba(18,59,93,.06);--pb-shadow:0 1px 2px rgba(16,24,40,.04),0 10px 28px rgba(16,24,40,.06)}
+[data-pb="dark"]{--pb-deep:#0B2540;--pb-blue:#4C8BFF;--pb-blue-ink:#77A6FF;--pb-tint:#16304E;--pb-green:#3ED08C;--pb-amber:#F6C560;--pb-red:#FF6B6E;--pb-bg:#0E1525;--pb-surface:#172033;--pb-card:#1D2939;--pb-text:#F1F5FB;--pb-text2:#94A3B8;--pb-border:#28364D;--pb-soft:rgba(255,255,255,.05);--pb-shadow:0 1px 2px rgba(0,0,0,.3),0 12px 30px rgba(0,0,0,.28)}
+[data-pb-contrast="on"]{--pb-text2:#3B4759;--pb-border:#94A3B8;--pb-soft:rgba(18,59,93,.12)}
+[data-pb="dark"][data-pb-contrast="on"]{--pb-text2:#D2DCEA;--pb-border:#6B7C96}
+[data-pb-font="m"]{zoom:1.09}
+[data-pb-font="g"]{zoom:1.2}
+[data-pb-scroll]{scrollbar-width:none}
+[data-pb-scroll]::-webkit-scrollbar{display:none}
+@keyframes pbRipple{0%{transform:scale(.72);opacity:0}35%{opacity:.9}100%{transform:scale(1.35);opacity:0}}
+@keyframes pbRise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes pbFade{from{opacity:0}to{opacity:1}}
+@keyframes pbSpin{to{transform:rotate(360deg)}}
+@keyframes pbDash{from{stroke-dashoffset:44}to{stroke-dashoffset:0}}
+@keyframes pbScan{0%{transform:translateY(-26px);opacity:0}20%{opacity:1}80%{opacity:1}100%{transform:translateY(26px);opacity:0}}
+@keyframes pbLoad{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes pbSheet{from{transform:translateY(100%)}to{transform:none}}
+@keyframes pbPop{from{opacity:0;transform:translateY(10px) scale(.96)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+<div style="min-height:100vh;box-sizing:border-box;display:flex;justify-content:center;align-items:flex-start;gap:40px;padding:44px 32px 72px;background:radial-gradient(120% 90% at 50% 0%,#F4F6FA 0%,#E6EAF1 100%)">
+
+<sc-if value="{{ ui.rail }}" hint-placeholder-val="{{ true }}">
+<aside style="width:238px;flex:none;display:flex;flex-direction:column;gap:26px;position:sticky;top:44px">
+<div>
+<div style="display:flex;align-items:center;gap:9px;margin-bottom:8px">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2.4 4.4 5.4v6c0 5 3.3 9 7.6 10.4 4.3-1.4 7.6-5.4 7.6-10.4v-6L12 2.4Z" fill="#123B5D"></path><path d="M8.6 15.8c2-.2 2.2-2.8 3.6-2.8s1.6 2.6 3.6 2.8" stroke="#2DBE78" stroke-width="1.6" stroke-linecap="round"></path></svg>
+<span style="font-size:14px;font-weight:600;letter-spacing:-.02em">Plano B Digital</span>
+</div>
+<p style="margin:0;font-size:11.5px;line-height:1.55;color:#667085">Protótipo navegável do fluxo de entrada. Dados simulados, salvos apenas neste navegador.</p>
+</div>
+
+<div>
+<p style="margin:0 0 10px;font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#8B98AB">Telas</p>
+<div style="display:flex;flex-direction:column;gap:4px">
+<sc-for list="{{ rail }}" as="r" hint-placeholder-count="7">
+<button type="button" onClick="{{ r.on }}" style="appearance:none;border:1px solid {{ r.bd }};background:{{ r.bg }};color:{{ r.fg }};text-align:left;padding:9px 12px;border-radius:10px;font:500 12.5px/1.2 Poppins,system-ui,sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;white-space:nowrap;transition:.16s ease" style-hover="border-color:#123B5D">
+<span>{{ r.label }}</span>
+<span style="font-size:10px;color:#98A4B8">{{ r.step }}</span>
+</button>
+</sc-for>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px;padding:16px;border:1px solid #DDE3EC;border-radius:14px;background:rgba(255,255,255,.7)">
+<p style="margin:0;font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#8B98AB">Preferências</p>
+<div style="display:flex;flex-direction:column;gap:7px">
+<span style="font-size:11.5px;color:#667085">Tema</span>
+<div style="display:flex;gap:6px">
+<sc-for list="{{ prefs.themes }}" as="t" hint-placeholder-count="2">
+<button type="button" onClick="{{ t.on }}" style="flex:1;appearance:none;cursor:pointer;border:1px solid {{ t.bd }};background:{{ t.bg }};color:{{ t.fg }};border-radius:9px;padding:7px 0;font:500 11.5px Poppins,system-ui,sans-serif">{{ t.label }}</button>
+</sc-for>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:7px">
+<span style="font-size:11.5px;color:#667085">Tamanho da fonte</span>
+<div style="display:flex;gap:6px">
+<sc-for list="{{ prefs.fonts }}" as="t" hint-placeholder-count="3">
+<button type="button" onClick="{{ t.on }}" style="flex:1;appearance:none;cursor:pointer;border:1px solid {{ t.bd }};background:{{ t.bg }};color:{{ t.fg }};border-radius:9px;padding:7px 0;font:600 {{ t.size }} Poppins,system-ui,sans-serif">A</button>
+</sc-for>
+</div>
+</div>
+<button type="button" onClick="{{ prefs.toggleContrast }}" style="appearance:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid #DDE3EC;background:#fff;border-radius:10px;padding:9px 11px;font:500 12px Poppins,system-ui,sans-serif;color:#172033">
+<span>Alto contraste</span>
+<span style="width:34px;height:19px;border-radius:99px;background:{{ prefs.contrastBg }};position:relative;transition:.18s ease"><span style="position:absolute;top:2px;left:{{ prefs.contrastX }};width:15px;height:15px;border-radius:50%;background:#fff;transition:.18s ease"></span></span>
+</button>
+<button type="button" onClick="{{ prefs.reset }}" style="appearance:none;cursor:pointer;border:1px solid #E4D3D4;background:#fff;color:#B02A2E;border-radius:10px;padding:9px 11px;font:500 12px Poppins,system-ui,sans-serif;text-align:left">Limpar dados locais</button>
+</div>
+</aside>
+</sc-if>
+
+<div style="display:flex;flex-direction:column;align-items:center;gap:16px">
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" dark="{{ dev.dark }}" hint-size="402px,874px">
+<div data-pb="{{ ui.theme }}" data-pb-contrast="{{ ui.contrast }}" style="height:100%;display:flex;flex-direction:column;position:relative;overflow:hidden;background:var(--pb-bg);color:var(--pb-text);font-family:'Poppins',system-ui,sans-serif">
+<div aria-hidden="true" style="position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden">
+<div style="position:absolute;top:-130px;right:-120px;width:330px;height:330px;border-radius:50%;background:radial-gradient(circle at 34% 34%,rgba(36,107,253,.20),rgba(36,107,253,0) 70%)"></div>
+<div style="position:absolute;bottom:-150px;left:-130px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle at 62% 40%,rgba(45,190,120,.18),rgba(45,190,120,0) 70%)"></div>
+<div style="position:absolute;top:32%;left:-90px;width:230px;height:230px;border-radius:50%;background:radial-gradient(circle at 50% 50%,rgba(18,59,93,.10),rgba(18,59,93,0) 72%)"></div>
+<div style="position:absolute;top:96px;right:-86px;width:210px;height:210px;border-radius:64px;border:1.5px solid var(--pb-border);opacity:.7;transform:rotate(24deg)"></div>
+<div style="position:absolute;top:150px;right:-42px;width:120px;height:120px;border-radius:38px;border:1.5px solid var(--pb-border);opacity:.55;transform:rotate(-12deg)"></div>
+<div style="position:absolute;bottom:118px;left:-58px;width:186px;height:186px;border-radius:58px;border:1.5px solid var(--pb-border);opacity:.6;transform:rotate(-18deg)"></div>
+<div style="position:absolute;bottom:44px;left:64px;width:88px;height:88px;border-radius:28px;border:1.5px solid var(--pb-border);opacity:.45;transform:rotate(16deg)"></div>
+<svg width="402" height="874" viewBox="0 0 402 874" fill="none" style="position:absolute;inset:0;opacity:.5">
+<circle cx="330" cy="612" r="3" fill="var(--pb-border)"></circle>
+<circle cx="352" cy="648" r="2" fill="var(--pb-border)"></circle>
+<circle cx="58" cy="292" r="2.5" fill="var(--pb-border)"></circle>
+<circle cx="30" cy="248" r="2" fill="var(--pb-border)"></circle>
+<path d="M-10 486c58-26 96 22 152-2s84-60 150-36 92 76 130 58" stroke="var(--pb-border)" stroke-width="1.4" stroke-dasharray="3 11" stroke-linecap="round" opacity=".9"></path>
+</svg>
+</div>
+<div data-pb-scroll data-pb-font="{{ ui.font }}" style="flex:1;overflow:auto;position:relative;z-index:1">
+
+<sc-if value="{{ s.splash }}" hint-placeholder-val="{{ true }}">
+<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 36px;gap:30px">
+<div style="position:absolute;top:-60px;left:50%;width:420px;height:420px;margin-left:-210px;border-radius:50%;background:radial-gradient(circle at 50% 45%,rgba(36,107,253,.16),rgba(36,107,253,0) 68%)"></div>
+<div style="position:absolute;bottom:-40px;right:-70px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle at 40% 40%,rgba(45,190,120,.16),rgba(45,190,120,0) 70%)"></div>
+<div style="position:relative;width:196px;height:196px;display:flex;align-items:center;justify-content:center">
+<div style="position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(36,107,253,.28);animation:pbRipple 3.4s ease-out infinite"></div>
+<div style="position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(36,107,253,.2);animation:pbRipple 3.4s .9s ease-out infinite"></div>
+<div style="position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(36,107,253,.14);animation:pbRipple 3.4s 1.8s ease-out infinite"></div>
+<div style="position:absolute;inset:22px;border-radius:50%;background:var(--pb-surface);box-shadow:0 18px 44px rgba(18,59,93,.14),0 2px 6px rgba(18,59,93,.06)"></div>
+<svg width="104" height="104" viewBox="0 0 96 96" fill="none" style="position:relative;animation:pbRise .7s cubic-bezier(.22,1,.36,1) both">
+<defs><linearGradient id="pbShield" x1="17" y1="7" x2="79" y2="90" gradientUnits="userSpaceOnUse"><stop stop-color="#2E7BFF"></stop><stop offset="1" stop-color="#123B5D"></stop></linearGradient></defs>
+<path d="M48 7 17 18.9v27.4C17 67.6 30.2 84 48 89.6 65.8 84 79 67.6 79 46.3V18.9L48 7Z" fill="url(#pbShield)"></path>
+<text x="48" y="53" text-anchor="middle" font-family="Poppins,system-ui" font-size="30" font-weight="700" fill="#FFFFFF">B</text>
+<path d="M29 68c8.5 0 7-9 19-9s10.5 9 19 9" stroke="#5CE0A0" stroke-width="2.8" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44" style="animation:pbDash 1.4s .5s cubic-bezier(.22,1,.36,1) forwards"></path>
+</svg>
+</div>
+<div style="text-align:center;position:relative;animation:pbRise .7s .22s cubic-bezier(.22,1,.36,1) both">
+<h1 style="margin:0;font-size:31px;font-weight:600;letter-spacing:-.03em;color:var(--pb-deep)">Plano B Digital</h1>
+<p style="margin:9px 0 0;font-size:15px;font-weight:300;color:var(--pb-text2)">Prepare-se antes que aconteça</p>
+</div>
+<div style="position:absolute;bottom:62px;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:16px;animation:pbFade 1s .8s both">
+<div style="width:120px;height:3px;border-radius:99px;background:var(--pb-border);overflow:hidden"><div style="height:100%;width:100%;background:var(--pb-green);transform-origin:left;animation:pbLoad 2.2s .2s linear both"></div></div>
+<p style="margin:0;font-size:11.5px;color:var(--pb-text2);display:flex;align-items:center;gap:6px">
+<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5.5 10.5h13v10h-13zM8.5 10.5V7a3.5 3.5 0 0 1 7 0v3.5"></path></svg>
+Seus dados ficam apenas neste aparelho</p>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ s.ob }}">
+<div style="min-height:100%;box-sizing:border-box;display:flex;flex-direction:column;padding:66px 26px 30px">
+<div style="display:flex;align-items:center;justify-content:space-between;height:36px">
+<div style="display:flex;gap:6px">
+<sc-for list="{{ ob.dots }}" as="d" hint-placeholder-count="4">
+<span style="height:5px;border-radius:99px;width:{{ d.w }};background:{{ d.bg }};transition:.3s cubic-bezier(.22,1,.36,1)"></span>
+</sc-for>
+</div>
+<button type="button" onClick="{{ ob.skip }}" style="appearance:none;background:none;border:0;cursor:pointer;font:500 13px Poppins,system-ui,sans-serif;color:var(--pb-text2);padding:8px 2px">Pular introdução</button>
+</div>
+
+<div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:34px;padding:12px 0 22px">
+<div style="position:relative;width:236px;height:236px;display:flex;align-items:center;justify-content:center">
+<div style="position:absolute;inset:0;border-radius:50%;background:{{ ob.tint }};transition:.4s ease"></div>
+<svg width="236" height="236" viewBox="0 0 236 236" fill="none" style="position:absolute;inset:0;animation:pbSpin 34s linear infinite">
+<circle cx="118" cy="118" r="112" stroke="{{ ob.accent }}" stroke-opacity=".28" stroke-width="1.5" stroke-dasharray="3 13" stroke-linecap="round"></circle>
+</svg>
+<div style="position:relative;width:120px;height:172px;border-radius:22px;background:var(--pb-surface);box-shadow:var(--pb-shadow);border:1px solid var(--pb-border);transform:rotate({{ ob.rot }});display:flex;flex-direction:column;gap:9px;padding:20px 16px;box-sizing:border-box;transition:.4s cubic-bezier(.22,1,.36,1)">
+<span style="height:7px;width:54%;border-radius:99px;background:var(--pb-soft)"></span>
+<span style="height:7px;width:82%;border-radius:99px;background:var(--pb-soft)"></span>
+<span style="height:7px;width:38%;border-radius:99px;background:var(--pb-soft)"></span>
+<span style="margin-top:6px;height:34px;border-radius:10px;background:{{ ob.tint }}"></span>
+<span style="height:7px;width:66%;border-radius:99px;background:var(--pb-soft)"></span>
+</div>
+<div style="position:absolute;right:26px;bottom:30px;width:76px;height:76px;border-radius:26px;background:{{ ob.accent }};display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 14px 30px {{ ob.glow }};animation:pbPop .5s cubic-bezier(.22,1,.36,1)">
+<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="{{ ob.glyph }}"></path></svg>
+</div>
+</div>
+
+<div style="text-align:center;max-width:322px">
+<span style="display:inline-block;font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:{{ ob.accent }};margin-bottom:14px">{{ ob.chip }}</span>
+<h2 style="margin:0;font-size:26px;line-height:1.18;font-weight:600;letter-spacing:-.03em;color:var(--pb-text);text-wrap:pretty">{{ ob.title }}</h2>
+<p style="margin:14px 0 0;font-size:15px;line-height:1.6;font-weight:300;color:var(--pb-text2);text-wrap:pretty">{{ ob.desc }}</p>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<button type="button" onClick="{{ ob.next }}" style="appearance:none;cursor:pointer;border:0;height:56px;border-radius:18px;background:var(--pb-blue);color:#fff;font:600 16px Poppins,system-ui,sans-serif;display:flex;align-items:center;justify-content:center;gap:9px;box-shadow:0 10px 24px rgba(36,107,253,.24);transition:.16s ease" style-hover="background:var(--pb-blue-ink)" style-active="transform:scale(.99)">
+<span>{{ ob.cta }}</span>
+<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"></path></svg>
+</button>
+<sc-if value="{{ ob.isLast }}">
+<button type="button" onClick="{{ ob.haveplan }}" style="appearance:none;cursor:pointer;height:52px;border-radius:18px;background:transparent;border:1.5px solid var(--pb-border);color:var(--pb-text);font:500 15px Poppins,system-ui,sans-serif" style-hover="border-color:var(--pb-blue);color:var(--pb-blue)">Já tenho um plano</button>
+</sc-if>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ s.auth }}">
+<div style="min-height:100%;box-sizing:border-box;display:flex;flex-direction:column;padding:62px 26px 34px">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:22px">
+<button type="button" onClick="{{ au.back }}" aria-label="Voltar para a introdução" style="appearance:none;cursor:pointer;width:42px;height:42px;border-radius:14px;border:1px solid var(--pb-border);background:var(--pb-surface);color:var(--pb-text);display:flex;align-items:center;justify-content:center" style-hover="border-color:var(--pb-blue);color:var(--pb-blue)">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5.5 8.5 12l6.5 6.5"></path></svg>
+</button>
+<div style="display:flex;align-items:center;gap:8px;color:var(--pb-deep)">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2.4 4.4 5.4v6c0 5 3.3 9 7.6 10.4 4.3-1.4 7.6-5.4 7.6-10.4v-6L12 2.4Z" fill="currentColor"></path><path d="M8.6 15.8c2-.2 2.2-2.8 3.6-2.8s1.6 2.6 3.6 2.8" stroke="#2DBE78" stroke-width="1.6" stroke-linecap="round"></path></svg>
+<span style="font-size:14px;font-weight:600;letter-spacing:-.02em;color:var(--pb-text)">Plano B Digital</span>
+</div>
+</div>
+
+<h2 style="margin:0;font-size:26px;line-height:1.2;font-weight:600;letter-spacing:-.03em">{{ au.title }}</h2>
+<p style="margin:9px 0 22px;font-size:14.5px;line-height:1.55;font-weight:300;color:var(--pb-text2);text-wrap:pretty">{{ au.sub }}</p>
+
+<div role="tablist" style="display:flex;gap:4px;padding:4px;border-radius:16px;background:var(--pb-soft);margin-bottom:22px">
+<sc-for list="{{ au.tabs }}" as="t" hint-placeholder-count="2">
+<button type="button" role="tab" onClick="{{ t.on }}" style="flex:1;appearance:none;cursor:pointer;border:0;height:42px;border-radius:12px;background:{{ t.bg }};color:{{ t.fg }};box-shadow:{{ t.sh }};font:600 14px Poppins,system-ui,sans-serif;transition:.18s ease">{{ t.label }}</button>
+</sc-for>
+</div>
+
+<form onSubmit="{{ au.submit }}" style="display:flex;flex-direction:column;gap:16px">
+<sc-if value="{{ au.isSignup }}">
+<div style="display:flex;flex-direction:column;gap:7px">
+<label for="pb-nome" style="font-size:13px;font-weight:500;color:var(--pb-text2)">Nome</label>
+<input id="pb-nome" type="text" value="{{ au.f.name }}" onChange="{{ au.onName }}" placeholder="Como podemos te chamar" autoComplete="off" style="box-sizing:border-box;height:54px;border-radius:16px;border:1.5px solid {{ au.bdName }};background:var(--pb-surface);color:var(--pb-text);padding:0 16px;font:400 15px Poppins,system-ui,sans-serif;outline:none;transition:.16s ease" style-focus="border-color:var(--pb-blue);box-shadow:0 0 0 4px rgba(36,107,253,.14)">
+<sc-if value="{{ au.eName }}">
+<span style="display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--pb-red)">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3.5 2.8 19.5h18.4L12 3.5ZM12 9.5v4.5M12 17v.01"></path></svg>{{ au.eName }}</span>
+</sc-if>
+</div>
+</sc-if>
+
+<div style="display:flex;flex-direction:column;gap:7px">
+<label for="pb-email" style="font-size:13px;font-weight:500;color:var(--pb-text2)">E-mail</label>
+<input id="pb-email" type="email" value="{{ au.f.email }}" onChange="{{ au.onEmail }}" placeholder="nome@email.com" autoComplete="off" style="box-sizing:border-box;height:54px;border-radius:16px;border:1.5px solid {{ au.bdEmail }};background:var(--pb-surface);color:var(--pb-text);padding:0 16px;font:400 15px Poppins,system-ui,sans-serif;outline:none;transition:.16s ease" style-focus="border-color:var(--pb-blue);box-shadow:0 0 0 4px rgba(36,107,253,.14)">
+<sc-if value="{{ au.eEmail }}">
+<span style="display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--pb-red)">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3.5 2.8 19.5h18.4L12 3.5ZM12 9.5v4.5M12 17v.01"></path></svg>{{ au.eEmail }}</span>
+</sc-if>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:7px">
+<label for="pb-senha" style="font-size:13px;font-weight:500;color:var(--pb-text2)">Senha</label>
+<div style="position:relative;display:flex">
+<input id="pb-senha" type="{{ au.passType }}" value="{{ au.f.pass }}" onChange="{{ au.onPass }}" placeholder="Mínimo de 8 caracteres" autoComplete="off" style="box-sizing:border-box;width:100%;height:54px;border-radius:16px;border:1.5px solid {{ au.bdPass }};background:var(--pb-surface);color:var(--pb-text);padding:0 52px 0 16px;font:400 15px Poppins,system-ui,sans-serif;outline:none;transition:.16s ease" style-focus="border-color:var(--pb-blue);box-shadow:0 0 0 4px rgba(36,107,253,.14)">
+<button type="button" onClick="{{ au.toggleEye }}" aria-label="{{ au.eyeLabel }}" style="position:absolute;right:6px;top:6px;width:42px;height:42px;border-radius:12px;border:0;background:transparent;color:var(--pb-text2);cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="color:var(--pb-blue);background:var(--pb-soft)">
+<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 6 12 6s9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6ZM12 14.6a2.6 2.6 0 1 0 0-5.2 2.6 2.6 0 0 0 0 5.2"></path></svg>
+</button>
+</div>
+<sc-if value="{{ au.pwShow }}">
+<div style="display:flex;align-items:center;gap:10px;margin-top:2px">
+<span style="flex:1;height:5px;border-radius:99px;background:var(--pb-soft);overflow:hidden;display:block"><span style="display:block;height:100%;border-radius:99px;width:{{ au.pwW }};background:{{ au.pwColor }};transition:.28s cubic-bezier(.22,1,.36,1)"></span></span>
+<span style="font-size:12px;font-weight:500;color:{{ au.pwColor }}">{{ au.pwLabel }}</span>
+</div>
+</sc-if>
+<sc-if value="{{ au.ePass }}">
+<span style="display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--pb-red)">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3.5 2.8 19.5h18.4L12 3.5ZM12 9.5v4.5M12 17v.01"></path></svg>{{ au.ePass }}</span>
+</sc-if>
+</div>
+
+<sc-if value="{{ au.isSignup }}">
+<div style="display:flex;flex-direction:column;gap:7px">
+<label for="pb-senha2" style="font-size:13px;font-weight:500;color:var(--pb-text2)">Confirmar senha</label>
+<input id="pb-senha2" type="password" value="{{ au.f.pass2 }}" onChange="{{ au.onPass2 }}" placeholder="Repita a senha" autoComplete="off" style="box-sizing:border-box;height:54px;border-radius:16px;border:1.5px solid {{ au.bdPass2 }};background:var(--pb-surface);color:var(--pb-text);padding:0 16px;font:400 15px Poppins,system-ui,sans-serif;outline:none;transition:.16s ease" style-focus="border-color:var(--pb-blue);box-shadow:0 0 0 4px rgba(36,107,253,.14)">
+<sc-if value="{{ au.ePass2 }}">
+<span style="display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--pb-red)">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3.5 2.8 19.5h18.4L12 3.5ZM12 9.5v4.5M12 17v.01"></path></svg>{{ au.ePass2 }}</span>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ au.isLogin }}">
+<button type="button" onClick="{{ au.toRecover }}" style="align-self:flex-start;appearance:none;background:none;border:0;padding:2px;cursor:pointer;font:500 13.5px Poppins,system-ui,sans-serif;color:var(--pb-blue)" style-hover="color:var(--pb-blue-ink)">Esqueci meu acesso</button>
+</sc-if>
+
+<button type="submit" style="appearance:none;cursor:pointer;border:0;height:56px;border-radius:18px;background:var(--pb-blue);color:#fff;font:600 16px Poppins,system-ui,sans-serif;box-shadow:0 10px 24px rgba(36,107,253,.24);transition:.16s ease" style-hover="background:var(--pb-blue-ink)" style-active="transform:scale(.99)">{{ au.cta }}</button>
+</form>
+
+<div style="display:flex;align-items:center;gap:12px;margin:22px 0 18px">
+<span style="flex:1;height:1px;background:var(--pb-border)"></span>
+<span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--pb-text2)">ou</span>
+<span style="flex:1;height:1px;background:var(--pb-border)"></span>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<button type="button" onClick="{{ au.bio }}" style="appearance:none;cursor:pointer;height:54px;border-radius:18px;border:1.5px solid var(--pb-border);background:var(--pb-surface);color:var(--pb-text);font:500 15px Poppins,system-ui,sans-serif;display:flex;align-items:center;justify-content:center;gap:10px" style-hover="border-color:var(--pb-blue);color:var(--pb-blue)">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.6c-3 0-5.6 1.6-7 4M19 7.6a8.4 8.4 0 0 0-3-3.2M5.2 10.4A6.8 6.8 0 0 1 12 6.4a6.8 6.8 0 0 1 6.8 4M8.6 20.2a12 12 0 0 0 1.4-5.6 2 2 0 0 1 4 0c0 1.8-.3 3.6-.8 5.3M5.4 17.6c.4-1 .6-2 .6-3M18.2 14.6c0 2-.3 4-.9 5.9"></path></svg>
+Entrar com biometria
+</button>
+<button type="button" onClick="{{ au.guest }}" style="appearance:none;cursor:pointer;height:54px;border-radius:18px;border:1.5px dashed var(--pb-border);background:transparent;color:var(--pb-text2);font:500 15px Poppins,system-ui,sans-serif" style-hover="border-color:var(--pb-blue);color:var(--pb-blue)">Continuar como visitante</button>
+</div>
+
+<div style="margin-top:22px;display:flex;gap:10px;padding:14px;border-radius:16px;background:var(--pb-tint);color:var(--pb-deep)">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" style="flex:none;margin-top:1px"><path d="M5.5 10.5h13v10h-13zM8.5 10.5V7a3.5 3.5 0 0 1 7 0v3.5"></path></svg>
+<p style="margin:0;font-size:12px;line-height:1.5;font-weight:400">Protótipo acadêmico: nenhuma senha é enviada ou verificada. Tudo fica salvo apenas neste aparelho.</p>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ s.recover }}">
+<div style="min-height:100%;box-sizing:border-box;display:flex;flex-direction:column;padding:62px 26px 34px">
+<button type="button" onClick="{{ rc.back }}" aria-label="Voltar para o login" style="appearance:none;cursor:pointer;width:42px;height:42px;border-radius:14px;border:1px solid var(--pb-border);background:var(--pb-surface);color:var(--pb-text);display:flex;align-items:center;justify-content:center;margin-bottom:26px" style-hover="border-color:var(--pb-blue);color:var(--pb-blue)">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5.5 8.5 12l6.5 6.5"></path></svg>
+</button>
+
+<sc-if value="{{ rc.sent }}">
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:22px;padding-bottom:40px;animation:pbRise .5s cubic-bezier(.22,1,.36,1) both">
+<div style="width:88px;height:88px;border-radius:32px;background:rgba(45,190,120,.12);color:var(--pb-green);display:flex;align-items:center;justify-content:center">
+<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5 9.5 17.5 19.5 6.5"></path></svg>
+</div>
+<div>
+<h2 style="margin:0;font-size:23px;font-weight:600;letter-spacing:-.03em">Instruções enviadas</h2>
+<p style="margin:12px 0 0;font-size:14.5px;line-height:1.6;font-weight:300;color:var(--pb-text2);max-width:300px">Enviamos um link de recuperação simulado para <strong style="font-weight:500;color:var(--pb-text)">{{ rc.masked }}</strong>. Mostramos o endereço parcialmente por segurança.</p>
+</div>
+<button type="button" onClick="{{ rc.back }}" style="appearance:none;cursor:pointer;border:0;height:54px;padding:0 30px;border-radius:18px;background:var(--pb-blue);color:#fff;font:600 15.5px Poppins,system-ui,sans-serif" style-hover="background:var(--pb-blue-ink)">Voltar para o login</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ rc.notSent }}">
+<div style="flex:1;display:flex;flex-direction:column">
+<h2 style="margin:0;font-size:26px;line-height:1.2;font-weight:600;letter-spacing:-.03em">Recuperar acesso</h2>
+<p style="margin:9px 0 26px;font-size:14.5px;line-height:1.6;font-weight:300;color:var(--pb-text2);text-wrap:pretty">Informe o e-mail cadastrado. Enviaremos um link simulado de recuperação — nenhuma mensagem real é disparada.</p>
+<form onSubmit="{{ rc.submit }}" style="display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;flex-direction:column;gap:7px">
+<label for="pb-rc" style="font-size:13px;font-weight:500;color:var(--pb-text2)">E-mail de recuperação</label>
+<input id="pb-rc" type="email" value="{{ rc.email }}" onChange="{{ rc.on }}" placeholder="nome@email.com" autoComplete="off" style="box-sizing:border-box;height:54px;border-radius:16px;border:1.5px solid {{ rc.bd }};background:var(--pb-surface);color:var(--pb-text);padding:0 16px;font:400 15px Poppins,system-ui,sans-serif;outline:none" style-focus="border-color:var(--pb-blue);box-shadow:0 0 0 4px rgba(36,107,253,.14)">
+<sc-if value="{{ rc.err }}">
+<span style="display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--pb-red)">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3.5 2.8 19.5h18.4L12 3.5ZM12 9.5v4.5M12 17v.01"></path></svg>{{ rc.err }}</span>
+</sc-if>
+</div>
+<button type="submit" style="appearance:none;cursor:pointer;border:0;height:56px;border-radius:18px;background:var(--pb-blue);color:#fff;font:600 16px Poppins,system-ui,sans-serif;box-shadow:0 10px 24px rgba(36,107,253,.24)" style-hover="background:var(--pb-blue-ink)">Enviar instruções</button>
+</form>
+<div style="margin-top:24px;display:flex;gap:11px;padding:16px;border-radius:18px;border:1px solid var(--pb-border);background:var(--pb-surface)">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" style="flex:none;margin-top:1px;color:var(--pb-amber)"><path d="M12 3.2a8.8 8.8 0 1 0 0 17.6 8.8 8.8 0 0 0 0-17.6ZM12 11v5.4M12 7.6v.01"></path></svg>
+<p style="margin:0;font-size:12.5px;line-height:1.55;color:var(--pb-text2)">Sem acesso a este e-mail? No app final, um contato de confiança poderá ajudar a confirmar sua identidade.</p>
+</div>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ s.loading }}">
+<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px">
+<svg width="62" height="62" viewBox="0 0 62 62" fill="none" style="animation:pbSpin 1.1s linear infinite">
+<circle cx="31" cy="31" r="27" stroke="var(--pb-border)" stroke-width="4"></circle>
+<path d="M31 4a27 27 0 0 1 27 27" stroke="var(--pb-blue)" stroke-width="4" stroke-linecap="round"></path>
+</svg>
+<div style="text-align:center">
+<p style="margin:0;font-size:16px;font-weight:500">{{ load.label }}</p>
+<p style="margin:8px 0 0;font-size:13px;font-weight:300;color:var(--pb-text2)">Preparando seu ambiente local</p>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ s.ready }}">
+<div style="min-height:100%;box-sizing:border-box;display:flex;flex-direction:column;padding:70px 26px 34px;animation:pbFade .4s both">
+<div style="display:flex;align-items:center;gap:13px;margin-bottom:30px">
+<div style="width:52px;height:52px;border-radius:18px;background:var(--pb-deep);color:#fff;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600">{{ rd.initial }}</div>
+<div style="flex:1;min-width:0">
+<p style="margin:0;font-size:16.5px;font-weight:600;letter-spacing:-.02em">Tudo pronto, {{ rd.name }}</p>
+<p style="margin:3px 0 0;font-size:12.5px;color:var(--pb-text2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ rd.email }}</p>
+</div>
+<sc-if value="{{ rd.guest }}">
+<span style="flex:none;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--pb-blue-ink);background:var(--pb-tint);padding:6px 10px;border-radius:99px">Visitante</span>
+</sc-if>
+</div>
+
+<div style="border-radius:24px;padding:26px 24px;background:linear-gradient(160deg,#17466E,#123B5D 60%,#0B2540);color:#fff;box-shadow:0 18px 40px rgba(18,59,93,.28)">
+<span style="display:inline-block;font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:rgba(234,242,255,.62);margin-bottom:14px">Primeiro passo</span>
+<h2 style="margin:0;font-size:24px;line-height:1.2;font-weight:600;letter-spacing:-.03em;color:#fff">Teste de Prontidão Digital</h2>
+<p style="margin:12px 0 0;font-size:14px;line-height:1.6;font-weight:300;color:rgba(234,242,255,.82);text-wrap:pretty">Responda algumas perguntas para descobrir o quanto você está preparado para recuperar sua vida digital.</p>
+<div style="display:flex;gap:8px;margin-top:20px">
+<sc-for list="{{ rd.facts }}" as="fct" hint-placeholder-count="3">
+<span style="flex:1;text-align:center;padding:11px 4px;border-radius:14px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.12)">
+<span style="display:block;font-size:15px;font-weight:600;color:#fff">{{ fct.v }}</span>
+<span style="display:block;margin-top:3px;font-size:10.5px;color:rgba(234,242,255,.66)">{{ fct.k }}</span>
+</span>
+</sc-for>
+</div>
+</div>
+
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;margin-top:26px">
+<p style="margin:0 0 2px;font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--pb-text2)">O que vem depois <span style="color:var(--pb-amber)">✳</span></p>
+<sc-for list="{{ rd.steps }}" as="stp" hint-placeholder-count="3">
+<div style="display:flex;align-items:center;gap:13px;padding:15px 16px;border-radius:18px;background:var(--pb-surface);border:1px solid var(--pb-border)">
+<span style="width:38px;height:38px;flex:none;border-radius:13px;background:var(--pb-tint);color:var(--pb-deep);display:flex;align-items:center;justify-content:center">
+<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ stp.glyph }}"></path></svg>
+</span>
+<span style="flex:1;min-width:0">
+<span style="display:block;font-size:14px;font-weight:500;color:var(--pb-text)">{{ stp.t }}</span>
+<span style="display:block;margin-top:2px;font-size:12px;font-weight:300;color:var(--pb-text2)">{{ stp.d }}</span>
+</span>
+</div>
+</sc-for>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px;margin-top:24px">
+<button type="button" onClick="{{ rd.start }}" style="appearance:none;cursor:pointer;border:0;height:56px;border-radius:18px;background:var(--pb-blue);color:#fff;font:600 16px Poppins,system-ui,sans-serif;box-shadow:0 10px 24px rgba(36,107,253,.24)" style-hover="background:var(--pb-blue-ink)">Iniciar teste</button>
+<button type="button" onClick="{{ rd.later }}" style="appearance:none;cursor:pointer;height:52px;border-radius:18px;background:transparent;border:1.5px solid var(--pb-border);color:var(--pb-text);font:500 15px Poppins,system-ui,sans-serif" style-hover="border-color:var(--pb-blue);color:var(--pb-blue)">Fazer depois</button>
+</div>
+</div>
+</sc-if>
+
+
+<sc-if value="{{ s.quiz }}">
+<div style="min-height:100%;box-sizing:border-box;display:flex;flex-direction:column;padding:62px 26px 34px">
+<div style="display:flex;align-items:center;gap:14px;margin-bottom:26px">
+<button type="button" onClick="{{ qz.back }}" aria-label="Voltar" style="appearance:none;cursor:pointer;width:42px;height:42px;flex:none;border-radius:14px;border:1px solid var(--pb-border);background:var(--pb-surface);color:var(--pb-text);display:flex;align-items:center;justify-content:center" style-hover="border-color:var(--pb-blue);color:var(--pb-blue)">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5.5 8.5 12l6.5 6.5"></path></svg>
+</button>
+<div style="flex:1">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">
+<span style="font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--pb-text2)">Teste de Prontidão</span>
+<span style="font-size:12px;font-weight:500;color:var(--pb-text2)">{{ qz.num }}/{{ qz.total }}</span>
+</div>
+<span style="display:block;height:5px;border-radius:99px;background:var(--pb-soft);overflow:hidden"><span style="display:block;height:100%;border-radius:99px;background:var(--pb-blue);width:{{ qz.pct }};transition:.4s cubic-bezier(.22,1,.36,1)"></span></span>
+</div>
+</div>
+
+<div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:28px;padding-bottom:20px">
+<div>
+<span style="display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border-radius:99px;background:var(--pb-tint);color:var(--pb-blue-ink);font-size:11.5px;font-weight:500;margin-bottom:18px">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{ qz.glyph }}"></path></svg>
+{{ qz.cat }}</span>
+<h2 style="margin:0;font-size:25px;line-height:1.24;font-weight:600;letter-spacing:-.03em;text-wrap:pretty">{{ qz.q }}</h2>
+</div>
+<div style="display:flex;flex-direction:column;gap:11px">
+<sc-for list="{{ qz.opts }}" as="o" hint-placeholder-count="4">
+<button type="button" onClick="{{ o.on }}" style="appearance:none;cursor:pointer;display:flex;align-items:center;gap:13px;text-align:left;padding:17px 18px;border-radius:18px;border:1.5px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }};font:500 15px Poppins,system-ui,sans-serif;transition:.16s ease" style-hover="border-color:var(--pb-blue)">
+<span style="width:22px;height:22px;flex:none;border-radius:50%;border:2px solid {{ o.ring }};display:flex;align-items:center;justify-content:center"><span style="width:10px;height:10px;border-radius:50%;background:{{ o.dot }}"></span></span>
+<span>{{ o.l }}</span>
+</button>
+</sc-for>
+</div>
+</div>
+<p style="margin:0;font-size:12px;line-height:1.5;text-align:center;color:var(--pb-text2)">Não existe resposta errada — o resultado guia seu plano.</p>
+</div>
+</sc-if>
+
+<sc-if value="{{ s.proc }}">
+<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;padding:0 40px">
+<svg width="70" height="70" viewBox="0 0 62 62" fill="none" style="animation:pbSpin 1.1s linear infinite">
+<circle cx="31" cy="31" r="27" stroke="var(--pb-border)" stroke-width="4"></circle>
+<path d="M31 4a27 27 0 0 1 27 27" stroke="var(--pb-blue)" stroke-width="4" stroke-linecap="round"></path>
+</svg>
+<div style="display:flex;flex-direction:column;gap:14px;width:100%">
+<sc-for list="{{ pr.steps }}" as="p" hint-placeholder-count="3">
+<div style="display:flex;align-items:center;gap:12px">
+<span style="width:24px;height:24px;flex:none;border-radius:50%;background:{{ p.bg }};display:flex;align-items:center;justify-content:center;transition:.3s ease">
+<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5 9.5 17.5 19.5 6.5"></path></svg>
+</span>
+<span style="font-size:14.5px;font-weight:400;color:{{ p.fg }};transition:.3s ease">{{ p.l }}</span>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ s.result }}">
+<div style="min-height:100%;box-sizing:border-box;display:flex;flex-direction:column;padding:62px 26px 34px;animation:pbFade .4s both">
+<span style="font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--pb-text2)">Seu resultado</span>
+<div style="display:flex;flex-direction:column;align-items:center;gap:16px;margin:26px 0 30px">
+<div style="position:relative;width:168px;height:168px;display:flex;align-items:center;justify-content:center">
+<svg width="168" height="168" viewBox="0 0 168 168" style="position:absolute;transform:rotate(-90deg)">
+<circle cx="84" cy="84" r="62" fill="none" stroke="var(--pb-soft)" stroke-width="14"></circle>
+<circle cx="84" cy="84" r="62" fill="none" stroke="{{ res.color }}" stroke-width="14" stroke-linecap="round" stroke-dasharray="{{ res.dash }}" stroke-dashoffset="{{ res.off }}" style="transition:1s cubic-bezier(.22,1,.36,1)"></circle>
+</svg>
+<div style="position:relative;text-align:center">
+<span style="display:block;font-size:44px;font-weight:600;letter-spacing:-.04em;line-height:1">{{ res.score }}</span>
+<span style="display:block;margin-top:2px;font-size:12px;color:var(--pb-text2)">de 100</span>
+</div>
+</div>
+<div style="text-align:center">
+<span style="display:inline-block;padding:7px 15px;border-radius:99px;background:var(--pb-soft);font-size:13px;font-weight:600;color:{{ res.ink }}">{{ res.level }}</span>
+<p style="margin:12px 0 0;font-size:14.5px;line-height:1.6;font-weight:300;color:var(--pb-text2);max-width:300px;text-wrap:pretty">{{ res.desc }}</p>
+</div>
+</div>
+
+<p style="margin:0 0 14px;font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--pb-text2)">Por área</p>
+<div style="display:flex;flex-direction:column;gap:13px;margin-bottom:28px">
+<sc-for list="{{ res.cats }}" as="c" hint-placeholder-count="5">
+<div style="display:flex;align-items:center;gap:12px">
+<span style="width:34px;height:34px;flex:none;border-radius:12px;background:var(--pb-soft);color:var(--pb-text2);display:flex;align-items:center;justify-content:center">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ c.glyph }}"></path></svg>
+</span>
+<span style="flex:1;min-width:0">
+<span style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:6px">
+<span style="font-size:13.5px;font-weight:500">{{ c.n }}</span>
+<span style="font-size:12.5px;font-weight:600;color:{{ c.ink }}">{{ c.v }}</span>
+</span>
+<span style="display:block;height:6px;border-radius:99px;background:var(--pb-soft);overflow:hidden"><span style="display:block;height:100%;border-radius:99px;width:{{ c.w }};background:{{ c.col }};transition:.8s cubic-bezier(.22,1,.36,1)"></span></span>
+</span>
+</div>
+</sc-for>
+</div>
+
+<sc-if value="{{ res.hasRisks }}">
+<div style="margin-bottom:28px">
+<p style="margin:0 0 12px;font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--pb-text2)">Riscos prioritários</p>
+<div style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ res.risks }}" as="r" hint-placeholder-count="3">
+<div style="display:flex;gap:13px;padding:16px;border-radius:18px;background:var(--pb-surface);border:1px solid var(--pb-border)">
+<span style="font-size:13px;font-weight:600;color:var(--pb-amber);flex:none;font-style:italic">{{ r.n }}</span>
+<span style="flex:1;min-width:0">
+<span style="display:block;font-size:14px;font-weight:500;line-height:1.35">{{ r.t }}</span>
+<span style="display:block;margin-top:5px;font-size:12.5px;line-height:1.55;font-weight:300;color:var(--pb-text2)">{{ r.d }}</span>
+</span>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<button type="button" onClick="{{ res.toPlan }}" style="appearance:none;cursor:pointer;border:0;height:56px;border-radius:18px;background:var(--pb-blue);color:#fff;font:600 16px Poppins,system-ui,sans-serif;box-shadow:0 10px 24px rgba(36,107,253,.24)" style-hover="background:var(--pb-blue-ink)">Ver meu Plano B</button>
+<button type="button" onClick="{{ res.toHome }}" style="appearance:none;cursor:pointer;height:52px;border-radius:18px;background:transparent;border:1.5px solid var(--pb-border);color:var(--pb-text);font:500 15px Poppins,system-ui,sans-serif" style-hover="border-color:var(--pb-blue);color:var(--pb-blue)">Ir para o início</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ s.home }}">
+<div style="min-height:100%;box-sizing:border-box;display:flex;flex-direction:column;padding:62px 26px 116px;animation:pbFade .3s both">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:24px">
+<div style="flex:1;min-width:0">
+<p style="margin:0;font-size:13px;font-weight:300;color:var(--pb-text2)">{{ hm.hello }},</p>
+<p style="margin:2px 0 0;font-size:22px;font-weight:600;letter-spacing:-.03em">{{ hm.name }}</p>
+</div>
+<button type="button" onClick="{{ hm.openNotif }}" aria-label="Notificações" style="position:relative;appearance:none;cursor:pointer;width:44px;height:44px;flex:none;border-radius:15px;border:1px solid var(--pb-border);background:var(--pb-surface);color:var(--pb-text);display:flex;align-items:center;justify-content:center" style-hover="border-color:var(--pb-blue);color:var(--pb-blue)">
+<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 10a6 6 0 1 1 12 0c0 4.5 1.8 5.5 1.8 5.5H4.2S6 14.5 6 10M10.2 19a1.9 1.9 0 0 0 3.6 0"></path></svg>
+<sc-if value="{{ hm.hasNotif }}">
+<span style="position:absolute;top:7px;right:7px;min-width:17px;height:17px;box-sizing:border-box;padding:0 4px;border-radius:99px;background:var(--pb-red);color:#fff;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;border:2px solid var(--pb-surface)">{{ hm.notifN }}</span>
+</sc-if>
+</button>
+</div>
+
+<div style="border-radius:24px;padding:22px;background:linear-gradient(160deg,#17466E,#123B5D 60%,#0B2540);color:#fff;box-shadow:0 18px 40px rgba(18,59,93,.26);display:flex;align-items:center;gap:20px">
+<div style="position:relative;width:92px;height:92px;flex:none;display:flex;align-items:center;justify-content:center">
+<svg width="92" height="92" viewBox="0 0 92 92" style="position:absolute;transform:rotate(-90deg)">
+<circle cx="46" cy="46" r="34" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="9"></circle>
+<circle cx="46" cy="46" r="34" fill="none" stroke="{{ hm.color }}" stroke-width="9" stroke-linecap="round" stroke-dasharray="{{ hm.dash }}" stroke-dashoffset="{{ hm.off }}" style="transition:1s cubic-bezier(.22,1,.36,1)"></circle>
+</svg>
+<span style="position:relative;font-size:25px;font-weight:600;letter-spacing:-.03em">{{ hm.score }}</span>
+</div>
+<div style="flex:1;min-width:0">
+<p style="margin:0;font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(234,242,255,.6)">Prontidão digital</p>
+<p style="margin:6px 0 0;font-size:18px;font-weight:600;letter-spacing:-.02em;color:#fff">{{ hm.level }}</p>
+<p style="margin:8px 0 0;font-size:12.5px;font-weight:300;color:rgba(234,242,255,.75)">{{ hm.done }} de {{ hm.total }} tarefas · {{ hm.pts }} pontos</p>
+</div>
+</div>
+
+<button type="button" onClick="{{ hm.emergency }}" style="appearance:none;cursor:pointer;margin-top:14px;display:flex;align-items:center;gap:13px;text-align:left;padding:16px 18px;border-radius:20px;border:1.5px solid rgba(229,72,77,.35);background:rgba(229,72,77,.08);color:var(--pb-text);transition:.16s ease" style-hover="border-color:#E5484D">
+<span style="width:40px;height:40px;flex:none;border-radius:14px;background:var(--pb-red);color:#fff;display:flex;align-items:center;justify-content:center">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 2.8 19.5h18.4L12 3.5ZM12 9.5v4.5M12 17v.01"></path></svg>
+</span>
+<span style="flex:1;min-width:0">
+<span style="display:block;font-size:15px;font-weight:600">Aconteceu algo agora</span>
+<span style="display:block;margin-top:2px;font-size:12.5px;font-weight:300;color:var(--pb-text2)">Abrir o Modo Emergência</span>
+</span>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:var(--pb-text2)"><path d="M9 5.5 15.5 12 9 18.5"></path></svg>
+</button>
+
+<div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:28px 0 12px">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--pb-text2)">Próximas tarefas</p>
+<button type="button" onClick="{{ hm.toPlan }}" style="appearance:none;background:none;border:0;padding:0;cursor:pointer;font:500 12.5px Poppins,system-ui,sans-serif;color:var(--pb-blue)" style-hover="color:var(--pb-blue-ink)">Ver todas</button>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ hm.tasks }}" as="t" hint-placeholder-count="3">
+<button type="button" onClick="{{ t.on }}" style="appearance:none;cursor:pointer;display:flex;align-items:center;gap:13px;text-align:left;padding:15px 16px;border-radius:18px;border:1px solid var(--pb-border);background:var(--pb-surface);color:var(--pb-text);transition:.16s ease" style-hover="border-color:var(--pb-blue)">
+<span style="width:22px;height:22px;flex:none;border-radius:8px;border:2px solid var(--pb-border)"></span>
+<span style="flex:1;min-width:0">
+<span style="display:block;font-size:14px;font-weight:500;line-height:1.35">{{ t.t }}</span>
+<span style="display:block;margin-top:3px;font-size:11.5px;font-weight:300;color:var(--pb-text2)">{{ t.cat }} · {{ t.min }}</span>
+</span>
+</button>
+</sc-for>
+<sc-if value="{{ hm.noTasks }}">
+<div style="padding:24px 18px;border-radius:18px;border:1px dashed var(--pb-border);text-align:center">
+<p style="margin:0;font-size:14px;font-weight:500">Plano concluído</p>
+<p style="margin:6px 0 0;font-size:12.5px;font-weight:300;color:var(--pb-text2)">Revise seu plano a cada seis meses.</p>
+</div>
+</sc-if>
+</div>
+
+<p style="margin:28px 0 12px;font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--pb-text2)">Acesso rápido</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<sc-for list="{{ hm.quick }}" as="q" hint-placeholder-count="4">
+<button type="button" onClick="{{ q.on }}" style="appearance:none;cursor:pointer;display:flex;flex-direction:column;gap:10px;text-align:left;padding:16px;border-radius:18px;border:1px solid var(--pb-border);background:var(--pb-surface);color:var(--pb-text);transition:.16s ease" style-hover="border-color:var(--pb-blue)">
+<span style="width:36px;height:36px;border-radius:13px;background:var(--pb-tint);color:var(--pb-blue-ink);display:flex;align-items:center;justify-content:center">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ q.g }}"></path></svg>
+</span>
+<span>
+<span style="display:block;font-size:14px;font-weight:500">{{ q.l }}</span>
+<span style="display:block;margin-top:2px;font-size:11.5px;font-weight:300;color:var(--pb-text2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ q.d }}</span>
+</span>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ s.planList }}">
+<div style="min-height:100%;box-sizing:border-box;display:flex;flex-direction:column;padding:62px 26px 116px;animation:pbFade .3s both">
+<h2 style="margin:0;font-size:26px;font-weight:600;letter-spacing:-.03em">Meu Plano B</h2>
+<p style="margin:8px 0 22px;font-size:14px;line-height:1.55;font-weight:300;color:var(--pb-text2);text-wrap:pretty">Organizado por área. Cada tarefa concluída aumenta sua prontidão.</p>
+
+<div style="padding:20px;border-radius:20px;background:var(--pb-surface);border:1px solid var(--pb-border);margin-bottom:24px">
+<div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px">
+<span style="font-size:14px;font-weight:500">Progresso geral</span>
+<span style="font-size:20px;font-weight:600;letter-spacing:-.02em;color:var(--pb-blue)">{{ pl.pctN }}%</span>
+</div>
+<span style="display:block;height:8px;border-radius:99px;background:var(--pb-soft);overflow:hidden"><span style="display:block;height:100%;border-radius:99px;width:{{ pl.pct }};background:var(--pb-blue);transition:.7s cubic-bezier(.22,1,.36,1)"></span></span>
+<p style="margin:10px 0 0;font-size:12.5px;font-weight:300;color:var(--pb-text2)">{{ pl.done }} de {{ pl.total }} tarefas concluídas</p>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ pl.cats }}" as="c" hint-placeholder-count="7">
+<button type="button" onClick="{{ c.on }}" style="appearance:none;cursor:pointer;display:flex;align-items:center;gap:14px;text-align:left;padding:16px;border-radius:20px;border:1px solid var(--pb-border);background:var(--pb-surface);color:var(--pb-text);transition:.16s ease" style-hover="border-color:var(--pb-blue)">
+<span style="width:42px;height:42px;flex:none;border-radius:15px;background:var(--pb-tint);color:var(--pb-blue-ink);display:flex;align-items:center;justify-content:center">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ c.glyph }}"></path></svg>
+</span>
+<span style="flex:1;min-width:0">
+<span style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+<span style="font-size:14.5px;font-weight:500">{{ c.n }}</span>
+<span style="font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;border-radius:99px;background:{{ c.priBg }};color:{{ c.priFg }}">{{ c.pri }}</span>
+</span>
+<span style="display:flex;align-items:center;gap:9px">
+<span style="flex:1;height:5px;border-radius:99px;background:var(--pb-soft);overflow:hidden;display:block"><span style="display:block;height:100%;border-radius:99px;width:{{ c.w }};background:{{ c.col }};transition:.6s cubic-bezier(.22,1,.36,1)"></span></span>
+<span style="font-size:11.5px;font-weight:500;color:var(--pb-text2)">{{ c.cnt }}</span>
+</span>
+</span>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:var(--pb-text2)"><path d="M9 5.5 15.5 12 9 18.5"></path></svg>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ s.planDetail }}">
+<div style="min-height:100%;box-sizing:border-box;display:flex;flex-direction:column;padding:62px 26px 116px;animation:pbFade .3s both">
+<button type="button" onClick="{{ pl.back }}" aria-label="Voltar ao plano" style="appearance:none;cursor:pointer;width:42px;height:42px;border-radius:14px;border:1px solid var(--pb-border);background:var(--pb-surface);color:var(--pb-text);display:flex;align-items:center;justify-content:center;margin-bottom:22px" style-hover="border-color:var(--pb-blue);color:var(--pb-blue)">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5.5 8.5 12l6.5 6.5"></path></svg>
+</button>
+<div style="display:flex;align-items:center;gap:13px;margin-bottom:22px">
+<span style="width:46px;height:46px;flex:none;border-radius:16px;background:var(--pb-tint);color:var(--pb-blue-ink);display:flex;align-items:center;justify-content:center">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ pl.catGlyph }}"></path></svg>
+</span>
+<div style="flex:1;min-width:0">
+<h2 style="margin:0;font-size:20px;font-weight:600;letter-spacing:-.03em">{{ pl.catName }}</h2>
+<p style="margin:4px 0 0;font-size:12.5px;font-weight:300;color:var(--pb-text2)">{{ pl.catCnt }}</p>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ pl.items }}" as="t" hint-placeholder-count="3">
+<div style="display:flex;align-items:center;gap:12px;padding:15px 16px;border-radius:18px;border:1px solid {{ t.bd }};background:var(--pb-surface);transition:.2s ease">
+<button type="button" onClick="{{ t.toggle }}" aria-label="Concluir tarefa" style="appearance:none;cursor:pointer;width:24px;height:24px;flex:none;border-radius:8px;border:2px solid {{ t.bd }};background:{{ t.bg }};display:flex;align-items:center;justify-content:center;transition:.2s ease">
+<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5 9.5 17.5 19.5 6.5"></path></svg>
+</button>
+<button type="button" onClick="{{ t.open }}" style="flex:1;min-width:0;appearance:none;background:none;border:0;padding:0;cursor:pointer;text-align:left">
+<span style="display:block;font-size:14px;font-weight:500;line-height:1.35;color:{{ t.fg }};text-decoration:{{ t.deco }}">{{ t.t }}</span>
+<span style="display:block;margin-top:3px;font-size:11.5px;font-weight:300;color:var(--pb-text2)">{{ t.min }} · toque para ver os passos</span>
+</button>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ s.vault }}">
+<div style="min-height:100%;box-sizing:border-box;display:flex;flex-direction:column;padding:62px 26px 40px;animation:pbFade .3s both">
+<button type="button" onClick="{{ vt.back }}" aria-label="Voltar" style="appearance:none;cursor:pointer;width:42px;height:42px;border-radius:14px;border:1px solid var(--pb-border);background:var(--pb-surface);color:var(--pb-text);display:flex;align-items:center;justify-content:center;margin-bottom:22px" style-hover="border-color:var(--pb-blue);color:var(--pb-blue)">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5.5 8.5 12l6.5 6.5"></path></svg>
+</button>
+
+<sc-if value="{{ s.vaultLocked }}">
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:24px;padding-bottom:40px">
+<div style="position:relative;width:112px;height:112px;border-radius:38px;background:var(--pb-tint);color:var(--pb-blue);display:flex;align-items:center;justify-content:center;overflow:hidden">
+<svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 10.5h13v10h-13zM8.5 10.5V7a3.5 3.5 0 0 1 7 0v3.5"></path></svg>
+<sc-if value="{{ vt.scanning }}">
+<span style="position:absolute;left:14px;right:14px;height:2px;background:var(--pb-blue);box-shadow:0 0 12px rgba(36,107,253,.6);animation:pbScan 1.4s ease-in-out infinite"></span>
+</sc-if>
+</div>
+<div>
+<h2 style="margin:0;font-size:23px;font-weight:600;letter-spacing:-.03em">Cofre de Preparação</h2>
+<p style="margin:12px 0 0;font-size:14.5px;line-height:1.6;font-weight:300;color:var(--pb-text2);max-width:290px">Suas informações críticas ficam protegidas. Confirme sua identidade para abrir.</p>
+</div>
+<button type="button" onClick="{{ vt.unlock }}" style="appearance:none;cursor:pointer;border:0;height:56px;padding:0 30px;border-radius:18px;background:var(--pb-blue);color:#fff;font:600 15.5px Poppins,system-ui,sans-serif;display:flex;align-items:center;gap:10px;box-shadow:0 10px 24px rgba(36,107,253,.24)" style-hover="background:var(--pb-blue-ink)">
+<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.6c-3 0-5.6 1.6-7 4M19 7.6a8.4 8.4 0 0 0-3-3.2M5.2 10.4A6.8 6.8 0 0 1 12 6.4a6.8 6.8 0 0 1 6.8 4M8.6 20.2a12 12 0 0 0 1.4-5.6 2 2 0 0 1 4 0c0 1.8-.3 3.6-.8 5.3M5.4 17.6c.4-1 .6-2 .6-3M18.2 14.6c0 2-.3 4-.9 5.9"></path></svg>
+Desbloquear com biometria</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ s.vaultOpen }}">
+<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:20px">
+<div style="flex:1;min-width:0">
+<h2 style="margin:0;font-size:24px;font-weight:600;letter-spacing:-.03em">Cofre de Preparação</h2>
+<p style="margin:7px 0 0;font-size:12.5px;font-weight:300;color:var(--pb-text2)">Bloqueia automaticamente após inatividade</p>
+</div>
+<button type="button" onClick="{{ vt.lock }}" style="appearance:none;cursor:pointer;flex:none;height:38px;padding:0 14px;border-radius:13px;border:1px solid var(--pb-border);background:var(--pb-surface);color:var(--pb-text2);font:500 12.5px Poppins,system-ui,sans-serif" style-hover="border-color:var(--pb-blue);color:var(--pb-blue)">Bloquear</button>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ vt.items }}" as="v" hint-placeholder-count="6">
+<div style="padding:16px;border-radius:18px;border:1px solid var(--pb-border);background:var(--pb-surface)">
+<div style="display:flex;align-items:center;gap:11px;margin-bottom:11px">
+<span style="width:34px;height:34px;flex:none;border-radius:12px;background:var(--pb-tint);color:var(--pb-blue-ink);display:flex;align-items:center;justify-content:center">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ v.glyph }}"></path></svg>
+</span>
+<span style="flex:1;min-width:0">
+<span style="display:block;font-size:13.5px;font-weight:500;line-height:1.3">{{ v.t }}</span>
+<span style="display:block;margin-top:2px;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--pb-text2)">{{ v.tag }}</span>
+</span>
+<button type="button" onClick="{{ v.on }}" aria-label="{{ v.label }}" style="appearance:none;cursor:pointer;width:34px;height:34px;flex:none;border-radius:11px;border:1px solid var(--pb-border);background:transparent;color:var(--pb-text2);display:flex;align-items:center;justify-content:center" style-hover="border-color:var(--pb-blue);color:var(--pb-blue)">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ v.eye }}"></path></svg>
+</button>
+</div>
+<p style="margin:0;padding:11px 13px;border-radius:12px;background:var(--pb-soft);font-size:13px;line-height:1.45;font-weight:400;color:var(--pb-text);word-break:break-word">{{ v.val }}</p>
+</div>
+</sc-for>
+</div>
+<button type="button" onClick="{{ vt.add }}" style="appearance:none;cursor:pointer;margin-top:12px;height:52px;border-radius:18px;border:1.5px dashed var(--pb-border);background:transparent;color:var(--pb-text2);font:500 14.5px Poppins,system-ui,sans-serif;display:flex;align-items:center;justify-content:center;gap:9px" style-hover="border-color:var(--pb-blue);color:var(--pb-blue)">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5.5v13M5.5 12h13"></path></svg>
+Adicionar informação</button>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ s.contact }}">
+<div style="min-height:100%;box-sizing:border-box;display:flex;flex-direction:column;padding:62px 26px 40px;animation:pbFade .3s both">
+<button type="button" onClick="{{ ct.back }}" aria-label="Voltar" style="appearance:none;cursor:pointer;width:42px;height:42px;border-radius:14px;border:1px solid var(--pb-border);background:var(--pb-surface);color:var(--pb-text);display:flex;align-items:center;justify-content:center;margin-bottom:22px" style-hover="border-color:var(--pb-blue);color:var(--pb-blue)">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5.5 8.5 12l6.5 6.5"></path></svg>
+</button>
+
+<sc-if value="{{ s.contactForm }}">
+<h2 style="margin:0;font-size:25px;font-weight:600;letter-spacing:-.03em">Contato de confiança</h2>
+<p style="margin:9px 0 24px;font-size:14.5px;line-height:1.6;font-weight:300;color:var(--pb-text2);text-wrap:pretty">Escolha alguém que possa confirmar sua identidade e agir com você em uma emergência.</p>
+<form onSubmit="{{ ct.submit }}" style="display:flex;flex-direction:column;gap:15px">
+<div style="display:flex;flex-direction:column;gap:7px">
+<label for="ct-nome" style="font-size:13px;font-weight:500;color:var(--pb-text2)">Nome</label>
+<input id="ct-nome" type="text" value="{{ ct.f.name }}" onChange="{{ ct.onName }}" placeholder="Ex.: Marina Alves" autoComplete="off" style="box-sizing:border-box;height:54px;border-radius:16px;border:1.5px solid {{ ct.bdName }};background:var(--pb-surface);color:var(--pb-text);padding:0 16px;font:400 15px Poppins,system-ui,sans-serif;outline:none" style-focus="border-color:var(--pb-blue);box-shadow:0 0 0 4px rgba(36,107,253,.14)">
+<sc-if value="{{ ct.eName }}">
+<span style="display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--pb-red)">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3.5 2.8 19.5h18.4L12 3.5ZM12 9.5v4.5M12 17v.01"></path></svg>{{ ct.eName }}</span>
+</sc-if>
+</div>
+<div style="display:flex;flex-direction:column;gap:7px">
+<label for="ct-rel" style="font-size:13px;font-weight:500;color:var(--pb-text2)">Relação</label>
+<input id="ct-rel" type="text" value="{{ ct.f.rel }}" onChange="{{ ct.onRel }}" placeholder="Ex.: irmã, cônjuge, amigo" autoComplete="off" style="box-sizing:border-box;height:54px;border-radius:16px;border:1.5px solid var(--pb-border);background:var(--pb-surface);color:var(--pb-text);padding:0 16px;font:400 15px Poppins,system-ui,sans-serif;outline:none" style-focus="border-color:var(--pb-blue);box-shadow:0 0 0 4px rgba(36,107,253,.14)">
+</div>
+<div style="display:flex;flex-direction:column;gap:7px">
+<label for="ct-tel" style="font-size:13px;font-weight:500;color:var(--pb-text2)">Telefone</label>
+<input id="ct-tel" type="tel" value="{{ ct.f.phone }}" onChange="{{ ct.onPhone }}" placeholder="(11) 90000-0000" autoComplete="off" style="box-sizing:border-box;height:54px;border-radius:16px;border:1.5px solid {{ ct.bdPhone }};background:var(--pb-surface);color:var(--pb-text);padding:0 16px;font:400 15px Poppins,system-ui,sans-serif;outline:none" style-focus="border-color:var(--pb-blue);box-shadow:0 0 0 4px rgba(36,107,253,.14)">
+<sc-if value="{{ ct.ePhone }}">
+<span style="display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--pb-red)">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3.5 2.8 19.5h18.4L12 3.5ZM12 9.5v4.5M12 17v.01"></path></svg>{{ ct.ePhone }}</span>
+</sc-if>
+</div>
+<div style="display:flex;flex-direction:column;gap:7px">
+<label for="ct-obs" style="font-size:13px;font-weight:500;color:var(--pb-text2)">O que essa pessoa deve fazer</label>
+<textarea id="ct-obs" value="{{ ct.f.note }}" onChange="{{ ct.onNote }}" rows="3" placeholder="Ex.: confirmar por ligação antes de qualquer transferência" style="box-sizing:border-box;border-radius:16px;border:1.5px solid var(--pb-border);background:var(--pb-surface);color:var(--pb-text);padding:14px 16px;font:400 14.5px/1.5 Poppins,system-ui,sans-serif;outline:none;resize:none" style-focus="border-color:var(--pb-blue);box-shadow:0 0 0 4px rgba(36,107,253,.14)"></textarea>
+</div>
+<button type="submit" style="appearance:none;cursor:pointer;border:0;height:56px;border-radius:18px;background:var(--pb-blue);color:#fff;font:600 16px Poppins,system-ui,sans-serif;box-shadow:0 10px 24px rgba(36,107,253,.24)" style-hover="background:var(--pb-blue-ink)">Cadastrar contato</button>
+</form>
+</sc-if>
+
+<sc-if value="{{ s.contactCard }}">
+<h2 style="margin:0 0 20px;font-size:25px;font-weight:600;letter-spacing:-.03em">Contato de confiança</h2>
+<div style="padding:22px;border-radius:22px;border:1px solid var(--pb-border);background:var(--pb-surface);display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;align-items:center;gap:14px">
+<span style="width:56px;height:56px;flex:none;border-radius:20px;background:var(--pb-deep);color:#fff;display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:600">{{ ct.initial }}</span>
+<span style="flex:1;min-width:0">
+<span style="display:block;font-size:18px;font-weight:600;letter-spacing:-.02em">{{ ct.name }}</span>
+<span style="display:block;margin-top:3px;font-size:12.5px;font-weight:300;color:var(--pb-text2)">{{ ct.rel }}</span>
+</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:9px;padding-top:16px;border-top:1px solid var(--pb-border)">
+<span style="display:flex;align-items:center;gap:9px;font-size:13.5px;color:var(--pb-text)">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" style="color:var(--pb-text2)"><path d="M7.5 2.6h9a1 1 0 0 1 1 1v16.8a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1V3.6a1 1 0 0 1 1-1ZM10.8 18.2h2.4"></path></svg>
+{{ ct.phone }}</span>
+<sc-if value="{{ ct.note }}">
+<span style="display:flex;gap:9px;font-size:13px;line-height:1.5;font-weight:300;color:var(--pb-text2)">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" style="flex:none;margin-top:2px"><path d="M13.5 2.5H7a1.5 1.5 0 0 0-1.5 1.5v16A1.5 1.5 0 0 0 7 21.5h10a1.5 1.5 0 0 0 1.5-1.5V7.5l-5-5ZM13.5 2.5v5h5M8.5 13h7M8.5 17h4"></path></svg>
+{{ ct.note }}</span>
+</sc-if>
+</div>
+</div>
+<button type="button" onClick="{{ ct.toProto }}" style="appearance:none;cursor:pointer;margin-top:12px;display:flex;align-items:center;gap:13px;text-align:left;padding:16px;border-radius:20px;border:1px solid var(--pb-border);background:var(--pb-surface);color:var(--pb-text);transition:.16s ease" style-hover="border-color:var(--pb-blue)">
+<span style="width:40px;height:40px;flex:none;border-radius:14px;background:var(--pb-tint);color:var(--pb-blue-ink);display:flex;align-items:center;justify-content:center">
+<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 20.5v-1.7a3.8 3.8 0 0 0-3.8-3.8H6.3a3.8 3.8 0 0 0-3.8 3.8v1.7M9 11.8a3.6 3.6 0 1 0 0-7.3 3.6 3.6 0 0 0 0 7.3M21.5 20.5v-1.7a3.8 3.8 0 0 0-2.8-3.7"></path></svg>
+</span>
+<span style="flex:1;min-width:0">
+<span style="display:block;font-size:14.5px;font-weight:500">Protocolo familiar</span>
+<span style="display:block;margin-top:2px;font-size:12px;font-weight:300;color:var(--pb-text2)">Palavra de segurança e regras combinadas</span>
+</span>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:var(--pb-text2)"><path d="M9 5.5 15.5 12 9 18.5"></path></svg>
+</button>
+<button type="button" onClick="{{ ct.remove }}" style="appearance:none;cursor:pointer;margin-top:10px;height:50px;border-radius:16px;border:1px solid var(--pb-border);background:transparent;color:var(--pb-red);font:500 14px Poppins,system-ui,sans-serif" style-hover="border-color:var(--pb-red)">Remover contato</button>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ s.proto }}">
+<div style="min-height:100%;box-sizing:border-box;display:flex;flex-direction:column;padding:62px 26px 40px;animation:pbFade .3s both">
+<button type="button" onClick="{{ pt.back }}" aria-label="Voltar" style="appearance:none;cursor:pointer;width:42px;height:42px;border-radius:14px;border:1px solid var(--pb-border);background:var(--pb-surface);color:var(--pb-text);display:flex;align-items:center;justify-content:center;margin-bottom:22px" style-hover="border-color:var(--pb-blue);color:var(--pb-blue)">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5.5 8.5 12l6.5 6.5"></path></svg>
+</button>
+<h2 style="margin:0;font-size:25px;font-weight:600;letter-spacing:-.03em">Protocolo familiar</h2>
+<p style="margin:9px 0 22px;font-size:14.5px;line-height:1.6;font-weight:300;color:var(--pb-text2);text-wrap:pretty">Combinados que protegem sua família de pedidos falsos feitos em seu nome.</p>
+
+<div style="padding:22px;border-radius:22px;background:linear-gradient(160deg,#17466E,#123B5D 65%,#0B2540);color:#fff;box-shadow:0 16px 34px rgba(18,59,93,.24)">
+<span style="display:block;font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:rgba(234,242,255,.6)">Palavra de segurança</span>
+<p style="margin:12px 0 0;font-size:27px;font-weight:600;letter-spacing:.02em;color:#fff;font-variant-numeric:tabular-nums">{{ pt.word }}</p>
+<button type="button" onClick="{{ pt.toggle }}" style="appearance:none;cursor:pointer;margin-top:16px;height:42px;padding:0 16px;border-radius:13px;border:1px solid rgba(255,255,255,.24);background:rgba(255,255,255,.1);color:#fff;font:500 13px Poppins,system-ui,sans-serif;display:flex;align-items:center;gap:8px" style-hover="background:rgba(255,255,255,.18)">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 6 12 6s9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6ZM12 14.6a2.6 2.6 0 1 0 0-5.2 2.6 2.6 0 0 0 0 5.2"></path></svg>
+{{ pt.revealLabel }}</button>
+</div>
+
+<p style="margin:26px 0 12px;font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--pb-text2)">Regras combinadas <span style="color:var(--pb-amber)">✳</span></p>
+<div style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ pt.rules }}" as="r" hint-placeholder-count="4">
+<div style="padding:16px;border-radius:18px;border:1px solid var(--pb-border);background:var(--pb-surface)">
+<p style="margin:0;font-size:14px;font-weight:500;line-height:1.35">{{ r.t }}</p>
+<p style="margin:6px 0 0;font-size:12.5px;line-height:1.55;font-weight:300;color:var(--pb-text2)">{{ r.d }}</p>
+</div>
+</sc-for>
+</div>
+<button type="button" onClick="{{ pt.share }}" style="appearance:none;cursor:pointer;margin-top:16px;height:54px;border-radius:18px;border:1.5px solid var(--pb-border);background:var(--pb-surface);color:var(--pb-text);font:500 15px Poppins,system-ui,sans-serif" style-hover="border-color:var(--pb-blue);color:var(--pb-blue)">Compartilhar com a família</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ s.sims }}">
+<div style="min-height:100%;box-sizing:border-box;display:flex;flex-direction:column;padding:62px 26px 116px;animation:pbFade .3s both">
+<h2 style="margin:0;font-size:26px;font-weight:600;letter-spacing:-.03em">Simulações</h2>
+<p style="margin:8px 0 22px;font-size:14px;line-height:1.55;font-weight:300;color:var(--pb-text2);text-wrap:pretty">Treine decisões difíceis com calma, para agir com clareza quando acontecer. {{ sm.doneN }} de {{ sm.total }} concluídas.</p>
+<div style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ sm.items }}" as="x" hint-placeholder-count="8">
+<button type="button" onClick="{{ x.on }}" style="appearance:none;cursor:pointer;display:flex;align-items:center;gap:14px;text-align:left;padding:16px;border-radius:20px;border:1px solid var(--pb-border);background:var(--pb-surface);color:var(--pb-text);opacity:{{ x.op }};transition:.16s ease" style-hover="border-color:var(--pb-blue)">
+<span style="width:44px;height:44px;flex:none;border-radius:16px;background:var(--pb-tint);color:var(--pb-blue-ink);display:flex;align-items:center;justify-content:center">
+<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ x.glyph }}"></path></svg>
+</span>
+<span style="flex:1;min-width:0">
+<span style="display:flex;align-items:center;gap:7px;margin-bottom:4px">
+<span style="font-size:14.5px;font-weight:500;line-height:1.3">{{ x.t }}</span>
+</span>
+<span style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+<span style="font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:99px;background:{{ x.badgeBg }};color:{{ x.badgeFg }}">{{ x.badge }}</span>
+<span style="font-size:11.5px;font-weight:300;color:var(--pb-text2)">{{ x.dif }} · {{ x.dur }} · {{ x.pts }}</span>
+</span>
+</span>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ s.simPlay }}">
+<div style="min-height:100%;box-sizing:border-box;display:flex;flex-direction:column;padding:62px 26px 34px">
+<div style="display:flex;align-items:center;gap:14px;margin-bottom:26px">
+<button type="button" onClick="{{ sp.exit }}" aria-label="Sair da simulação" style="appearance:none;cursor:pointer;width:42px;height:42px;flex:none;border-radius:14px;border:1px solid var(--pb-border);background:var(--pb-surface);color:var(--pb-text);display:flex;align-items:center;justify-content:center" style-hover="border-color:var(--pb-red);color:var(--pb-red)">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+</button>
+<div style="flex:1">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">
+<span style="font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--pb-text2)">Roubaram meu celular</span>
+<span style="font-size:12px;font-weight:500;color:var(--pb-text2)">{{ sp.num }}/{{ sp.total }}</span>
+</div>
+<span style="display:block;height:5px;border-radius:99px;background:var(--pb-soft);overflow:hidden"><span style="display:block;height:100%;border-radius:99px;background:var(--pb-blue);width:{{ sp.pct }};transition:.4s cubic-bezier(.22,1,.36,1)"></span></span>
+</div>
+</div>
+
+<div style="flex:1;display:flex;flex-direction:column;gap:22px">
+<div>
+<h2 style="margin:0;font-size:23px;line-height:1.26;font-weight:600;letter-spacing:-.03em;text-wrap:pretty">{{ sp.t }}</h2>
+<sc-if value="{{ sp.isIntro }}">
+<p style="margin:14px 0 0;font-size:15px;line-height:1.62;font-weight:300;color:var(--pb-text2);text-wrap:pretty">{{ sp.d }}</p>
+</sc-if>
+<sc-if value="{{ sp.hasHint }}">
+<p style="margin:10px 0 0;font-size:12.5px;font-weight:500;color:var(--pb-blue)">{{ sp.hint }}</p>
+</sc-if>
+</div>
+
+<sc-if value="{{ sp.hasOpts }}">
+<div style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ sp.opts }}" as="o" hint-placeholder-count="4">
+<button type="button" onClick="{{ o.on }}" style="appearance:none;cursor:pointer;display:flex;align-items:center;gap:13px;text-align:left;padding:16px 17px;border-radius:18px;border:1.5px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }};font:500 14.5px/1.4 Poppins,system-ui,sans-serif;transition:.16s ease" style-hover="border-color:var(--pb-blue)">
+<span style="width:22px;height:22px;flex:none;border-radius:7px;border:2px solid {{ o.ring }};display:flex;align-items:center;justify-content:center"><span style="width:10px;height:10px;border-radius:3px;background:{{ o.dot }}"></span></span>
+<span>{{ o.l }}</span>
+</button>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{ sp.isOrder }}">
+<div style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ sp.items }}" as="i" hint-placeholder-count="3">
+<button type="button" onClick="{{ i.on }}" style="appearance:none;cursor:pointer;display:flex;align-items:center;gap:13px;text-align:left;padding:16px 17px;border-radius:18px;border:1.5px solid {{ i.bd }};background:{{ i.bg }};color:{{ i.fg }};font:500 14.5px/1.4 Poppins,system-ui,sans-serif;transition:.16s ease" style-hover="border-color:var(--pb-blue)">
+<span style="width:26px;height:26px;flex:none;border-radius:50%;background:{{ i.numBg }};color:{{ i.numFg }};display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:600">{{ i.num }}</span>
+<span>{{ i.l }}</span>
+</button>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{ sp.fbShow }}">
+<div style="display:flex;gap:11px;padding:16px;border-radius:18px;background:{{ sp.fbBg }};animation:pbPop .28s cubic-bezier(.22,1,.36,1) both">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ sp.fbFg }}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px"><path d="M4.5 12.5 9.5 17.5 19.5 6.5"></path></svg>
+<p style="margin:0;font-size:13.5px;line-height:1.55;font-weight:400;color:{{ sp.fbFg }}">{{ sp.fbText }}</p>
+</div>
+</sc-if>
+</div>
+
+<button type="button" onClick="{{ sp.onCta }}" disabled="{{ sp.dis }}" style="appearance:none;cursor:pointer;border:0;height:56px;border-radius:18px;background:{{ sp.ctaBg }};color:{{ sp.ctaFg }};font:600 16px Poppins,system-ui,sans-serif;margin-top:22px;transition:.16s ease">{{ sp.cta }}</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ s.simResult }}">
+<div style="min-height:100%;box-sizing:border-box;display:flex;flex-direction:column;padding:70px 26px 34px;animation:pbFade .4s both">
+<div style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:18px">
+<div style="width:96px;height:96px;border-radius:34px;background:rgba(45,190,120,.12);color:{{ sr.ink }};display:flex;align-items:center;justify-content:center;animation:pbPop .4s cubic-bezier(.22,1,.36,1) both">
+<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5 9.5 17.5 19.5 6.5"></path></svg>
+</div>
+<div>
+<h2 style="margin:0;font-size:25px;font-weight:600;letter-spacing:-.03em">Simulação concluída</h2>
+<p style="margin:10px 0 0;font-size:15px;font-weight:500;color:{{ sr.ink }}">{{ sr.level }}</p>
+</div>
+</div>
+
+<div style="display:flex;gap:9px;margin:26px 0 28px">
+<div style="flex:1;text-align:center;padding:16px 6px;border-radius:18px;border:1px solid var(--pb-border);background:var(--pb-surface)">
+<span style="display:block;font-size:20px;font-weight:600;letter-spacing:-.02em">{{ sr.hits }}/{{ sr.total }}</span>
+<span style="display:block;margin-top:4px;font-size:11px;color:var(--pb-text2)">acertos</span>
+</div>
+<div style="flex:1;text-align:center;padding:16px 6px;border-radius:18px;border:1px solid var(--pb-border);background:var(--pb-surface)">
+<span style="display:block;font-size:20px;font-weight:600;letter-spacing:-.02em">{{ sr.time }}</span>
+<span style="display:block;margin-top:4px;font-size:11px;color:var(--pb-text2)">tempo</span>
+</div>
+<div style="flex:1;text-align:center;padding:16px 6px;border-radius:18px;border:1px solid var(--pb-border);background:var(--pb-surface)">
+<span style="display:block;font-size:20px;font-weight:600;letter-spacing:-.02em;color:var(--pb-green)">{{ sr.pts }}</span>
+<span style="display:block;margin-top:4px;font-size:11px;color:var(--pb-text2)">pontos</span>
+</div>
+</div>
+
+<p style="margin:0 0 12px;font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--pb-text2)">O que você levou daqui</p>
+<div style="display:flex;flex-direction:column;gap:9px;flex:1">
+<sc-for list="{{ sr.learn }}" as="l" hint-placeholder-count="4">
+<div style="display:flex;gap:11px;align-items:flex-start;padding:14px 16px;border-radius:16px;background:var(--pb-surface);border:1px solid var(--pb-border)">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pb-green)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px"><path d="M4.5 12.5 9.5 17.5 19.5 6.5"></path></svg>
+<span style="font-size:13.5px;line-height:1.5;font-weight:400">{{ l }}</span>
+</div>
+</sc-for>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px;margin-top:24px">
+<button type="button" onClick="{{ sr.back }}" style="appearance:none;cursor:pointer;border:0;height:56px;border-radius:18px;background:var(--pb-blue);color:#fff;font:600 16px Poppins,system-ui,sans-serif;box-shadow:0 10px 24px rgba(36,107,253,.24)" style-hover="background:var(--pb-blue-ink)">Voltar às simulações</button>
+<button type="button" onClick="{{ sr.again }}" style="appearance:none;cursor:pointer;height:52px;border-radius:18px;background:transparent;border:1.5px solid var(--pb-border);color:var(--pb-text);font:500 15px Poppins,system-ui,sans-serif" style-hover="border-color:var(--pb-blue);color:var(--pb-blue)">Refazer simulação</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ s.emPick }}">
+<div style="min-height:100%;box-sizing:border-box;display:flex;flex-direction:column;padding:62px 26px 34px;animation:pbFade .3s both">
+<button type="button" onClick="{{ ep.back }}" aria-label="Voltar" style="appearance:none;cursor:pointer;width:42px;height:42px;border-radius:14px;border:1px solid var(--pb-border);background:var(--pb-surface);color:var(--pb-text);display:flex;align-items:center;justify-content:center;margin-bottom:22px" style-hover="border-color:var(--pb-blue);color:var(--pb-blue)">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5.5 8.5 12l6.5 6.5"></path></svg>
+</button>
+<span style="display:inline-flex;align-self:flex-start;align-items:center;gap:8px;padding:7px 13px;border-radius:99px;background:rgba(229,72,77,.1);color:var(--pb-red);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 3.5 2.8 19.5h18.4L12 3.5ZM12 9.5v4.5M12 17v.01"></path></svg>
+Modo Emergência</span>
+<h2 style="margin:0;font-size:26px;line-height:1.2;font-weight:600;letter-spacing:-.03em">O que aconteceu?</h2>
+<p style="margin:9px 0 22px;font-size:14.5px;line-height:1.6;font-weight:300;color:var(--pb-text2);text-wrap:pretty">Escolha a situação. Você recebe um passo a passo na ordem certa, sem precisar pensar em tudo de uma vez.</p>
+<div style="display:flex;flex-direction:column;gap:9px">
+<sc-for list="{{ ep.items }}" as="e" hint-placeholder-count="9">
+<button type="button" onClick="{{ e.on }}" style="appearance:none;cursor:pointer;display:flex;align-items:center;gap:13px;text-align:left;padding:17px 16px;border-radius:18px;border:1px solid var(--pb-border);background:var(--pb-surface);color:var(--pb-text);transition:.16s ease" style-hover="border-color:var(--pb-red)">
+<span style="width:40px;height:40px;flex:none;border-radius:14px;background:var(--pb-soft);color:var(--pb-text);display:flex;align-items:center;justify-content:center">
+<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ e.glyph }}"></path></svg>
+</span>
+<span style="flex:1;min-width:0;font-size:15px;font-weight:500;line-height:1.35">{{ e.t }}</span>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:var(--pb-text2)"><path d="M9 5.5 15.5 12 9 18.5"></path></svg>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ s.emRun }}">
+<div style="min-height:100%;box-sizing:border-box;display:flex;flex-direction:column;padding:58px 22px 34px;background:var(--pb-surface)">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:18px">
+<button type="button" onClick="{{ em.exit }}" aria-label="Encerrar atendimento" style="appearance:none;cursor:pointer;width:40px;height:40px;flex:none;border-radius:13px;border:1px solid var(--pb-border);background:transparent;color:var(--pb-text2);display:flex;align-items:center;justify-content:center" style-hover="border-color:var(--pb-red);color:var(--pb-red)">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+</button>
+<div style="flex:1;min-width:0">
+<p style="margin:0;font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--pb-red)">Atendimento · início {{ em.start }}</p>
+<p style="margin:4px 0 0;font-size:17px;font-weight:600;letter-spacing:-.02em;line-height:1.25">{{ em.title }}</p>
+</div>
+</div>
+
+<div style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:16px;background:var(--pb-bg);border:1px solid var(--pb-border);margin-bottom:22px">
+<span style="flex:1;min-width:0">
+<span style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:7px">
+<span style="font-size:12.5px;font-weight:500">Progresso do atendimento</span>
+<span style="font-size:12.5px;font-weight:600;color:var(--pb-green)">{{ em.doneN }}/{{ em.total }}</span>
+</span>
+<span style="display:block;height:6px;border-radius:99px;background:var(--pb-soft);overflow:hidden"><span style="display:block;height:100%;border-radius:99px;width:{{ em.pct }};background:var(--pb-green);transition:.5s cubic-bezier(.22,1,.36,1)"></span></span>
+</span>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:24px;flex:1">
+<sc-for list="{{ em.groups }}" as="g" hint-placeholder-count="3">
+<div>
+<div style="display:flex;align-items:baseline;gap:9px;margin-bottom:12px">
+<span style="font-size:15px;font-weight:600;letter-spacing:-.02em">{{ g.label }}</span>
+<span style="font-size:11.5px;font-weight:300;color:var(--pb-text2)">{{ g.sub }}</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:9px">
+<sc-for list="{{ g.items }}" as="i" hint-placeholder-count="4">
+<button type="button" onClick="{{ i.on }}" style="appearance:none;cursor:pointer;display:flex;gap:12px;text-align:left;padding:15px 16px;border-radius:18px;border:1.5px solid {{ i.bd }};background:var(--pb-bg);color:var(--pb-text);transition:.18s ease" style-hover="border-color:var(--pb-green)">
+<span style="width:24px;height:24px;flex:none;margin-top:1px;border-radius:8px;border:2px solid {{ i.bd }};background:{{ i.bg }};display:flex;align-items:center;justify-content:center;transition:.18s ease">
+<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5 9.5 17.5 19.5 6.5"></path></svg>
+</span>
+<span style="flex:1;min-width:0">
+<span style="display:block;font-size:14.5px;font-weight:500;line-height:1.35;color:{{ i.fg }};text-decoration:{{ i.deco }}">{{ i.t }}</span>
+<span style="display:block;margin-top:5px;font-size:12.5px;line-height:1.55;font-weight:300;color:var(--pb-text2)">{{ i.h }}</span>
+<sc-if value="{{ i.time }}">
+<span style="display:inline-block;margin-top:8px;font-size:11px;font-weight:600;color:var(--pb-green)">Concluída às {{ i.time }}</span>
+</sc-if>
+</span>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-for>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px;margin-top:24px">
+<button type="button" onClick="{{ em.call }}" style="appearance:none;cursor:pointer;height:54px;border-radius:18px;border:1.5px solid var(--pb-border);background:transparent;color:var(--pb-text);font:500 15px Poppins,system-ui,sans-serif;display:flex;align-items:center;justify-content:center;gap:10px" style-hover="border-color:var(--pb-blue);color:var(--pb-blue)">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 20.5v-1.7a3.8 3.8 0 0 0-3.8-3.8H6.3a3.8 3.8 0 0 0-3.8 3.8v1.7M9 11.8a3.6 3.6 0 1 0 0-7.3 3.6 3.6 0 0 0 0 7.3M21.5 20.5v-1.7a3.8 3.8 0 0 0-2.8-3.7"></path></svg>
+Acionar contato de confiança</button>
+<button type="button" onClick="{{ em.finish }}" style="appearance:none;cursor:pointer;border:0;height:56px;border-radius:18px;background:var(--pb-deep);color:#fff;font:600 16px Poppins,system-ui,sans-serif" style-hover="background:var(--pb-blue-ink)">Encerrar e gerar relatório</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ s.report }}">
+<div style="min-height:100%;box-sizing:border-box;display:flex;flex-direction:column;padding:62px 26px 34px;animation:pbFade .3s both">
+<button type="button" onClick="{{ rp.back }}" aria-label="Voltar" style="appearance:none;cursor:pointer;width:42px;height:42px;border-radius:14px;border:1px solid var(--pb-border);background:var(--pb-surface);color:var(--pb-text);display:flex;align-items:center;justify-content:center;margin-bottom:22px" style-hover="border-color:var(--pb-blue);color:var(--pb-blue)">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5.5 8.5 12l6.5 6.5"></path></svg>
+</button>
+<span style="font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--pb-text2)">Relatório do atendimento</span>
+<h2 style="margin:10px 0 6px;font-size:24px;line-height:1.2;font-weight:600;letter-spacing:-.03em">{{ rp.title }}</h2>
+<p style="margin:0 0 22px;font-size:13px;font-weight:300;color:var(--pb-text2)">{{ rp.when }}</p>
+
+<div style="padding:20px;border-radius:20px;border:1px solid var(--pb-border);background:var(--pb-surface);margin-bottom:24px">
+<div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:11px">
+<span style="font-size:14px;font-weight:500">Ações concluídas</span>
+<span style="font-size:19px;font-weight:600;letter-spacing:-.02em;color:var(--pb-green)">{{ rp.doneN }}/{{ rp.total }}</span>
+</div>
+<span style="display:block;height:7px;border-radius:99px;background:var(--pb-soft);overflow:hidden"><span style="display:block;height:100%;border-radius:99px;width:{{ rp.pct }};background:var(--pb-green)"></span></span>
+</div>
+
+<p style="margin:0 0 14px;font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--pb-text2)">Linha do tempo</p>
+<div style="display:flex;flex-direction:column;gap:0;margin-bottom:26px">
+<sc-for list="{{ rp.log }}" as="l" hint-placeholder-count="4">
+<div style="display:flex;gap:14px;align-items:flex-start">
+<span style="display:flex;flex-direction:column;align-items:center;flex:none;width:12px">
+<span style="width:10px;height:10px;border-radius:50%;background:var(--pb-blue);margin-top:5px"></span>
+<span style="width:1.5px;flex:1;min-height:26px;background:var(--pb-border)"></span>
+</span>
+<span style="flex:1;min-width:0;padding-bottom:14px">
+<span style="display:block;font-size:11.5px;font-weight:600;color:var(--pb-text2)">{{ l.t }}</span>
+<span style="display:block;margin-top:3px;font-size:13.5px;line-height:1.45;font-weight:400">{{ l.txt }}</span>
+</span>
+</div>
+</sc-for>
+</div>
+
+<sc-if value="{{ rp.hasPend }}">
+<div style="margin-bottom:24px">
+<p style="margin:0 0 12px;font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--pb-text2)">Ainda pendente</p>
+<div style="display:flex;flex-direction:column;gap:8px">
+<sc-for list="{{ rp.pend }}" as="p" hint-placeholder-count="3">
+<div style="display:flex;gap:10px;align-items:center;padding:13px 15px;border-radius:15px;border:1px solid var(--pb-border);background:var(--pb-surface)">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pb-amber)" stroke-width="2" stroke-linecap="round" style="flex:none"><path d="M12 3.2a8.8 8.8 0 1 0 0 17.6 8.8 8.8 0 0 0 0-17.6ZM12 7.2v5l3.4 2"></path></svg>
+<span style="font-size:13.5px;line-height:1.4;font-weight:400">{{ p.t }}</span>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<button type="button" onClick="{{ rp.exportar }}" style="appearance:none;cursor:pointer;border:0;height:56px;border-radius:18px;background:var(--pb-blue);color:#fff;font:600 15.5px Poppins,system-ui,sans-serif;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 10px 24px rgba(36,107,253,.24)" style-hover="background:var(--pb-blue-ink)">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.5v13M6.5 12.5 12 18l5.5-5.5"></path></svg>
+Exportar relatório</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ s.profile }}">
+<div style="min-height:100%;box-sizing:border-box;display:flex;flex-direction:column;padding:62px 26px 116px;animation:pbFade .3s both">
+<div style="display:flex;align-items:center;gap:14px;margin-bottom:24px">
+<span style="width:58px;height:58px;flex:none;border-radius:20px;background:var(--pb-deep);color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600">{{ pf.initial }}</span>
+<span style="flex:1;min-width:0">
+<span style="display:flex;align-items:center;gap:8px">
+<span style="font-size:20px;font-weight:600;letter-spacing:-.03em">{{ pf.name }}</span>
+<sc-if value="{{ pf.guest }}">
+<span style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--pb-blue-ink);background:var(--pb-tint);padding:4px 8px;border-radius:99px">Visitante</span>
+</sc-if>
+</span>
+<span style="display:block;margin-top:3px;font-size:12.5px;font-weight:300;color:var(--pb-text2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ pf.email }}</span>
+</span>
+</div>
+
+<div style="display:flex;gap:9px;margin-bottom:26px">
+<div style="flex:1;text-align:center;padding:16px 6px;border-radius:18px;border:1px solid var(--pb-border);background:var(--pb-surface)">
+<span style="display:block;font-size:21px;font-weight:600;letter-spacing:-.02em;color:{{ pf.ink }}">{{ pf.score }}</span>
+<span style="display:block;margin-top:4px;font-size:11px;color:var(--pb-text2)">prontidão</span>
+</div>
+<div style="flex:1;text-align:center;padding:16px 6px;border-radius:18px;border:1px solid var(--pb-border);background:var(--pb-surface)">
+<span style="display:block;font-size:21px;font-weight:600;letter-spacing:-.02em">{{ pf.tasksDone }}</span>
+<span style="display:block;margin-top:4px;font-size:11px;color:var(--pb-text2)">tarefas</span>
+</div>
+<div style="flex:1;text-align:center;padding:16px 6px;border-radius:18px;border:1px solid var(--pb-border);background:var(--pb-surface)">
+<span style="display:block;font-size:21px;font-weight:600;letter-spacing:-.02em;color:var(--pb-green)">{{ pf.pts }}</span>
+<span style="display:block;margin-top:4px;font-size:11px;color:var(--pb-text2)">pontos</span>
+</div>
+</div>
+
+<div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--pb-text2)">Conquistas</p>
+<span style="font-size:12.5px;font-weight:500;color:var(--pb-text2)">{{ pf.achN }} de {{ pf.achTotal }}</span>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:28px">
+<sc-for list="{{ pf.ach }}" as="a" hint-placeholder-count="6">
+<div style="display:flex;flex-direction:column;gap:10px;padding:16px;border-radius:18px;border:1px solid {{ a.bd }};background:var(--pb-surface);opacity:{{ a.op }}">
+<span style="width:36px;height:36px;border-radius:13px;background:{{ a.bg }};color:{{ a.fg }};display:flex;align-items:center;justify-content:center">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ a.glyph }}"></path></svg>
+</span>
+<span>
+<span style="display:block;font-size:13.5px;font-weight:500;line-height:1.3">{{ a.t }}</span>
+<span style="display:block;margin-top:3px;font-size:11.5px;line-height:1.4;font-weight:300;color:var(--pb-text2)">{{ a.d }}</span>
+</span>
+</div>
+</sc-for>
+</div>
+
+<p style="margin:0 0 12px;font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--pb-text2)">Acessibilidade e preferências</p>
+<div style="display:flex;flex-direction:column;gap:9px;margin-bottom:26px">
+<button type="button" onClick="{{ pf.toggleDark }}" style="appearance:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 16px;border-radius:16px;border:1px solid var(--pb-border);background:var(--pb-surface);color:var(--pb-text);font:500 14px Poppins,system-ui,sans-serif" style-hover="border-color:var(--pb-blue)">
+<span>Modo escuro</span>
+<span style="width:38px;height:22px;flex:none;border-radius:99px;background:{{ pf.darkBg }};position:relative;transition:.18s ease"><span style="position:absolute;top:2px;left:{{ pf.darkX }};width:18px;height:18px;border-radius:50%;background:#fff;transition:.18s ease"></span></span>
+</button>
+<button type="button" onClick="{{ pf.toggleContrast }}" style="appearance:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 16px;border-radius:16px;border:1px solid var(--pb-border);background:var(--pb-surface);color:var(--pb-text);font:500 14px Poppins,system-ui,sans-serif" style-hover="border-color:var(--pb-blue)">
+<span>Alto contraste</span>
+<span style="width:38px;height:22px;flex:none;border-radius:99px;background:{{ pf.contrastBg }};position:relative;transition:.18s ease"><span style="position:absolute;top:2px;left:{{ pf.contrastX }};width:18px;height:18px;border-radius:50%;background:#fff;transition:.18s ease"></span></span>
+</button>
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px;border-radius:16px;border:1px solid var(--pb-border);background:var(--pb-surface)">
+<span style="font-size:14px;font-weight:500">Tamanho da fonte</span>
+<span style="display:flex;gap:6px">
+<sc-for list="{{ pf.fonts }}" as="f" hint-placeholder-count="3">
+<button type="button" onClick="{{ f.on }}" aria-label="Tamanho da fonte" style="appearance:none;cursor:pointer;width:38px;height:38px;border-radius:12px;border:1.5px solid {{ f.bd }};background:{{ f.bg }};color:{{ f.fg }};font-family:Poppins,system-ui,sans-serif;font-weight:600;font-size:{{ f.size }}">A</button>
+</sc-for>
+</span>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:9px">
+<button type="button" onClick="{{ pf.retake }}" style="appearance:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:15px 16px;border-radius:16px;border:1px solid var(--pb-border);background:var(--pb-surface);color:var(--pb-text);font:500 14px Poppins,system-ui,sans-serif" style-hover="border-color:var(--pb-blue)">
+<span>Refazer Teste de Prontidão</span>
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--pb-text2)"><path d="M9 5.5 15.5 12 9 18.5"></path></svg>
+</button>
+<button type="button" onClick="{{ pf.openNotif }}" style="appearance:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:15px 16px;border-radius:16px;border:1px solid var(--pb-border);background:var(--pb-surface);color:var(--pb-text);font:500 14px Poppins,system-ui,sans-serif" style-hover="border-color:var(--pb-blue)">
+<span>Notificações</span>
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--pb-text2)"><path d="M9 5.5 15.5 12 9 18.5"></path></svg>
+</button>
+<button type="button" onClick="{{ pf.logout }}" style="appearance:none;cursor:pointer;padding:15px 16px;border-radius:16px;border:1px solid var(--pb-border);background:transparent;color:var(--pb-red);font:500 14px Poppins,system-ui,sans-serif;text-align:left" style-hover="border-color:var(--pb-red)">Sair da conta</button>
+</div>
+</div>
+</sc-if>
+
+</div>
+<sc-if value="{{ nav.show }}">
+<div style="position:absolute;left:0;right:0;bottom:0;z-index:30;display:flex;align-items:flex-end;justify-content:space-between;gap:4px;padding:10px 14px 26px;background:var(--pb-surface);border-top:1px solid var(--pb-border);box-shadow:0 -8px 28px rgba(16,24,40,.06)">
+<sc-for list="{{ nav.left }}" as="n" hint-placeholder-count="2">
+<button type="button" onClick="{{ n.on }}" style="flex:1;appearance:none;cursor:pointer;border:0;background:none;padding:8px 2px;display:flex;flex-direction:column;align-items:center;gap:5px;color:{{ n.fg }};font-family:Poppins,system-ui,sans-serif;font-size:10.5px;font-weight:{{ n.w }};transition:.16s ease">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ n.glyph }}"></path></svg>
+{{ n.l }}</button>
+</sc-for>
+<button type="button" onClick="{{ nav.sos }}" aria-label="Modo Emergência" style="flex:none;appearance:none;cursor:pointer;border:0;width:58px;height:58px;margin:0 2px 6px;border-radius:22px;background:var(--pb-red);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:0 10px 24px rgba(229,72,77,.34);transition:.16s ease" style-hover="transform:translateY(-2px)" style-active="transform:scale(.96)">
+<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 2.8 19.5h18.4L12 3.5ZM12 9.5v4.5M12 17v.01"></path></svg>
+<span style="font-size:8.5px;font-weight:600;letter-spacing:.08em">SOS</span>
+</button>
+<sc-for list="{{ nav.right }}" as="n" hint-placeholder-count="2">
+<button type="button" onClick="{{ n.on }}" style="flex:1;appearance:none;cursor:pointer;border:0;background:none;padding:8px 2px;display:flex;flex-direction:column;align-items:center;gap:5px;color:{{ n.fg }};font-family:Poppins,system-ui,sans-serif;font-size:10.5px;font-weight:{{ n.w }};transition:.16s ease">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ n.glyph }}"></path></svg>
+{{ n.l }}</button>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{ tk.open }}">
+<div style="position:absolute;inset:0;z-index:44;display:flex;align-items:flex-end;background:rgba(11,37,64,.42);animation:pbFade .22s both">
+<div role="dialog" aria-modal="true" style="width:100%;max-height:88%;overflow:auto;box-sizing:border-box;background:var(--pb-surface);border-radius:28px 28px 0 0;padding:20px 24px 32px;animation:pbSheet .32s cubic-bezier(.22,1,.36,1) both">
+<div style="display:flex;justify-content:center;margin-bottom:18px"><span style="width:44px;height:4px;border-radius:99px;background:var(--pb-border)"></span></div>
+<div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:20px">
+<h3 style="margin:0;flex:1;font-size:20px;line-height:1.25;font-weight:600;letter-spacing:-.03em;text-wrap:pretty">{{ tk.t }}</h3>
+<button type="button" onClick="{{ tk.close }}" aria-label="Fechar" style="appearance:none;cursor:pointer;width:34px;height:34px;flex:none;border-radius:11px;border:1px solid var(--pb-border);background:transparent;color:var(--pb-text2);display:flex;align-items:center;justify-content:center" style-hover="border-color:var(--pb-text);color:var(--pb-text)">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+</button>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;gap:11px;padding:15px;border-radius:16px;background:var(--pb-tint)">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--pb-blue-ink)" stroke-width="1.9" stroke-linecap="round" style="flex:none;margin-top:2px"><path d="M12 3.2a8.8 8.8 0 1 0 0 17.6 8.8 8.8 0 0 0 0-17.6ZM12 11v5.4M12 7.6v.01"></path></svg>
+<span style="flex:1;min-width:0">
+<span style="display:block;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--pb-blue-ink);margin-bottom:5px">Por que importa</span>
+<span style="display:block;font-size:13.5px;line-height:1.55;font-weight:400;color:var(--pb-deep)">{{ tk.why }}</span>
+</span>
+</div>
+<div style="display:flex;gap:11px;padding:15px;border-radius:16px;background:rgba(244,183,64,.14)">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#8A6100" stroke-width="1.9" stroke-linecap="round" style="flex:none;margin-top:2px"><path d="M12 3.5 2.8 19.5h18.4L12 3.5ZM12 9.5v4.5M12 17v.01"></path></svg>
+<span style="flex:1;min-width:0">
+<span style="display:block;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#8A6100;margin-bottom:5px">Risco se ficar de fora</span>
+<span style="display:block;font-size:13.5px;line-height:1.55;font-weight:400;color:#7A5600">{{ tk.risk }}</span>
+</span>
+</div>
+<div>
+<p style="margin:0 0 12px;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--pb-text2)">Como fazer · {{ tk.min }}</p>
+<div style="display:flex;flex-direction:column;gap:11px">
+<sc-for list="{{ tk.steps }}" as="p" hint-placeholder-count="3">
+<div style="display:flex;gap:12px;align-items:flex-start">
+<span style="width:24px;height:24px;flex:none;border-radius:50%;background:var(--pb-soft);color:var(--pb-text);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600">{{ p.n }}</span>
+<span style="flex:1;min-width:0;font-size:13.5px;line-height:1.55;font-weight:400;padding-top:2px">{{ p.x }}</span>
+</div>
+</sc-for>
+</div>
+</div>
+<button type="button" onClick="{{ tk.toggle }}" style="appearance:none;cursor:pointer;height:54px;border-radius:18px;border:{{ tk.ctaBd }};background:{{ tk.ctaBg }};color:{{ tk.ctaFg }};font:600 15.5px Poppins,system-ui,sans-serif;transition:.16s ease">{{ tk.cta }}</button>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ nt.open }}">
+<div style="position:absolute;inset:0;z-index:46;display:flex;align-items:flex-end;background:rgba(11,37,64,.42);animation:pbFade .22s both">
+<div role="dialog" aria-modal="true" style="width:100%;box-sizing:border-box;background:var(--pb-surface);border-radius:28px 28px 0 0;padding:20px 24px 34px;animation:pbSheet .32s cubic-bezier(.22,1,.36,1) both">
+<div style="display:flex;justify-content:center;margin-bottom:18px"><span style="width:44px;height:4px;border-radius:99px;background:var(--pb-border)"></span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px">
+<h3 style="margin:0;font-size:19px;font-weight:600;letter-spacing:-.02em">Notificações</h3>
+<button type="button" onClick="{{ nt.close }}" aria-label="Fechar" style="appearance:none;cursor:pointer;width:34px;height:34px;flex:none;border-radius:11px;border:1px solid var(--pb-border);background:transparent;color:var(--pb-text2);display:flex;align-items:center;justify-content:center" style-hover="border-color:var(--pb-text);color:var(--pb-text)">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+</button>
+</div>
+<div style="display:flex;flex-direction:column;gap:9px">
+<sc-for list="{{ nt.items }}" as="n" hint-placeholder-count="3">
+<button type="button" onClick="{{ n.on }}" style="appearance:none;cursor:pointer;display:flex;gap:12px;text-align:left;padding:15px;border-radius:16px;border:1px solid var(--pb-border);background:var(--pb-bg);color:var(--pb-text);transition:.16s ease" style-hover="border-color:var(--pb-blue)">
+<span style="width:36px;height:36px;flex:none;border-radius:13px;background:var(--pb-tint);color:var(--pb-blue-ink);display:flex;align-items:center;justify-content:center">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ n.glyph }}"></path></svg>
+</span>
+<span style="flex:1;min-width:0">
+<span style="display:block;font-size:13.5px;font-weight:500;line-height:1.35">{{ n.t }}</span>
+<span style="display:block;margin-top:3px;font-size:12px;line-height:1.45;font-weight:300;color:var(--pb-text2)">{{ n.d }}</span>
+<span style="display:block;margin-top:5px;font-size:11px;color:var(--pb-text2)">{{ n.when }}</span>
+</span>
+</button>
+</sc-for>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ cfm.open }}">
+<div style="position:absolute;inset:0;z-index:52;display:flex;align-items:center;justify-content:center;padding:0 30px;background:rgba(11,37,64,.48);animation:pbFade .2s both">
+<div role="dialog" aria-modal="true" style="width:100%;box-sizing:border-box;background:var(--pb-surface);border-radius:24px;padding:26px 24px 22px;animation:pbPop .28s cubic-bezier(.22,1,.36,1) both;box-shadow:0 22px 48px rgba(11,37,64,.3)">
+<h3 style="margin:0;font-size:19px;font-weight:600;letter-spacing:-.02em;text-wrap:pretty">{{ cfm.t }}</h3>
+<p style="margin:10px 0 22px;font-size:14px;line-height:1.55;font-weight:300;color:var(--pb-text2);text-wrap:pretty">{{ cfm.d }}</p>
+<div style="display:flex;gap:10px">
+<button type="button" onClick="{{ cfm.cancel }}" style="flex:1;appearance:none;cursor:pointer;height:50px;border-radius:16px;border:1.5px solid var(--pb-border);background:transparent;color:var(--pb-text);font:500 14.5px Poppins,system-ui,sans-serif">Cancelar</button>
+<button type="button" onClick="{{ cfm.on }}" style="flex:1;appearance:none;cursor:pointer;height:50px;border-radius:16px;border:0;background:var(--pb-red);color:#fff;font:600 14.5px Poppins,system-ui,sans-serif">{{ cfm.ok }}</button>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ bio.open }}">
+<div style="position:absolute;inset:0;z-index:40;display:flex;align-items:flex-end;background:rgba(11,37,64,.42);animation:pbFade .22s both">
+<div role="dialog" aria-modal="true" style="width:100%;box-sizing:border-box;background:var(--pb-surface);border-radius:28px 28px 0 0;padding:26px 26px 46px;display:flex;flex-direction:column;align-items:center;gap:20px;animation:pbSheet .32s cubic-bezier(.22,1,.36,1) both">
+<span style="width:44px;height:4px;border-radius:99px;background:var(--pb-border)"></span>
+
+<sc-if value="{{ bio.scan }}">
+<div style="display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center">
+<div style="position:relative;width:104px;height:104px;border-radius:36px;background:var(--pb-tint);color:var(--pb-blue);display:flex;align-items:center;justify-content:center;overflow:hidden">
+<svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.6c-3 0-5.6 1.6-7 4M19 7.6a8.4 8.4 0 0 0-3-3.2M5.2 10.4A6.8 6.8 0 0 1 12 6.4a6.8 6.8 0 0 1 6.8 4M8.6 20.2a12 12 0 0 0 1.4-5.6 2 2 0 0 1 4 0c0 1.8-.3 3.6-.8 5.3M5.4 17.6c.4-1 .6-2 .6-3M18.2 14.6c0 2-.3 4-.9 5.9"></path></svg>
+<span style="position:absolute;left:12px;right:12px;height:2px;background:var(--pb-blue);box-shadow:0 0 12px rgba(36,107,253,.6);animation:pbScan 1.6s ease-in-out infinite"></span>
+</div>
+<div>
+<h3 style="margin:0;font-size:19px;font-weight:600;letter-spacing:-.02em">Toque no sensor</h3>
+<p style="margin:9px 0 0;font-size:13.5px;line-height:1.55;font-weight:300;color:var(--pb-text2);max-width:270px">Leitura biométrica simulada. Nenhum dado biométrico é coletado ou armazenado.</p>
+</div>
+<div style="display:flex;gap:10px;width:100%">
+<button type="button" onClick="{{ bio.close }}" style="flex:1;appearance:none;cursor:pointer;height:50px;border-radius:16px;border:1.5px solid var(--pb-border);background:transparent;color:var(--pb-text);font:500 14.5px Poppins,system-ui,sans-serif">Cancelar</button>
+<button type="button" onClick="{{ bio.failNow }}" style="flex:1;appearance:none;cursor:pointer;height:50px;border-radius:16px;border:1.5px solid var(--pb-border);background:transparent;color:var(--pb-text2);font:500 14.5px Poppins,system-ui,sans-serif">Simular falha</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ bio.ok }}">
+<div style="display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;animation:pbPop .3s cubic-bezier(.22,1,.36,1) both">
+<div style="width:104px;height:104px;border-radius:36px;background:rgba(45,190,120,.14);color:var(--pb-green);display:flex;align-items:center;justify-content:center">
+<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5 9.5 17.5 19.5 6.5"></path></svg>
+</div>
+<div>
+<h3 style="margin:0;font-size:19px;font-weight:600;letter-spacing:-.02em">Identidade confirmada</h3>
+<p style="margin:9px 0 0;font-size:13.5px;font-weight:300;color:var(--pb-text2)">Abrindo seu Plano B…</p>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ bio.fail }}">
+<div style="display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;animation:pbPop .3s cubic-bezier(.22,1,.36,1) both">
+<div style="width:104px;height:104px;border-radius:36px;background:rgba(229,72,77,.12);color:var(--pb-red);display:flex;align-items:center;justify-content:center">
+<svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 2.8 19.5h18.4L12 3.5ZM12 9.5v4.5M12 17v.01"></path></svg>
+</div>
+<div>
+<h3 style="margin:0;font-size:19px;font-weight:600;letter-spacing:-.02em">Acesso biométrico negado</h3>
+<p style="margin:9px 0 0;font-size:13.5px;line-height:1.55;font-weight:300;color:var(--pb-text2);max-width:280px">Não foi possível reconhecer a leitura. Tente novamente ou entre com e-mail e senha.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;width:100%">
+<button type="button" onClick="{{ bio.retry }}" style="appearance:none;cursor:pointer;height:52px;border-radius:16px;border:0;background:var(--pb-blue);color:#fff;font:600 15px Poppins,system-ui,sans-serif">Tentar novamente</button>
+<button type="button" onClick="{{ bio.close }}" style="appearance:none;cursor:pointer;height:50px;border-radius:16px;border:1.5px solid var(--pb-border);background:transparent;color:var(--pb-text);font:500 14.5px Poppins,system-ui,sans-serif">Usar e-mail e senha</button>
+</div>
+</div>
+</sc-if>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ toast.show }}">
+<div role="status" style="position:absolute;left:20px;right:20px;bottom:52px;z-index:60;display:flex;align-items:center;gap:11px;padding:14px 16px;border-radius:18px;background:#0B2540;color:#fff;box-shadow:0 16px 34px rgba(11,37,64,.34);animation:pbPop .28s cubic-bezier(.22,1,.36,1) both">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2DBE78" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M4.5 12.5 9.5 17.5 19.5 6.5"></path></svg>
+<span style="font-size:13px;line-height:1.45;font-weight:400">{{ toast.text }}</span>
+</div>
+</sc-if>
+
+</div>
+</x-import>
+<p style="margin:0;font-size:11.5px;color:#7B879B;display:flex;align-items:center;gap:7px">
+<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2a8.8 8.8 0 1 0 0 17.6 8.8 8.8 0 0 0 0-17.6ZM12 11v5.4M12 7.6v.01"></path></svg>
+Protótipo acadêmico · autenticação, biometria e envio de e-mail são simulados
+</p>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:760,&quot;height&quot;:980},&quot;startScreen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;splash&quot;,&quot;ob&quot;,&quot;auth&quot;,&quot;recover&quot;,&quot;ready&quot;],&quot;default&quot;:&quot;splash&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Protótipo&quot;},&quot;showRail&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Protótipo&quot;}}">
+class Component extends DCLogic {
+  KEY = 'planob:v1';
+
+  OB = [
+    { chip: 'Prevenção', title: 'Você está preparado para uma emergência digital?', desc: 'Descubra como proteger suas contas, seus dados e sua família antes que um incidente aconteça.', accent: '#246BFD', tint: 'rgba(36,107,253,.10)', glow: 'rgba(36,107,253,.30)', rot: '-5deg', glyph: 'M12 2.4 4.4 5.4v6c0 5 3.3 9 7.6 10.4 4.3-1.4 7.6-5.4 7.6-10.4v-6L12 2.4Z' },
+    { chip: 'Organização', title: 'Tenha um plano antes de precisar dele', desc: 'Organize contas prioritárias, contatos de confiança e etapas de recuperação.', accent: '#123B5D', tint: 'rgba(18,59,93,.10)', glow: 'rgba(18,59,93,.28)', rot: '4deg', glyph: 'M8.5 6h12M8.5 12h12M8.5 18h12M4 6h.01M4 12h.01M4 18h.01' },
+    { chip: 'Treino', title: 'Treine situações reais', desc: 'Simule o roubo do celular, a invasão de uma conta e outras emergências digitais.', accent: '#2DBE78', tint: 'rgba(45,190,120,.12)', glow: 'rgba(45,190,120,.28)', rot: '-3deg', glyph: 'M8.5 5.6v12.8L19 12 8.5 5.6Z' },
+    { chip: 'Resposta', title: 'Se algo acontecer, saiba o que fazer', desc: 'Use checklists simples e acompanhe cada ação durante uma emergência.', accent: '#F4B740', tint: 'rgba(244,183,64,.14)', glow: 'rgba(244,183,64,.30)', rot: '5deg', glyph: 'M4.5 12.5 9.5 17.5 19.5 6.5' }
+  ];
+
+  G = {
+    shield: 'M12 2.4 4.4 5.4v6c0 5 3.3 9 7.6 10.4 4.3-1.4 7.6-5.4 7.6-10.4v-6L12 2.4Z',
+    phone: 'M7.5 2.6h9a1 1 0 0 1 1 1v16.8a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1V3.6a1 1 0 0 1 1-1ZM10.8 18.2h2.4',
+    mail: 'M3.5 5.5h17v13h-17zM3.8 6.4 12 12.6l8.2-6.2',
+    key: 'M14.8 3.6a5 5 0 0 0-4.6 6.9L3 17.7v2.7h2.8v-2h2v-2h2l1.4-1.4a5 5 0 1 0 3.6-11.4ZM16.6 7.7h.01',
+    users: 'M15.5 20.5v-1.7a3.8 3.8 0 0 0-3.8-3.8H6.3a3.8 3.8 0 0 0-3.8 3.8v1.7M9 11.8a3.6 3.6 0 1 0 0-7.3 3.6 3.6 0 0 0 0 7.3M21.5 20.5v-1.7a3.8 3.8 0 0 0-2.8-3.7',
+    bank: 'M3 9.5 12 4l9 5.5M5.5 11v7.5M10 11v7.5M14 11v7.5M18.5 11v7.5M3 20.5h18',
+    doc: 'M13.5 2.5H7a1.5 1.5 0 0 0-1.5 1.5v16A1.5 1.5 0 0 0 7 21.5h10a1.5 1.5 0 0 0 1.5-1.5V7.5l-5-5ZM13.5 2.5v5h5M8.5 13h7M8.5 17h4',
+    lock: 'M5.5 10.5h13v10h-13zM8.5 10.5V7a3.5 3.5 0 0 1 7 0v3.5',
+    cloud: 'M7 18.5a4 4 0 0 1-.4-8A5.5 5.5 0 0 1 17.4 11a3.8 3.8 0 0 1-.4 7.5H7ZM12 9v6M9.5 12.5 12 15l2.5-2.5',
+    bell: 'M6 10a6 6 0 1 1 12 0c0 4.5 1.8 5.5 1.8 5.5H4.2S6 14.5 6 10M10.2 19a1.9 1.9 0 0 0 3.6 0',
+    alert: 'M12 3.5 2.8 19.5h18.4L12 3.5ZM12 9.5v4.5M12 17v.01',
+    check: 'M4.5 12.5 9.5 17.5 19.5 6.5',
+    clock: 'M12 3.2a8.8 8.8 0 1 0 0 17.6 8.8 8.8 0 0 0 0-17.6ZM12 7.2v5l3.4 2',
+    home: 'M4 10.4 12 4l8 6.4V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1v-9.6Z',
+    plan: 'M8.5 6h12M8.5 12h12M8.5 18h12M4 6h.01M4 12h.01M4 18h.01',
+    play: 'M8.5 5.6v12.8L19 12 8.5 5.6Z',
+    life: 'M12 3.2a8.8 8.8 0 1 0 0 17.6 8.8 8.8 0 0 0 0-17.6ZM12 8.6a3.4 3.4 0 1 0 0 6.8 3.4 3.4 0 0 0 0-6.8M5.8 5.8l3.8 3.8M14.4 14.4l3.8 3.8M18.2 5.8l-3.8 3.8M9.6 14.4l-3.8 3.8',
+    user: 'M12 12.2a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4.5 20.5v-.8a5.2 5.2 0 0 1 5.2-5.2h4.6a5.2 5.2 0 0 1 5.2 5.2v.8',
+    star: 'M12 3.6l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.8l5.9-.9L12 3.6Z',
+    chat: 'M20.5 12.2a8 8 0 0 1-11.6 7.1L4 20.5l1.3-4.6A8 8 0 1 1 20.5 12.2Z',
+    card: 'M2.8 6.5h18.4v11H2.8zM2.8 10.2h18.4M6.2 14.2h3.6',
+    globe: 'M12 3.2a8.8 8.8 0 1 0 0 17.6 8.8 8.8 0 0 0 0-17.6ZM3.4 12h17.2M12 3.2c2.2 2.4 3.4 5.5 3.4 8.8s-1.2 6.4-3.4 8.8c-2.2-2.4-3.4-5.5-3.4-8.8s1.2-6.4 3.4-8.8Z',
+    eye: 'M2.5 12S6 6 12 6s9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6ZM12 14.6a2.6 2.6 0 1 0 0-5.2 2.6 2.6 0 0 0 0 5.2',
+    eyeOff: 'M4 4l16 16M9.9 5.1A8.6 8.6 0 0 1 12 4.9c6 0 9.5 6 9.5 6a15 15 0 0 1-3.4 4M6.4 7.7A15 15 0 0 0 2.5 11s3.5 6 9.5 6a8.9 8.9 0 0 0 3.5-.7',
+    down: 'M12 4.5v13M6.5 12.5 12 18l5.5-5.5',
+    plus: 'M12 5.5v13M5.5 12h13',
+    trash: 'M4.5 6.5h15M9.5 6.5V4.8a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v1.7M6.5 6.5l.9 13a1 1 0 0 0 1 .9h7.2a1 1 0 0 0 1-.9l.9-13'
+  };
+
+  CATS = [
+    { id: 'dev', n: 'Proteção do aparelho', g: 'phone' },
+    { id: 'email', n: 'Proteção do e-mail', g: 'mail' },
+    { id: 'rec', n: 'Recuperação de contas', g: 'key' },
+    { id: 'fin', n: 'Segurança financeira', g: 'bank' },
+    { id: 'trust', n: 'Rede de confiança', g: 'users' }
+  ];
+
+  Q = [
+    { q: 'Você sabe a senha principal do seu e-mail?', c: 'email' },
+    { q: 'Seu e-mail possui autenticação em dois fatores?', c: 'email' },
+    { q: 'Você possui códigos de recuperação guardados?', c: 'rec' },
+    { q: 'Sabe como bloquear o chip do seu celular?', c: 'dev' },
+    { q: 'Possui o IMEI do aparelho registrado?', c: 'dev' },
+    { q: 'Usa senhas diferentes nas contas importantes?', c: 'rec' },
+    { q: 'Possui um contato de confiança?', c: 'trust' },
+    { q: 'Sabe como encerrar sessões abertas?', c: 'rec' },
+    { q: 'Conhece os canais oficiais do seu banco?', c: 'fin' },
+    { q: 'Seu aparelho possui bloqueio por biometria ou senha?', c: 'dev' }
+  ];
+
+  OPTS = [{ k: 'sim', v: 1, l: 'Sim' }, { k: 'parcial', v: .6, l: 'Parcialmente' }, { k: 'nao', v: 0, l: 'Não' }, { k: 'naosei', v: 0, l: 'Não sei o que é isso' }];
+
+  PC = [
+    { id: 'aparelho', n: 'Meu aparelho', g: 'phone', pri: 'Alta', up: 'há 2 dias' },
+    { id: 'email', n: 'Meu e-mail', g: 'mail', pri: 'Crítica', up: 'há 6 dias' },
+    { id: 'contas', n: 'Minhas contas', g: 'key', pri: 'Alta', up: 'há 6 dias' },
+    { id: 'fin', n: 'Proteção financeira', g: 'bank', pri: 'Alta', up: 'há 11 dias' },
+    { id: 'contatos', n: 'Contatos de confiança', g: 'users', pri: 'Média', up: 'nunca' },
+    { id: 'docs', n: 'Documentos importantes', g: 'doc', pri: 'Média', up: 'há 20 dias' },
+    { id: 'backup', n: 'Recuperação e backup', g: 'cloud', pri: 'Média', up: 'há 20 dias' }
+  ];
+
+  T = [
+    { id: 't1', pc: 'aparelho', t: 'Registrar marca e modelo do aparelho', min: 2, why: 'O modelo exato agiliza o bloqueio junto à operadora e o registro do boletim de ocorrência.', risk: 'Perder horas procurando a informação durante o roubo.', steps: ['Abra as configurações do aparelho e toque em Sobre o telefone.', 'Anote marca, modelo e ano de compra.', 'Guarde no Cofre de Preparação, em Aparelho.'] },
+    { id: 't2', pc: 'aparelho', t: 'Guardar o número IMEI', min: 3, why: 'O IMEI identifica o aparelho e permite bloqueá-lo em todas as operadoras.', risk: 'Não conseguir inutilizar o aparelho para o ladrão.', steps: ['Disque *#06# no teclado do telefone.', 'Fotografe ou anote o código de 15 dígitos.', 'Guarde uma cópia fora do celular.'] },
+    { id: 't3', pc: 'aparelho', t: 'Registrar a operadora e o canal de bloqueio', min: 2, why: 'Bloquear o chip evita que recebam seus códigos por SMS.', risk: 'O golpista recebe seus SMS de verificação.', steps: ['Anote o nome da operadora e o telefone de atendimento.', 'Verifique se existe bloqueio pelo aplicativo.', 'Salve o passo a passo no cofre.'] },
+    { id: 't4', pc: 'email', t: 'Confirmar o e-mail de recuperação', min: 3, why: 'É por ele que você recupera o acesso quando perde a senha principal.', risk: 'Ficar sem nenhuma via de retorno à conta principal.', steps: ['Acesse as configurações de segurança do seu e-mail.', 'Confirme se o endereço secundário ainda é seu e está ativo.', 'Atualize se estiver desatualizado.'] },
+    { id: 't5', pc: 'email', t: 'Ativar autenticação em dois fatores', min: 5, why: 'Impede o acesso mesmo que a senha vaze.', risk: 'Invasão silenciosa da conta que recupera todas as outras.', steps: ['Abra segurança da conta e escolha verificação em duas etapas.', 'Prefira um aplicativo autenticador ao SMS.', 'Guarde os códigos de backup gerados.'] },
+    { id: 't6', pc: 'email', t: 'Revisar sessões conectadas', min: 3, why: 'Sessões antigas em aparelhos perdidos continuam ativas por muito tempo.', risk: 'Acesso contínuo de um aparelho que não é mais seu.', steps: ['Procure por dispositivos conectados nas configurações.', 'Encerre o que não reconhecer.', 'Repita a revisão a cada três meses.'] },
+    { id: 't7', pc: 'contas', t: 'Guardar códigos de recuperação', min: 4, why: 'São a única porta de entrada quando você perde o autenticador.', risk: 'Perder o acesso definitivo às contas com dois fatores.', steps: ['Gere os códigos nas contas críticas.', 'Imprima ou anote em papel guardado em local seguro.', 'Registre no cofre apenas onde eles estão.'] },
+    { id: 't8', pc: 'contas', t: 'Listar contas prioritárias', min: 4, why: 'Na emergência não dá tempo de lembrar de tudo. A ordem já pronta economiza minutos.', risk: 'Proteger o que é secundário e esquecer o essencial.', steps: ['Liste e-mail, banco, redes e mensageiros.', 'Ordene por impacto se forem invadidos.', 'Salve a lista no cofre.'] },
+    { id: 't9', pc: 'fin', t: 'Listar bancos e carteiras utilizados', min: 3, why: 'Saber onde está seu dinheiro define a ordem das ligações.', risk: 'Demorar a comunicar a instituição certa.', steps: ['Liste bancos, carteiras digitais e corretoras.', 'Marque quais têm aplicativo no celular.', 'Guarde a lista no cofre.'] },
+    { id: 't10', pc: 'fin', t: 'Salvar canais oficiais de atendimento', min: 3, why: 'Golpistas se passam por centrais de atendimento em momentos de pânico.', risk: 'Ligar para um número falso e entregar seus dados.', steps: ['Copie os telefones do verso do cartão e do site oficial.', 'Anote o canal de contestação de transações.', 'Guarde no cofre, em Financeiro.'] },
+    { id: 't11', pc: 'contatos', t: 'Cadastrar um contato de confiança', min: 3, why: 'Alguém precisa poder confirmar sua identidade e agir com você.', risk: 'Enfrentar a emergência sozinho, sem validação externa.', steps: ['Escolha alguém que atenda o telefone rapidamente.', 'Combine previamente o que essa pessoa deve fazer.', 'Cadastre o contato no aplicativo.'] },
+    { id: 't12', pc: 'contatos', t: 'Definir a palavra de segurança da família', min: 4, why: 'Pedidos urgentes de dinheiro por mensagem são o golpe mais comum.', risk: 'Um familiar transferir dinheiro para um golpista.', steps: ['Escolha uma palavra que não esteja em redes sociais.', 'Combine que todo pedido urgente será confirmado por ligação.', 'Renove a palavra a cada seis meses.'] },
+    { id: 't13', pc: 'docs', t: 'Registrar onde estão os documentos', min: 3, why: 'Boletim de ocorrência e contestações exigem documentos em mãos.', risk: 'Atrasar registros formais por não achar os documentos.', steps: ['Anote o local físico de RG, CPF e certidões.', 'Verifique se há cópias digitais protegidas.', 'Registre apenas a localização, nunca as imagens.'] },
+    { id: 't14', pc: 'backup', t: 'Configurar backup automático', min: 5, why: 'Fotos e conversas perdidas raramente voltam.', risk: 'Perder anos de registros junto com o aparelho.', steps: ['Ative o backup automático de fotos e mensagens.', 'Confirme a frequência e o espaço disponível.', 'Anote onde o backup está guardado.'] },
+    { id: 't15', pc: 'backup', t: 'Testar uma restauração', min: 6, why: 'Backup que nunca foi testado costuma falhar justamente na hora.', risk: 'Descobrir que o backup não funciona quando ele é a única opção.', steps: ['Restaure um arquivo antigo em outro aparelho ou computador.', 'Confirme que o conteúdo abre corretamente.', 'Repita o teste a cada seis meses.'] }
+  ];
+
+  VAULT = [
+    { id: 'v1', t: 'Onde estão os códigos de recuperação', g: 'key', v: 'Envelope lacrado na segunda gaveta do escritório', tag: 'Recuperação' },
+    { id: 'v2', t: 'IMEI do aparelho principal', g: 'phone', v: '35 982710 445119 3', tag: 'Aparelho' },
+    { id: 'v3', t: 'Operadora e canal de bloqueio', g: 'globe', v: 'Vivo · bloqueio pelo app em Minha conta > Segurança', tag: 'Aparelho' },
+    { id: 'v4', t: 'Canais oficiais do banco', g: 'bank', v: 'Central 4004-0001 · contestação pelo app, menu Ajuda', tag: 'Financeiro' },
+    { id: 'v5', t: 'Localização dos documentos', g: 'doc', v: 'Pasta azul no armário do quarto, com RG, CPF e certidão', tag: 'Documentos' },
+    { id: 'v6', t: 'Instruções para a família', g: 'users', v: 'Ligar para a Marina antes de qualquer transferência', tag: 'Família' }
+  ];
+
+  SIMS = [
+    { id: 'roubo', t: 'Roubaram meu celular', c: 'Aparelho', dif: 'Iniciante', dur: '6 min', st: 6, pts: 60, g: 'phone', play: true },
+    { id: 'zap', t: 'Meu WhatsApp foi invadido', c: 'Contas', dif: 'Iniciante', dur: '5 min', st: 5, pts: 50, g: 'chat' },
+    { id: 'email', t: 'Meu e-mail foi comprometido', c: 'Contas', dif: 'Intermediário', dur: '7 min', st: 6, pts: 70, g: 'mail' },
+    { id: 'auth', t: 'Perdi acesso ao autenticador', c: 'Contas', dif: 'Intermediário', dur: '5 min', st: 5, pts: 55, g: 'key' },
+    { id: 'pix', t: 'Fiz um Pix para um golpista', c: 'Fraudes', dif: 'Intermediário', dur: '6 min', st: 6, pts: 65, g: 'card' },
+    { id: 'familia', t: 'Um familiar pediu dinheiro por mensagem', c: 'Família', dif: 'Iniciante', dur: '4 min', st: 4, pts: 45, g: 'users' },
+    { id: 'social', t: 'Minha rede social foi invadida', c: 'Contas', dif: 'Iniciante', dur: '5 min', st: 5, pts: 50, g: 'globe' },
+    { id: 'docs', t: 'Meus documentos foram expostos', c: 'Privacidade', dif: 'Avançado', dur: '8 min', st: 7, pts: 80, g: 'doc' }
+  ];
+
+  STEPS = [
+    { type: 'intro', t: 'Você acabou de perceber que seu celular foi roubado', d: 'O aparelho está desbloqueado e contém aplicativos bancários, e-mail e redes sociais. Cada minuto conta — e a ordem das ações importa mais do que a pressa.' },
+    { type: 'choice', t: 'O que você deve proteger primeiro?', opts: [{ l: 'Minha rede social', ok: false }, { l: 'Meu e-mail principal', ok: true }, { l: 'O aplicativo de música', ok: false }, { l: 'A galeria de fotos', ok: false }], ok: 'Correto. O e-mail principal costuma ser utilizado para recuperar o acesso às demais contas.', no: 'Quase. Proteger o e-mail principal vem antes: é por ele que o golpista redefine a senha de todas as outras contas.' },
+    { type: 'multi', t: 'Quais ações fazem parte da contenção imediata?', hint: 'Selecione as 3 corretas', opts: [{ l: 'Bloquear o chip na operadora', ok: true }, { l: 'Publicar um aviso nas redes sociais', ok: false }, { l: 'Encerrar as sessões abertas do e-mail', ok: true }, { l: 'Trocar a foto do perfil', ok: false }, { l: 'Avisar o banco sobre o risco de fraude', ok: true }], ok: 'Isso. Chip, e-mail e banco são a tríade da primeira hora.', no: 'Publicações e ajustes de perfil podem esperar. Chip, e-mail e banco vêm primeiro.' },
+    { type: 'order', t: 'Coloque as três primeiras ações na ordem certa', hint: 'Toque para montar a sequência', items: [{ id: 'a', l: 'Proteger o e-mail principal' }, { id: 'b', l: 'Bloquear o chip com a operadora' }, { id: 'c', l: 'Avisar o banco e travar transações' }], order: ['a', 'b', 'c'], ok: 'Boa sequência. Primeiro a conta que recupera as outras, depois o canal dos códigos, depois o dinheiro.', no: 'A ordem ideal é: e-mail principal, bloqueio do chip e, então, o banco.' },
+    { type: 'choice', t: 'Você recebe uma ligação: dizem ser do seu banco e pedem a senha para "cancelar" uma transferência.', opts: [{ l: 'Informo a senha para agilizar', ok: false }, { l: 'Desligo e ligo para o canal oficial que registrei', ok: true }, { l: 'Peço que enviem um link por mensagem', ok: false }], ok: 'Exato. Nenhum banco pede senha por telefone. Ligar para o canal oficial é sempre a saída segura.', no: 'Cuidado: bancos nunca pedem senha por telefone. O caminho seguro é desligar e ligar para o canal oficial.' },
+    { type: 'choice', t: 'Antes de encerrar, o que garante seus direitos depois?', opts: [{ l: 'Apagar as conversas para evitar exposição', ok: false }, { l: 'Registrar o boletim de ocorrência e guardar comprovantes', ok: true }, { l: 'Esperar alguns dias para ver o que acontece', ok: false }], ok: 'Isso mesmo. Registro e evidências sustentam contestações e bloqueios definitivos.', no: 'Preservar evidências e registrar o ocorrido é o que sustenta contestações no banco e nas plataformas.' }
+  ];
+
+  EMS = [
+    { id: 'celular', t: 'Roubaram ou perdi meu celular', g: 'phone' },
+    { id: 'zap', t: 'Invadiram meu WhatsApp', g: 'chat' },
+    { id: 'email', t: 'Invadiram meu e-mail', g: 'mail' },
+    { id: 'pix', t: 'Fiz um pagamento suspeito', g: 'card' },
+    { id: 'conta', t: 'Perdi acesso a uma conta', g: 'key' },
+    { id: 'social', t: 'Roubaram minha rede social', g: 'globe' },
+    { id: 'familiar', t: 'Estão se passando por um familiar', g: 'users' },
+    { id: 'docs', t: 'Meus documentos foram expostos', g: 'doc' },
+    { id: 'outro', t: 'Outro problema', g: 'alert' }
+  ];
+
+  EMPLAN = {
+    celular: {
+      now: [
+        { id: 'c1', t: 'Tentar localizar o aparelho', h: 'Use o serviço de localização do sistema em outro aparelho ou computador. Se não localizar em poucos minutos, siga em frente.' },
+        { id: 'c2', t: 'Bloquear o dispositivo remotamente', h: 'Marque o aparelho como perdido e exiba uma mensagem na tela. Evite apagar tudo antes de tentar localizar.' },
+        { id: 'c3', t: 'Bloquear o chip com a operadora', h: 'Ligue para a operadora e peça o bloqueio da linha. Isso interrompe o recebimento de códigos por SMS.' },
+        { id: 'c4', t: 'Proteger o e-mail principal', h: 'Troque a senha, encerre as sessões abertas e confirme se o e-mail de recuperação continua sendo o seu.' },
+        { id: 'c5', t: 'Contatar as instituições financeiras', h: 'Avise bancos e carteiras pelos canais oficiais que você registrou. Peça o bloqueio preventivo de transações.' }
+      ],
+      next: [
+        { id: 'c6', t: 'Encerrar sessões nas demais contas', h: 'Redes sociais, mensageiros e serviços de nuvem: encerre tudo que estiver conectado ao aparelho.' },
+        { id: 'c7', t: 'Trocar as senhas prioritárias', h: 'Comece pelas contas que usam o e-mail principal como recuperação.' },
+        { id: 'c8', t: 'Avisar contatos próximos', h: 'Explique que podem receber mensagens em seu nome pedindo dinheiro.' },
+        { id: 'c9', t: 'Preservar evidências', h: 'Guarde prints, horários e protocolos de atendimento. Eles sustentam contestações.' }
+      ],
+      later: [
+        { id: 'c10', t: 'Registrar boletim de ocorrência', h: 'Informe o IMEI registrado no seu cofre. O registro é exigido por bancos e seguradoras.' },
+        { id: 'c11', t: 'Restaurar as contas', h: 'Refaça o acesso com calma, revisando permissões e aplicativos conectados.' },
+        { id: 'c12', t: 'Revisar configurações do novo aparelho', h: 'Bloqueio de tela, backup automático e dois fatores antes de reinstalar tudo.' },
+        { id: 'c13', t: 'Atualizar seu Plano B', h: 'Ajuste IMEI, operadora e contatos com as informações do novo aparelho.' }
+      ]
+    },
+    generico: {
+      now: [
+        { id: 'g1', t: 'Interromper o acesso do invasor', h: 'Troque a senha da conta afetada e encerre todas as sessões conectadas.' },
+        { id: 'g2', t: 'Proteger o e-mail principal', h: 'É a chave de recuperação das demais contas. Reforce a senha e ative dois fatores.' },
+        { id: 'g3', t: 'Avisar quem pode ser afetado', h: 'Contatos próximos e instituições financeiras devem saber que existe um golpe em andamento.' }
+      ],
+      next: [
+        { id: 'g4', t: 'Revisar permissões e dispositivos', h: 'Remova aplicativos conectados e aparelhos que você não reconhece.' },
+        { id: 'g5', t: 'Registrar o ocorrido nas plataformas', h: 'Use os canais oficiais de denúncia e guarde os protocolos.' },
+        { id: 'g6', t: 'Preservar evidências', h: 'Prints, datas e números de protocolo sustentam qualquer contestação.' }
+      ],
+      later: [
+        { id: 'g7', t: 'Recuperar e revisar a conta', h: 'Confira dados cadastrais, e-mails de recuperação e regras de encaminhamento.' },
+        { id: 'g8', t: 'Atualizar seu Plano B', h: 'Registre o que faltou e transforme em tarefa para não repetir.' }
+      ]
+    }
+  };
+
+  ACH = [
+    { id: 'a1', t: 'Primeiros Passos', d: 'Concluiu o Teste de Prontidão', g: 'star' },
+    { id: 'a2', t: 'E-mail Protegido', d: 'Completou as tarefas do e-mail', g: 'mail' },
+    { id: 'a3', t: 'Plano Preparado', d: 'Metade do plano concluída', g: 'plan' },
+    { id: 'a4', t: 'Família Segura', d: 'Cadastrou um contato de confiança', g: 'users' },
+    { id: 'a5', t: 'Pronto para Emergências', d: 'Concluiu uma simulação', g: 'play' },
+    { id: 'a6', t: 'Guardião Digital', d: 'Prontidão acima de 80%', g: 'shield' }
+  ];
+
+  NOTIF = [
+    { id: 'n1', t: 'Revise as sessões do seu e-mail', d: 'Faz 3 meses desde a última verificação', when: 'há 2 h', g: 'mail' },
+    { id: 'n2', t: 'Seu contato de confiança ainda não foi cadastrado', d: 'É a tarefa de maior impacto agora', when: 'ontem', g: 'users' },
+    { id: 'n3', t: 'Nova simulação disponível', d: 'Um familiar pediu dinheiro por mensagem', when: 'há 3 dias', g: 'play' }
+  ];
+
+  state = {
+    screen: 'splash', ob: 0, mode: 'signup',
+    f: { name: '', email: '', pass: '', pass2: '' },
+    err: {}, showPass: false,
+    bio: null, loading: '', user: null,
+    rcEmail: '', rcSent: false,
+    theme: 'light', contrast: false, font: 's',
+    toast: '', obDone: false,
+    qi: 0, answers: {}, base: null, procStep: 0,
+    tab: 'home', planCat: null, task: null, tasks: {}, note: '',
+    vaultLocked: true, vaultBio: false, reveal: {},
+    contact: null, cf: { name: '', rel: '', phone: '', email: '', note: '' }, cErr: {}, protoReveal: false,
+    simId: null, simStep: 0, simPick: null, simMulti: [], simOrder: [], simFb: null, simHits: 0, simDone: {}, simStart: 0, simTime: 0,
+    emId: null, emDone: {}, emLog: [], emStart: null, emHelp: false,
+    notifOpen: false, confirm: null, points: 0
+  };
+
+  _t = [];
+
+  componentDidMount() {
+    try {
+      const raw = localStorage.getItem(this.KEY);
+      if (raw) {
+        const d = JSON.parse(raw);
+        this.setState({
+          theme: d.theme || 'light', contrast: !!d.contrast, font: d.font || 's',
+          obDone: !!d.obDone, user: d.user || null,
+          answers: d.answers || {}, base: d.base === undefined ? null : d.base,
+          tasks: d.tasks || {}, points: d.points || 0, simDone: d.simDone || {}, contact: d.contact || null
+        });
+      }
+    } catch (e) {}
+    const start = this.props.startScreen;
+    this._t.push(setTimeout(() => {
+      if (this.state.screen !== 'splash') return;
+      if (start && start !== 'splash') return this.go(start);
+      this.go(this.state.obDone ? 'auth' : 'ob');
+    }, 2400));
+    if (start && start !== 'splash') this._t.push(setTimeout(() => this.go(start), 60));
+  }
+
+  componentWillUnmount() { this._t.forEach(clearTimeout); }
+
+  save(patch) {
+    const s = this.state;
+    const d = Object.assign({
+      theme: s.theme, contrast: s.contrast, font: s.font, obDone: s.obDone, user: s.user,
+      answers: s.answers, base: s.base, tasks: s.tasks, points: s.points, simDone: s.simDone, contact: s.contact
+    }, patch || {});
+    try { localStorage.setItem(this.KEY, JSON.stringify(d)); } catch (e) {}
+  }
+
+  go = (screen) => { this.setState({ screen }); };
+
+  toast = (text) => {
+    this.setState({ toast: text });
+    this._t.push(setTimeout(() => this.setState({ toast: '' }), 2600));
+  };
+
+  set = (k) => (e) => {
+    const f = Object.assign({}, this.state.f, { [k]: e.target.value });
+    const err = Object.assign({}, this.state.err); delete err[k];
+    this.setState({ f, err });
+  };
+
+  validate() {
+    const { f, mode } = this.state, err = {};
+    if (mode === 'signup' && f.name.trim().length < 2) err.name = 'Informe seu primeiro nome.';
+    if (!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(f.email.trim())) err.email = 'Digite um e-mail válido, como nome@email.com.';
+    if (f.pass.length < 8) err.pass = 'Use ao menos 8 caracteres.';
+    else if (mode === 'signup' && !/\d/.test(f.pass)) err.pass = 'Inclua ao menos um número.';
+    if (mode === 'signup' && f.pass2 !== f.pass) err.pass2 = 'As senhas não são iguais.';
+    return err;
+  }
+
+  submit = (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    const err = this.validate();
+    if (Object.keys(err).length) { this.setState({ err }); return; }
+    const name = this.state.mode === 'signup' ? this.state.f.name.trim().split(' ')[0] : (this.state.f.email.split('@')[0] || 'Você');
+    this.enter({ name: name.charAt(0).toUpperCase() + name.slice(1), email: this.state.f.email.trim(), guest: false }, 'Criando seu espaço seguro');
+  };
+
+  guest = () => this.enter({ name: 'Pedro', email: 'pedro.demo@planob.app', guest: true }, 'Preparando modo visitante');
+
+  enter = (user, label) => {
+    this.setState({ loading: label, screen: 'loading', bio: null });
+    this._t.push(setTimeout(() => {
+      this.setState({ user, screen: 'ready', obDone: true });
+      this.save({ user, obDone: true });
+    }, 1400));
+  };
+
+  bioStart = () => {
+    this.setState({ bio: 'scan' });
+    this._t.push(setTimeout(() => { if (this.state.bio === 'scan') this.setState({ bio: 'ok' }); }, 1500));
+    this._t.push(setTimeout(() => {
+      if (this.state.bio !== 'ok') return;
+      this.setState({ bio: null });
+      this.enter({ name: 'Pedro', email: 'pedro.demo@planob.app', guest: false }, 'Confirmando sua identidade');
+    }, 2400));
+  };
+
+  bioFail = () => this.setState({ bio: 'fail' });
+
+  recover = (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    if (!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(this.state.rcEmail.trim())) {
+      this.setState({ err: { rc: 'Digite um e-mail válido para continuar.' } }); return;
+    }
+    this.setState({ rcSent: true, err: {} });
+  };
+
+  mask(email) {
+    const [a, b] = String(email || '').split('@');
+    if (!b) return '';
+    return a.slice(0, 2) + '•'.repeat(Math.max(3, a.length - 2)) + '@' + b;
+  }
+
+  strength() {
+    const p = this.state.f.pass;
+    let n = 0;
+    if (p.length >= 8) n++;
+    if (/\d/.test(p) && /[a-zA-Z]/.test(p)) n++;
+    if (p.length >= 12 || /[^a-zA-Z0-9]/.test(p)) n++;
+    if (!p) return { w: '0%', label: '', color: 'transparent' };
+    return [
+      { w: '33%', label: 'Senha fraca', color: '#E5484D' },
+      { w: '33%', label: 'Senha fraca', color: '#E5484D' },
+      { w: '66%', label: 'Senha média', color: '#F4B740' },
+      { w: '100%', label: 'Senha forte', color: '#2DBE78' }
+    ][n];
+  }
+
+  reset = () => {
+    try { localStorage.removeItem(this.KEY); } catch (e) {}
+    this._t.forEach(clearTimeout); this._t = [];
+    this.setState({
+      screen: 'splash', ob: 0, mode: 'signup', f: { name: '', email: '', pass: '', pass2: '' },
+      err: {}, bio: null, user: null, rcEmail: '', rcSent: false, obDone: false, toast: 'Dados de demonstração restaurados'
+    });
+    this._t.push(setTimeout(() => this.setState({ toast: '' }), 2600));
+    this._t.push(setTimeout(() => { if (this.state.screen === 'splash') this.go('ob'); }, 2400));
+  };
+
+  chip(active, on, label, size) {
+    return {
+      label, on, size,
+      bg: active ? '#123B5D' : '#fff',
+      fg: active ? '#fff' : '#475467',
+      bd: active ? '#123B5D' : '#DDE3EC'
+    };
+  }
+
+  now() { const d = new Date(); return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); }
+
+  glyph(k) { return this.G[k] || this.G.shield; }
+
+  answer = (i) => {
+    const answers = Object.assign({}, this.state.answers, { [this.state.qi]: i });
+    const last = this.state.qi >= this.Q.length - 1;
+    this.setState({ answers });
+    this._t.push(setTimeout(() => {
+      if (last) { this.setState({ screen: 'proc', procStep: 0 }); this.runProc(answers); }
+      else this.setState({ qi: this.state.qi + 1 });
+    }, 220));
+  };
+
+  runProc(answers) {
+    [1, 2].forEach((n) => this._t.push(setTimeout(() => this.setState({ procStep: n }), n * 700)));
+    this._t.push(setTimeout(() => {
+      const base = this.scoreOf(answers);
+      this.setState({ base, screen: 'result', points: this.state.points + 40 });
+      this.save({ answers, base, points: this.state.points + 40 });
+    }, 2100));
+  }
+
+  scoreOf(answers) {
+    let sum = 0;
+    this.Q.forEach((q, i) => { const a = answers[i]; sum += a === undefined ? 0 : this.OPTS[a].v; });
+    return Math.round((sum / this.Q.length) * 100);
+  }
+
+  catScores() {
+    const a = this.state.answers, out = {};
+    this.CATS.forEach((c) => {
+      const qs = this.Q.map((q, i) => [q, i]).filter(([q]) => q.c === c.id);
+      const v = qs.reduce((n, [, i]) => n + (a[i] === undefined ? 0 : this.OPTS[a[i]].v), 0);
+      out[c.id] = qs.length ? Math.round((v / qs.length) * 100) : 0;
+    });
+    return out;
+  }
+
+  doneCount() { return Object.keys(this.state.tasks).filter((k) => this.state.tasks[k]).length; }
+
+  score() {
+    const base = this.state.base === null ? 42 : this.state.base;
+    return Math.min(100, base + this.doneCount() * 4 + Object.keys(this.state.simDone).length * 3);
+  }
+
+  risks() {
+    const a = this.state.answers, out = [];
+    const push = (i, t, d) => { if (a[i] === undefined || this.OPTS[a[i]].v < 1) out.push({ t, d }); };
+    push(2, 'Códigos de recuperação não armazenados', 'Sem eles, uma conta com dois fatores pode ficar inacessível para sempre.');
+    push(6, 'Nenhum contato de confiança configurado', 'Ninguém poderá confirmar sua identidade ou agir junto com você.');
+    push(1, 'E-mail principal sem proteção suficiente', 'Quem entra no seu e-mail recupera a senha de quase todas as outras contas.');
+    push(4, 'IMEI do aparelho não registrado', 'O bloqueio definitivo do aparelho depende desse número.');
+    return out.slice(0, 3);
+  }
+
+  toggleTask = (id) => {
+    const tasks = Object.assign({}, this.state.tasks);
+    const on = !tasks[id];
+    if (on) tasks[id] = true; else delete tasks[id];
+    const points = this.state.points + (on ? 20 : -20);
+    this.setState({ tasks, points, task: null, note: '' });
+    this.save({ tasks, points });
+    this.toast(on ? 'Tarefa concluída. Prontidão atualizada.' : 'Tarefa reaberta.');
+  };
+
+  pcPct(pc) {
+    const list = this.T.filter((t) => t.pc === pc);
+    const done = list.filter((t) => this.state.tasks[t.id]).length;
+    return { pct: list.length ? Math.round((done / list.length) * 100) : 0, done, total: list.length };
+  }
+
+  unlockVault = () => {
+    this.setState({ vaultBio: true });
+    this._t.push(setTimeout(() => this.setState({ vaultBio: false, vaultLocked: false }), 1400));
+    this._t.push(setTimeout(() => { if (!this.state.vaultLocked) this.setState({ vaultLocked: true, reveal: {} }); }, 46000));
+  };
+
+  saveContact = (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    const f = this.state.cf, cErr = {};
+    if (f.name.trim().length < 2) cErr.name = 'Informe o nome da pessoa.';
+    if (f.phone.replace(/\D/g, '').length < 10) cErr.phone = 'Informe um telefone com DDD.';
+    if (Object.keys(cErr).length) { this.setState({ cErr }); return; }
+    const contact = Object.assign({}, f);
+    const points = this.state.points + 30;
+    this.setState({ contact, cErr: {}, screen: 'proto', points });
+    this.save({ contact, points });
+    this.toast('Contato de confiança cadastrado');
+  };
+
+  maskPhone(p) { const d = String(p || '').replace(/\D/g, ''); return d.length < 6 ? p : '(' + d.slice(0, 2) + ') ' + '•'.repeat(d.length - 6) + '-' + d.slice(-4); }
+
+  startSim = (id) => {
+    const sim = this.SIMS.find((s) => s.id === id);
+    if (!sim || !sim.play) { this.toast('Esta simulação entra em uma próxima versão do protótipo'); return; }
+    this.setState({ simId: id, simStep: 0, simPick: null, simMulti: [], simOrder: [], simFb: null, simHits: 0, simStart: Date.now(), screen: 'simPlay' });
+  };
+
+  simCheck = () => {
+    const s = this.STEPS[this.state.simStep], st = this.state;
+    let ok = false;
+    if (s.type === 'choice') ok = st.simPick !== null && s.opts[st.simPick].ok;
+    if (s.type === 'multi') { const need = s.opts.map((o, i) => o.ok ? i : -1).filter((i) => i >= 0); ok = need.length === st.simMulti.length && need.every((i) => st.simMulti.indexOf(i) >= 0); }
+    if (s.type === 'order') ok = st.simOrder.length === s.order.length && st.simOrder.every((id, i) => id === s.order[i]);
+    this.setState({ simFb: ok ? 'ok' : 'no', simHits: st.simHits + (ok ? 1 : 0) });
+  };
+
+  simNext = () => {
+    const st = this.state;
+    if (st.simStep >= this.STEPS.length - 1) {
+      const simDone = Object.assign({}, st.simDone, { [st.simId]: true });
+      const points = st.points + 60;
+      this.setState({ simDone, points, simTime: Math.max(1, Math.round((Date.now() - st.simStart) / 1000)), screen: 'simResult' });
+      this.save({ simDone, points });
+      return;
+    }
+    this.setState({ simStep: st.simStep + 1, simPick: null, simMulti: [], simOrder: [], simFb: null });
+  };
+
+  emStartPlan = () => {
+    const t = this.now();
+    this.setState({ screen: 'emRun', emStart: t, emDone: {}, emLog: [{ t, txt: 'Atendimento iniciado' }] });
+  };
+
+  emToggle = (id, title) => {
+    const emDone = Object.assign({}, this.state.emDone);
+    const on = !emDone[id];
+    if (on) emDone[id] = this.now(); else delete emDone[id];
+    const emLog = on ? this.state.emLog.concat([{ t: this.now(), txt: title + ' — concluída' }]) : this.state.emLog;
+    this.setState({ emDone, emLog });
+  };
+
+  emPlan() { return this.EMPLAN[this.state.emId] || this.EMPLAN.generico; }
+
+  emAll() { const p = this.emPlan(); return p.now.concat(p.next, p.later); }
+
+  emFinish = () => {
+    this.setState({ emLog: this.state.emLog.concat([{ t: this.now(), txt: 'Atendimento encerrado' }]), screen: 'report', emHelp: false });
+  };
+
+  achievements() {
+    const st = this.state, done = this.doneCount(), sc = this.score();
+    const emailDone = this.T.filter((t) => t.pc === 'email').every((t) => st.tasks[t.id]);
+    const on = { a1: st.base !== null, a2: emailDone, a3: done >= Math.ceil(this.T.length / 2), a4: !!st.contact, a5: Object.keys(st.simDone).length > 0, a6: sc >= 80 };
+    return this.ACH.map((a) => Object.assign({}, a, { on: !!on[a.id] }));
+  }
+
+  goTab = (tab) => this.setState({ tab, screen: tab, task: null, planCat: null, emHelp: false });
+
+  renderVals() {
+    const st = this.state;
+    const sc = st.screen;
+    const ob = this.OB[st.ob];
+    const one = {};
+    ['splash', 'ob', 'auth', 'recover', 'loading', 'ready', 'quiz', 'proc', 'result', 'home', 'plan', 'vault', 'contact', 'proto', 'sims', 'simPlay', 'simResult', 'emPick', 'emRun', 'report', 'profile'].forEach((k) => { one[k] = sc === k; });
+    const s = one;
+    s.planList = sc === 'plan' && !st.planCat;
+    s.planDetail = sc === 'plan' && !!st.planCat;
+    s.vaultLocked = sc === 'vault' && st.vaultLocked;
+    s.vaultOpen = sc === 'vault' && !st.vaultLocked;
+    s.contactForm = sc === 'contact' && !st.contact;
+    s.contactCard = sc === 'contact' && !!st.contact;
+    const isSignup = st.mode === 'signup';
+    const pw = this.strength();
+    const railDefs = [
+      ['Splash', 'splash', '01'], ['Onboarding', 'ob', '02'], ['Login e cadastro', 'auth', '03'],
+      ['Recuperar acesso', 'recover', '04'], ['Biometria', 'bio', '05'], ['Verificando', 'loading', '06'], ['Tudo pronto', 'ready', '07'],
+      ['Teste de Prontidão', 'quiz', '08'], ['Resultado', 'result', '09'], ['Início', 'home', '10'],
+      ['Meu Plano', 'plan', '11'], ['Cofre de Preparação', 'vault', '12'], ['Contato de confiança', 'contact', '13'],
+      ['Protocolo familiar', 'proto', '14'], ['Simulações', 'sims', '15'], ['Simulação jogável', 'simPlay', '16'],
+      ['Modo Emergência', 'emPick', '17'], ['Atendimento', 'emRun', '18'], ['Relatório', 'report', '19'], ['Perfil', 'profile', '20']
+    ];
+
+    return {
+      dev: { dark: st.theme === 'dark' },
+      ui: { theme: st.theme, contrast: st.contrast ? 'on' : 'off', font: st.font, rail: this.props.showRail !== false },
+      s,
+      rail: railDefs.map(([label, key, step]) => {
+        const active = key === 'bio' ? !!st.bio : sc === key;
+        return {
+          label, step,
+          bg: active ? '#123B5D' : 'rgba(255,255,255,.72)',
+          fg: active ? '#fff' : '#3B4759',
+          bd: active ? '#123B5D' : '#DDE3EC',
+          on: () => {
+            if (key === 'bio') { this.setState({ screen: 'auth' }); this.bioStart(); return; }
+            if (!st.user && key !== 'splash' && key !== 'ob' && key !== 'auth' && key !== 'recover') {
+              this.setState({ user: { name: 'Pedro', email: 'pedro.demo@planob.app', guest: true } });
+            }
+            if (key === 'quiz') { this.setState({ bio: null, screen: 'quiz', qi: 0 }); return; }
+            if (key === 'result' && st.base === null) { this.setState({ base: 42 }); }
+            if (key === 'simPlay') { this.startSim('roubo'); return; }
+            if (key === 'emRun') { this.setState({ emId: 'celular' }); this._t.push(setTimeout(this.emStartPlan, 10)); return; }
+            if (key === 'report' && !st.emLog.length) {
+              const t = this.now();
+              this.setState({ emId: st.emId || 'celular', emStart: t, emLog: [{ t, txt: 'Atendimento iniciado' }, { t, txt: 'Atendimento encerrado' }] });
+            }
+            const tab = ['home', 'plan', 'sims', 'profile'].indexOf(key) >= 0 ? key : st.tab;
+            this.setState({ bio: null, screen: key, tab, planCat: null, task: null });
+          }
+        };
+      }),
+      prefs: {
+        themes: [
+          this.chip(st.theme === 'light', () => { this.setState({ theme: 'light' }); this.save({ theme: 'light' }); }, 'Claro'),
+          this.chip(st.theme === 'dark', () => { this.setState({ theme: 'dark' }); this.save({ theme: 'dark' }); }, 'Escuro')
+        ],
+        fonts: ['s', 'm', 'g'].map((k, i) => this.chip(st.font === k, () => { this.setState({ font: k }); this.save({ font: k }); }, 'A', ['11px', '13px', '15px'][i])),
+        contrastBg: st.contrast ? '#2DBE78' : '#CBD5E1',
+        contrastX: st.contrast ? '17px' : '2px',
+        toggleContrast: () => { const v = !st.contrast; this.setState({ contrast: v }); this.save({ contrast: v }); },
+        reset: this.reset
+      },
+      ob: {
+        chip: ob.chip, title: ob.title, desc: ob.desc, accent: ob.accent, tint: ob.tint, glow: ob.glow, rot: ob.rot, glyph: ob.glyph,
+        isLast: st.ob === this.OB.length - 1,
+        cta: st.ob === this.OB.length - 1 ? 'Começar' : 'Continuar',
+        dots: this.OB.map((_, i) => ({ w: i === st.ob ? '26px' : '6px', bg: i === st.ob ? ob.accent : 'var(--pb-border)' })),
+        next: () => { if (st.ob < this.OB.length - 1) this.setState({ ob: st.ob + 1 }); else { this.setState({ mode: 'signup', screen: 'auth' }); } },
+        skip: () => this.setState({ mode: 'login', screen: 'auth' }),
+        haveplan: () => this.setState({ mode: 'login', screen: 'auth' })
+      },
+      au: {
+        isSignup, isLogin: !isSignup,
+        title: isSignup ? 'Criar sua conta' : 'Bem-vindo de volta',
+        sub: isSignup ? 'Leva menos de um minuto. Tudo fica salvo apenas neste aparelho.' : 'Entre para retomar seu Plano B de onde parou.',
+        cta: isSignup ? 'Criar conta' : 'Entrar',
+        f: st.f,
+        eName: st.err.name || '', eEmail: st.err.email || '', ePass: st.err.pass || '', ePass2: st.err.pass2 || '',
+        bdName: st.err.name ? '#E5484D' : 'var(--pb-border)',
+        bdEmail: st.err.email ? '#E5484D' : 'var(--pb-border)',
+        bdPass: st.err.pass ? '#E5484D' : 'var(--pb-border)',
+        bdPass2: st.err.pass2 ? '#E5484D' : 'var(--pb-border)',
+        onName: this.set('name'), onEmail: this.set('email'), onPass: this.set('pass'), onPass2: this.set('pass2'),
+        passType: st.showPass ? 'text' : 'password',
+        toggleEye: () => this.setState({ showPass: !st.showPass }),
+        eyeLabel: st.showPass ? 'Ocultar senha' : 'Mostrar senha',
+        tabs: [
+          { label: 'Criar conta', on: () => this.setState({ mode: 'signup', err: {} }), bg: isSignup ? 'var(--pb-surface)' : 'transparent', fg: isSignup ? 'var(--pb-text)' : 'var(--pb-text2)', sh: isSignup ? 'var(--pb-shadow)' : 'none' },
+          { label: 'Entrar', on: () => this.setState({ mode: 'login', err: {} }), bg: !isSignup ? 'var(--pb-surface)' : 'transparent', fg: !isSignup ? 'var(--pb-text)' : 'var(--pb-text2)', sh: !isSignup ? 'var(--pb-shadow)' : 'none' }
+        ],
+        submit: this.submit, guest: this.guest, bio: this.bioStart,
+        toRecover: () => this.setState({ screen: 'recover', err: {}, rcSent: false }),
+        back: () => this.setState({ screen: 'ob', err: {} }),
+        pwShow: isSignup && !!st.f.pass, pwW: pw.w, pwColor: pw.color, pwLabel: pw.label
+      },
+      bio: {
+        open: !!st.bio, scan: st.bio === 'scan', ok: st.bio === 'ok', fail: st.bio === 'fail',
+        close: () => this.setState({ bio: null }),
+        retry: this.bioStart, failNow: this.bioFail
+      },
+      rc: {
+        email: st.rcEmail, sent: st.rcSent, notSent: !st.rcSent, masked: this.mask(st.rcEmail),
+        on: (e) => this.setState({ rcEmail: e.target.value, err: {} }),
+        err: st.err.rc || '', bd: st.err.rc ? '#E5484D' : 'var(--pb-border)',
+        submit: this.recover,
+        back: () => this.setState({ screen: 'auth', err: {}, rcSent: false })
+      },
+      load: { label: st.loading || 'Carregando' },
+      rd: {
+        name: (st.user && st.user.name) || 'Pedro',
+        initial: (((st.user && st.user.name) || 'Pedro')[0] || 'P').toUpperCase(),
+        guest: !!(st.user && st.user.guest),
+        email: this.mask((st.user && st.user.email) || ''),
+        facts: [{ v: '10', k: 'perguntas' }, { v: '3 min', k: 'duração' }, { v: '5', k: 'áreas' }],
+        steps: [
+          { t: 'Resultado personalizado', d: 'Sua pontuação de prontidão e os riscos prioritários', glyph: 'M12 3.2a8.8 8.8 0 1 0 0 17.6 8.8 8.8 0 0 0 0-17.6ZM12 7.2v5l3.4 2' },
+          { t: 'Seu Plano B', d: 'Tarefas organizadas por aparelho, e-mail, contas e finanças', glyph: 'M8.5 6h12M8.5 12h12M8.5 18h12M4 6h.01M4 12h.01M4 18h.01' },
+          { t: 'Simulações e emergência', d: 'Treine agora para saber o que fazer na hora certa', glyph: 'M8.5 5.6v12.8L19 12 8.5 5.6Z' }
+        ],
+        start: () => this.setState({ screen: 'quiz', qi: 0, answers: {} }),
+        later: () => { this.setState({ screen: 'home', tab: 'home' }); this.toast('Você pode iniciar o teste depois, pela tela inicial'); }
+      },
+      qz: this.vQuiz(st),
+      pr: this.vProc(st),
+      res: this.vResult(st),
+      hm: this.vHome(st),
+      pl: this.vPlan(st),
+      tk: this.vTask(st),
+      vt: this.vVault(st),
+      ct: this.vContact(st),
+      pt: this.vProto(st),
+      sm: this.vSims(st),
+      sp: this.vSimPlay(st),
+      sr: this.vSimResult(st),
+      ep: this.vEmPick(st),
+      em: this.vEmRun(st),
+      rp: this.vReport(st),
+      pf: this.vProfile(st),
+      nt: this.vNotif(st),
+      nav: this.vNav(st),
+      cfm: this.vConfirm(st),
+      toast: { show: !!st.toast, text: st.toast }
+    };
+  }
+
+  ring(pct, r) {
+    const c = 2 * Math.PI * r;
+    return { c: String(c.toFixed(1)), off: String((c - (c * pct) / 100).toFixed(1)) };
+  }
+
+  INK = { '#2DBE78': '#1B8A56', '#246BFD': '#1B54CC', '#F4B740': '#8A6100', '#E5484D': '#B02A2E' };
+
+  ink(c) { return this.state.theme === 'dark' ? c : (this.INK[c] || c); }
+
+  level(sc) {
+    const mk = (l, c, d) => ({ l, c, d, ink: this.ink(c) });
+    if (sc >= 85) return mk('Preparado', '#2DBE78', 'Você tem um plano sólido. Mantenha a revisão em dia.');
+    if (sc >= 70) return mk('Bem preparado', '#246BFD', 'Boa base construída. Faltam poucos pontos críticos.');
+    if (sc >= 40) return mk('Em construção', '#F4B740', 'Você já deu passos importantes, mas há brechas relevantes.');
+    return mk('Início da jornada', '#E5484D', 'Há riscos importantes em aberto. Comece pelas tarefas críticas.');
+  }
+
+  vQuiz(st) {
+    const q = this.Q[st.qi] || this.Q[0];
+    const cat = this.CATS.find((c) => c.id === q.c) || this.CATS[0];
+    const sel = st.answers[st.qi];
+    return {
+      num: String(st.qi + 1).padStart(2, '0'), total: String(this.Q.length).padStart(2, '0'),
+      pct: Math.round(((st.qi) / this.Q.length) * 100) + '%',
+      q: q.q, cat: cat.n, glyph: this.glyph(cat.g),
+      opts: this.OPTS.map((o, i) => ({
+        l: o.l, on: () => this.answer(i),
+        bg: sel === i ? 'var(--pb-tint)' : 'var(--pb-surface)',
+        bd: sel === i ? 'var(--pb-blue)' : 'var(--pb-border)',
+        fg: sel === i ? 'var(--pb-blue-ink)' : 'var(--pb-text)',
+        dot: sel === i ? 'var(--pb-blue)' : 'transparent',
+        ring: sel === i ? 'var(--pb-blue)' : 'var(--pb-border)'
+      })),
+      back: () => { if (st.qi > 0) this.setState({ qi: st.qi - 1 }); else this.setState({ screen: st.base === null ? 'ready' : 'home' }); },
+      canBack: true
+    };
+  }
+
+  vProc(st) {
+    const labels = ['Analisando suas respostas', 'Identificando riscos prioritários', 'Montando seu Plano B'];
+    return {
+      steps: labels.map((l, i) => ({
+        l, done: st.procStep > i, active: st.procStep === i,
+        fg: st.procStep >= i ? 'var(--pb-text)' : 'var(--pb-text2)',
+        bg: st.procStep > i ? 'var(--pb-green)' : (st.procStep === i ? 'var(--pb-blue)' : 'var(--pb-soft)'),
+        icon: st.procStep > i ? 'var(--pb-green)' : 'transparent'
+      }))
+    };
+  }
+
+  vResult(st) {
+    const sc = st.base === null ? 42 : st.base;
+    const lv = this.level(sc), rg = this.ring(sc, 62);
+    const cs = this.catScores();
+    return {
+      score: String(sc), level: lv.l, color: lv.c, ink: lv.ink, desc: lv.d,
+      dash: rg.c, off: rg.off,
+      cats: this.CATS.map((c) => {
+        const v = cs[c.id] || 0;
+        const col = v >= 70 ? '#2DBE78' : (v >= 40 ? '#F4B740' : '#E5484D');
+        return { n: c.n, glyph: this.glyph(c.g), v: v + '%', w: v + '%', col, ink: this.ink(col) };
+      }),
+      risks: this.risks().map((r, i) => ({ t: r.t, d: r.d, n: String(i + 1).padStart(2, '0') })),
+      hasRisks: this.risks().length > 0,
+      toPlan: () => this.setState({ screen: 'plan', tab: 'plan', planCat: null }),
+      toHome: () => this.setState({ screen: 'home', tab: 'home' })
+    };
+  }
+
+  vHome(st) {
+    const sc = this.score(), lv = this.level(sc), rg = this.ring(sc, 34);
+    const pend = this.T.filter((t) => !st.tasks[t.id]).slice(0, 3);
+    return {
+      name: (st.user && st.user.name) || 'Pedro',
+      hello: new Date().getHours() < 12 ? 'Bom dia' : (new Date().getHours() < 18 ? 'Boa tarde' : 'Boa noite'),
+      score: String(sc), level: lv.l, color: lv.c, dash: rg.c, off: rg.off,
+      done: String(this.doneCount()), total: String(this.T.length),
+      pts: String(st.points),
+      notifN: String(this.NOTIF.length), hasNotif: this.NOTIF.length > 0,
+      openNotif: () => this.setState({ notifOpen: true }),
+      tasks: pend.map((t) => ({
+        t: t.t, min: t.min + ' min',
+        cat: (this.PC.find((p) => p.id === t.pc) || {}).n || '',
+        on: () => this.setState({ screen: 'plan', tab: 'plan', planCat: t.pc, task: t.id })
+      })),
+      noTasks: pend.length === 0,
+      toPlan: () => this.goTab('plan'),
+      quick: [
+        { l: 'Cofre', d: 'Dados protegidos', g: this.glyph('lock'), on: () => this.setState({ screen: 'vault' }) },
+        { l: 'Contato', d: st.contact ? st.contact.name : 'Não cadastrado', g: this.glyph('users'), on: () => this.setState({ screen: 'contact' }) },
+        { l: 'Simulações', d: Object.keys(st.simDone).length + ' concluídas', g: this.glyph('play'), on: () => this.goTab('sims') },
+        { l: 'Relatório', d: 'Histórico de ações', g: this.glyph('doc'), on: () => this.setState({ screen: 'report' }) }
+      ],
+      emergency: () => this.setState({ screen: 'emPick' }),
+      sim: this.SIMS[0],
+      toSim: () => this.startSim('roubo')
+    };
+  }
+
+  vPlan(st) {
+    const cat = this.PC.find((p) => p.id === st.planCat);
+    const all = this.T.length, done = this.doneCount();
+    const list = cat ? this.T.filter((t) => t.pc === cat.id) : [];
+    return {
+      pct: Math.round((done / all) * 100) + '%', pctN: String(Math.round((done / all) * 100)),
+      done: String(done), total: String(all),
+      cats: this.PC.map((p) => {
+        const r = this.pcPct(p.id);
+        return {
+          n: p.n, glyph: this.glyph(p.g), pri: p.pri, up: 'Atualizado ' + p.up,
+          w: r.pct + '%', pct: r.pct + '%', cnt: r.done + '/' + r.total,
+          col: r.pct === 100 ? 'var(--pb-green)' : 'var(--pb-blue)',
+          priBg: p.pri === 'Crítica' ? 'rgba(229,72,77,.12)' : (p.pri === 'Alta' ? 'rgba(244,183,64,.16)' : 'var(--pb-soft)'),
+          priFg: p.pri === 'Crítica' ? '#B02A2E' : (p.pri === 'Alta' ? '#8A6100' : 'var(--pb-text2)'),
+          on: () => this.setState({ planCat: p.id })
+        };
+      }),
+      catName: cat ? cat.n : '', catGlyph: cat ? this.glyph(cat.g) : '',
+      catPct: cat ? this.pcPct(cat.id).pct + '%' : '0%',
+      catCnt: cat ? this.pcPct(cat.id).done + ' de ' + this.pcPct(cat.id).total + ' concluídas' : '',
+      items: list.map((t) => ({
+        t: t.t, min: t.min + ' min', done: !!st.tasks[t.id],
+        bd: st.tasks[t.id] ? 'var(--pb-green)' : 'var(--pb-border)',
+        bg: st.tasks[t.id] ? 'var(--pb-green)' : 'transparent',
+        fg: st.tasks[t.id] ? 'var(--pb-text2)' : 'var(--pb-text)',
+        deco: st.tasks[t.id] ? 'line-through' : 'none',
+        toggle: () => this.toggleTask(t.id),
+        open: () => this.setState({ task: t.id })
+      })),
+      back: () => this.setState({ planCat: null })
+    };
+  }
+
+  vTask(st) {
+    const t = this.T.find((x) => x.id === st.task);
+    if (!t) return { open: false, steps: [] };
+    const done = !!st.tasks[t.id];
+    return {
+      open: true, t: t.t, min: t.min + ' min', why: t.why, risk: t.risk,
+      steps: t.steps.map((x, i) => ({ n: String(i + 1), x })),
+      done, cta: done ? 'Reabrir tarefa' : 'Marcar como concluída',
+      ctaBg: done ? 'transparent' : 'var(--pb-blue)',
+      ctaFg: done ? 'var(--pb-text)' : '#fff',
+      ctaBd: done ? '1.5px solid var(--pb-border)' : '0',
+      toggle: () => this.toggleTask(t.id),
+      close: () => this.setState({ task: null })
+    };
+  }
+
+  vVault(st) {
+    return {
+      locked: st.vaultLocked, scanning: st.vaultBio,
+      unlock: this.unlockVault,
+      lock: () => this.setState({ vaultLocked: true, reveal: {} }),
+      items: this.VAULT.map((v) => ({
+        t: v.t, tag: v.tag, glyph: this.glyph(v.g),
+        val: st.reveal[v.id] ? v.v : '••••••••••••••••',
+        shown: !!st.reveal[v.id],
+        label: st.reveal[v.id] ? 'Ocultar' : 'Mostrar',
+        eye: st.reveal[v.id] ? this.G.eyeOff : this.G.eye,
+        on: () => this.setState({ reveal: Object.assign({}, st.reveal, { [v.id]: !st.reveal[v.id] }) })
+      })),
+      add: () => this.toast('Adicionar item entra na versão completa'),
+      back: () => this.setState({ screen: st.tab || 'home' })
+    };
+  }
+
+  vContact(st) {
+    const c = st.contact;
+    const set = (k) => (e) => this.setState({ cf: Object.assign({}, st.cf, { [k]: e.target.value }), cErr: {} });
+    return {
+      has: !!c, name: c ? c.name : '', rel: c ? c.rel || 'Contato de confiança' : '',
+      phone: c ? this.maskPhone(c.phone) : '', email: c ? c.email : '', note: c ? c.note : '',
+      initial: c ? (c.name[0] || 'C').toUpperCase() : '',
+      f: st.cf, onName: set('name'), onRel: set('rel'), onPhone: set('phone'), onEmail: set('email'), onNote: set('note'),
+      eName: st.cErr.name || '', ePhone: st.cErr.phone || '',
+      bdName: st.cErr.name ? '#E5484D' : 'var(--pb-border)', bdPhone: st.cErr.phone ? '#E5484D' : 'var(--pb-border)',
+      submit: this.saveContact,
+      toProto: () => this.setState({ screen: 'proto' }),
+      remove: () => this.setState({ confirm: 'contact' }),
+      back: () => this.setState({ screen: st.tab || 'home' })
+    };
+  }
+
+  vProto(st) {
+    return {
+      word: st.protoReveal ? 'girassol-42' : '••••••••••',
+      reveal: st.protoReveal, revealLabel: st.protoReveal ? 'Ocultar palavra' : 'Mostrar palavra',
+      toggle: () => this.setState({ protoReveal: !st.protoReveal }),
+      contact: st.contact ? st.contact.name : 'Nenhum contato cadastrado',
+      hasContact: !!st.contact,
+      rules: [
+        { t: 'Todo pedido urgente de dinheiro é confirmado por ligação', d: 'Mensagem de texto nunca basta, mesmo que venha de um número conhecido.' },
+        { t: 'A palavra de segurança confirma a identidade', d: 'Quem não souber a palavra combinada não é quem diz ser.' },
+        { t: 'Ninguém transfere valores sem falar com o contato de confiança', d: 'Uma segunda pessoa sempre valida antes do pagamento.' },
+        { t: 'A palavra é renovada a cada seis meses', d: 'E nunca é escrita em conversas, redes sociais ou e-mail.' }
+      ],
+      share: () => this.toast('Compartilhamento entra na versão completa'),
+      back: () => this.setState({ screen: 'contact' })
+    };
+  }
+
+  vSims(st) {
+    return {
+      doneN: String(Object.keys(st.simDone).length), total: String(this.SIMS.length),
+      items: this.SIMS.map((x) => ({
+        t: x.t, c: x.c, dif: x.dif, dur: x.dur, glyph: this.glyph(x.g),
+        pts: '+' + x.pts + ' pts', steps: x.st + ' etapas',
+        done: !!st.simDone[x.id],
+        badge: st.simDone[x.id] ? 'Concluída' : (x.play ? 'Disponível' : 'Em breve'),
+        badgeBg: st.simDone[x.id] ? 'rgba(45,190,120,.14)' : (x.play ? 'var(--pb-tint)' : 'var(--pb-soft)'),
+        badgeFg: st.simDone[x.id] ? '#1B8A56' : (x.play ? 'var(--pb-blue-ink)' : 'var(--pb-text2)'),
+        op: x.play ? '1' : '.72',
+        on: () => this.startSim(x.id)
+      }))
+    };
+  }
+
+  vSimPlay(st) {
+    const step = this.STEPS[st.simStep] || this.STEPS[0];
+    const fb = st.simFb;
+    const mk = (o, i, arr, active) => ({
+      l: o.l, on: () => { if (fb) return; arr(i); },
+      bd: active ? 'var(--pb-blue)' : 'var(--pb-border)',
+      bg: active ? 'var(--pb-tint)' : 'var(--pb-surface)',
+      fg: active ? 'var(--pb-blue-ink)' : 'var(--pb-text)',
+      dot: active ? 'var(--pb-blue)' : 'transparent',
+      ring: active ? 'var(--pb-blue)' : 'var(--pb-border)'
+    });
+    let opts = [], items = [], canCheck = false;
+    if (step.type === 'choice') {
+      opts = step.opts.map((o, i) => mk(o, i, (n) => this.setState({ simPick: n }), st.simPick === i));
+      canCheck = st.simPick !== null;
+    } else if (step.type === 'multi') {
+      opts = step.opts.map((o, i) => mk(o, i, (n) => {
+        const has = st.simMulti.indexOf(n) >= 0;
+        this.setState({ simMulti: has ? st.simMulti.filter((x) => x !== n) : st.simMulti.concat([n]) });
+      }, st.simMulti.indexOf(i) >= 0));
+      canCheck = st.simMulti.length > 0;
+    } else if (step.type === 'order') {
+      items = step.items.map((it) => {
+        const pos = st.simOrder.indexOf(it.id);
+        return {
+          l: it.l, num: pos >= 0 ? String(pos + 1) : '',
+          on: () => { if (fb) return; this.setState({ simOrder: pos >= 0 ? st.simOrder.filter((x) => x !== it.id) : st.simOrder.concat([it.id]) }); },
+          bd: pos >= 0 ? 'var(--pb-blue)' : 'var(--pb-border)',
+          bg: pos >= 0 ? 'var(--pb-tint)' : 'var(--pb-surface)',
+          fg: pos >= 0 ? 'var(--pb-blue-ink)' : 'var(--pb-text)',
+          numBg: pos >= 0 ? 'var(--pb-blue)' : 'var(--pb-soft)',
+          numFg: pos >= 0 ? '#fff' : 'var(--pb-text2)'
+        };
+      });
+      canCheck = st.simOrder.length === step.items.length;
+    }
+    return {
+      isIntro: step.type === 'intro', isChoice: step.type === 'choice', isMulti: step.type === 'multi', isOrder: step.type === 'order',
+      hasOpts: step.type === 'choice' || step.type === 'multi',
+      t: step.t, d: step.d || '', hint: step.hint || '',
+      hasHint: !!step.hint,
+      num: String(st.simStep + 1), total: String(this.STEPS.length),
+      pct: Math.round((st.simStep / this.STEPS.length) * 100) + '%',
+      opts, items,
+      fbShow: !!fb, fbOk: fb === 'ok',
+      fbText: fb === 'ok' ? step.ok : step.no,
+      fbBg: fb === 'ok' ? 'rgba(45,190,120,.12)' : 'rgba(244,183,64,.14)',
+      fbFg: fb === 'ok' ? '#1B8A56' : '#8A6100',
+      cta: step.type === 'intro' ? 'Começar simulação' : (fb ? (st.simStep >= this.STEPS.length - 1 ? 'Ver resultado' : 'Continuar') : 'Confirmar resposta'),
+      onCta: () => { if (step.type === 'intro' || fb) this.simNext(); else this.simCheck(); },
+      dis: step.type !== 'intro' && !fb && !canCheck,
+      ctaBg: (step.type !== 'intro' && !fb && !canCheck) ? 'var(--pb-soft)' : 'var(--pb-blue)',
+      ctaFg: (step.type !== 'intro' && !fb && !canCheck) ? 'var(--pb-text2)' : '#fff',
+      exit: () => this.setState({ confirm: 'sim' })
+    };
+  }
+
+  vSimResult(st) {
+    const total = this.STEPS.filter((s) => s.type !== 'intro').length;
+    const pct = Math.round((st.simHits / total) * 100);
+    const lv = pct >= 80 ? { l: 'Excelente resposta', c: '#2DBE78' } : (pct >= 50 ? { l: 'Boa resposta', c: '#F4B740' } : { l: 'Reveja os passos', c: '#E5484D' });
+    return {
+      hits: String(st.simHits), total: String(total), pct: String(pct), color: lv.c, ink: this.ink(lv.c), level: lv.l,
+      time: Math.floor(st.simTime / 60) + ' min ' + (st.simTime % 60) + ' s',
+      pts: '+60',
+      learn: [
+        'O e-mail principal é a primeira conta a proteger.',
+        'Bloquear o chip interrompe os códigos por SMS.',
+        'Nenhum banco pede senha por telefone.',
+        'Registro e evidências sustentam contestações.'
+      ],
+      again: () => this.startSim('roubo'),
+      back: () => this.goTab('sims')
+    };
+  }
+
+  vEmPick(st) {
+    return {
+      items: this.EMS.map((e) => ({
+        t: e.t, glyph: this.glyph(e.g),
+        on: () => this.setState({ emId: e.id === 'celular' ? 'celular' : 'generico', screen: 'emRun', emStart: this.now(), emDone: {}, emLog: [{ t: this.now(), txt: 'Atendimento iniciado: ' + e.t }] })
+      })),
+      contact: st.contact ? st.contact.name : '',
+      hasContact: !!st.contact,
+      call: () => this.toast('Ligação simulada para o contato de confiança'),
+      back: () => this.setState({ screen: st.tab || 'home' })
+    };
+  }
+
+  vEmRun(st) {
+    const p = this.emPlan(), all = this.emAll();
+    const doneN = all.filter((i) => st.emDone[i.id]).length;
+    const grp = (label, sub, arr) => ({
+      label, sub,
+      items: arr.map((i) => ({
+        t: i.t, h: i.h, done: !!st.emDone[i.id], time: st.emDone[i.id] || '',
+        bd: st.emDone[i.id] ? 'var(--pb-green)' : 'var(--pb-border)',
+        bg: st.emDone[i.id] ? 'var(--pb-green)' : 'transparent',
+        deco: st.emDone[i.id] ? 'line-through' : 'none',
+        fg: st.emDone[i.id] ? 'var(--pb-text2)' : 'var(--pb-text)',
+        on: () => this.emToggle(i.id, i.t)
+      }))
+    });
+    return {
+      title: st.emId === 'celular' ? 'Roubaram ou perdi meu celular' : 'Emergência digital em andamento',
+      start: st.emStart || this.now(),
+      doneN: String(doneN), total: String(all.length),
+      pct: Math.round((doneN / all.length) * 100) + '%',
+      groups: [grp('Agora', 'Primeiros minutos', p.now), grp('Em seguida', 'Primeiras horas', p.next), grp('Depois', 'Primeiros dias', p.later)],
+      finish: this.emFinish,
+      help: () => this.setState({ emHelp: true }),
+      helpOpen: st.emHelp,
+      closeHelp: () => this.setState({ emHelp: false }),
+      contact: st.contact ? st.contact.name : 'Nenhum contato cadastrado',
+      hasContact: !!st.contact,
+      call: () => this.toast('Ligação simulada para o contato de confiança'),
+      exit: () => this.setState({ confirm: 'em' })
+    };
+  }
+
+  vReport(st) {
+    const all = this.emAll();
+    const doneN = all.filter((i) => st.emDone[i.id]).length;
+    const pend = all.filter((i) => !st.emDone[i.id]);
+    return {
+      title: st.emId === 'celular' ? 'Roubo ou perda de celular' : 'Emergência digital',
+      when: (st.emStart || this.now()) + ' · hoje',
+      doneN: String(doneN), total: String(all.length),
+      pct: Math.round((doneN / all.length) * 100) + '%',
+      log: (st.emLog.length ? st.emLog : [{ t: this.now(), txt: 'Nenhuma ação registrada ainda' }]).map((l, i) => ({ t: l.t, txt: l.txt, first: i === 0 })),
+      pend: pend.slice(0, 4).map((i) => ({ t: i.t })),
+      hasPend: pend.length > 0,
+      exportar: () => this.toast('Relatório em PDF entra na versão completa'),
+      back: () => this.setState({ screen: st.tab || 'home' })
+    };
+  }
+
+  vProfile(st) {
+    const sc = this.score(), lv = this.level(sc);
+    const ach = this.achievements();
+    return {
+      name: (st.user && st.user.name) || 'Pedro',
+      initial: (((st.user && st.user.name) || 'Pedro')[0] || 'P').toUpperCase(),
+      email: this.mask((st.user && st.user.email) || ''),
+      guest: !!(st.user && st.user.guest),
+      score: String(sc), level: lv.l, color: lv.c, ink: lv.ink,
+      pts: String(st.points), tasksDone: String(this.doneCount()),
+      simsDone: String(Object.keys(st.simDone).length),
+      achN: String(ach.filter((a) => a.on).length), achTotal: String(ach.length),
+      ach: ach.map((a) => ({
+        t: a.t, d: a.d, glyph: this.glyph(a.g), on: a.on,
+        bg: a.on ? 'var(--pb-tint)' : 'var(--pb-soft)',
+        fg: a.on ? 'var(--pb-blue-ink)' : 'var(--pb-text2)',
+        op: a.on ? '1' : '.55',
+        bd: a.on ? 'var(--pb-blue)' : 'var(--pb-border)'
+      })),
+      dark: st.theme === 'dark',
+      darkBg: st.theme === 'dark' ? 'var(--pb-green)' : 'var(--pb-border)',
+      darkX: st.theme === 'dark' ? '17px' : '2px',
+      toggleDark: () => { const v = st.theme === 'dark' ? 'light' : 'dark'; this.setState({ theme: v }); this.save({ theme: v }); },
+      contrast: st.contrast,
+      contrastBg: st.contrast ? 'var(--pb-green)' : 'var(--pb-border)',
+      contrastX: st.contrast ? '17px' : '2px',
+      toggleContrast: () => { const v = !st.contrast; this.setState({ contrast: v }); this.save({ contrast: v }); },
+      fonts: ['s', 'm', 'g'].map((k, i) => ({
+        l: ['A', 'A', 'A'][i], size: ['12px', '14px', '16px'][i],
+        bg: st.font === k ? 'var(--pb-blue)' : 'var(--pb-surface)',
+        fg: st.font === k ? '#fff' : 'var(--pb-text)',
+        bd: st.font === k ? 'var(--pb-blue)' : 'var(--pb-border)',
+        on: () => { this.setState({ font: k }); this.save({ font: k }); }
+      })),
+      openNotif: () => this.setState({ notifOpen: true }),
+      toReport: () => this.setState({ screen: 'report' }),
+      toVault: () => this.setState({ screen: 'vault' }),
+      toContact: () => this.setState({ screen: 'contact' }),
+      retake: () => this.setState({ screen: 'quiz', qi: 0, answers: {} }),
+      logout: () => this.setState({ confirm: 'logout' })
+    };
+  }
+
+  vNotif(st) {
+    return {
+      open: st.notifOpen,
+      close: () => this.setState({ notifOpen: false }),
+      items: this.NOTIF.map((n) => ({
+        t: n.t, d: n.d, when: n.when, glyph: this.glyph(n.g),
+        on: () => { this.setState({ notifOpen: false }); this.toast('Notificação aberta: ' + n.t); }
+      }))
+    };
+  }
+
+  vNav(st) {
+    const show = ['home', 'plan', 'sims', 'profile'].indexOf(st.screen) >= 0;
+    const item = (k, l, g) => ({
+      l, glyph: this.glyph(g),
+      fg: st.screen === k ? 'var(--pb-blue)' : 'var(--pb-text2)',
+      w: st.screen === k ? '600' : '400',
+      on: () => this.goTab(k)
+    });
+    return {
+      show,
+      left: [item('home', 'Início', 'home'), item('plan', 'Meu Plano', 'plan')],
+      right: [item('sims', 'Simulações', 'play'), item('profile', 'Perfil', 'user')],
+      sos: () => this.setState({ screen: 'emPick' })
+    };
+  }
+
+  vConfirm(st) {
+    const c = st.confirm;
+    const map = {
+      sim: { t: 'Sair da simulação?', d: 'Seu progresso nesta simulação será perdido.', ok: 'Sair', on: () => this.setState({ confirm: null, screen: 'sims', tab: 'sims' }) },
+      em: { t: 'Encerrar o atendimento?', d: 'Você pode retomar depois, mas o cronômetro recomeça.', ok: 'Encerrar', on: () => { this.setState({ confirm: null }); this.emFinish(); } },
+      logout: { t: 'Sair da conta?', d: 'Seus dados continuam salvos neste aparelho.', ok: 'Sair', on: () => this.setState({ confirm: null, screen: 'auth', mode: 'login', user: null }) },
+      contact: { t: 'Remover contato de confiança?', d: 'Você pode cadastrar outra pessoa depois.', ok: 'Remover', on: () => { this.setState({ confirm: null, contact: null }); this.save({ contact: null }); this.toast('Contato removido'); } }
+    };
+    const v = map[c] || { t: '', d: '', ok: '', on: () => {} };
+    return { open: !!c, t: v.t, d: v.d, ok: v.ok, on: v.on, cancel: () => this.setState({ confirm: null }) };
+  }
+}
+</script>
+</body>
+</html>

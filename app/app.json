@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "Plano B Digital",
+    "slug": "plano-b-digital",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.pedrodiniz.planobdigital"
+    },
+    "android": {
+      "package": "com.pedrodiniz.planobdigital",
+      "adaptiveIcon": {
+        "backgroundColor": "#123B5D",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-local-authentication",
+        {
+          "faceIDPermission": "Use Face ID para desbloquear o Cofre de Preparação."
+        }
+      ],
+      "expo-secure-store",
+      "expo-font"
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "plano-b-digital",
+  "private": true,
+  "workspaces": [
+    "app",
+    "backend"
+  ],
+  "scripts": {
+    "dev:app": "npm run dev -w app",
+    "dev:backend": "npm run dev -w backend",
+    "check": "npm run check --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "build": "npm run build --workspaces --if-present",
+    "verify": "npm run check && npm run build && npm run test"
+  }
+}

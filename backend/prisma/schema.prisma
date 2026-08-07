@@ -1,0 +1,147 @@
+// Modelo de dados: só estado do usuário. Catálogo de conteúdo (perguntas,
+// tarefas, simulações, planos de emergência) mora no app, não aqui — ver
+// docs/decisions/0004-modelo-de-dados-e-sync.md. Pontuação/nível/conquistas
+// são sempre calculados a partir destas tabelas, nunca armazenados.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+// A connection string mora em prisma.config.ts (Prisma 7), não aqui.
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  /// Sempre presente — visitante recebe um e-mail sintético (`guestEmail()`).
+  email        String   @unique
+  /// Só ausente pra conta de visitante (sem senha).
+  passwordHash String?
+  isGuest      Boolean  @default(false)
+  theme        String   @default("light")
+  contrast     Boolean  @default(false)
+  fontSize     String   @default("s")
+  createdAt    DateTime @default(now())
+
+  assessment     Assessment?
+  taskStates     TaskState[]
+  vaultItems     VaultItem[]
+  trustedContact TrustedContact?
+  simResults     SimulationResult[]
+  incidents      Incident[]
+  refreshTokens  RefreshToken[]
+
+  @@map("users")
+}
+
+/// Resultado do Teste de Prontidão — um por usuário (refazer sobrescreve).
+model Assessment {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  /// { [índiceDaPergunta]: índiceDaOpção }, espelha `Answers` do app.
+  answers   Json
+  baseScore Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("assessments")
+}
+
+/// Estado de conclusão de uma tarefa do catálogo (`taskId` referencia o app, ex. "t1").
+model TaskState {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  taskId      String
+  completed   Boolean   @default(false)
+  completedAt DateTime?
+
+  @@unique([userId, taskId])
+  @@map("task_states")
+}
+
+/// Item do Cofre — servidor só guarda o blob cifrado, nunca a chave nem o texto plano.
+/// Ver docs/decisions/0003-criptografia-cofre.md.
+model VaultItem {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  /// Referencia um `VaultPrompt.id` do catálogo (ex. "v1") ou item custom do usuário.
+  promptId   String
+  ciphertext String
+  nonce      String
+  updatedAt  DateTime @updatedAt
+  createdAt  DateTime @default(now())
+
+  @@unique([userId, promptId])
+  @@map("vault_items")
+}
+
+model TrustedContact {
+  userId   String  @id
+  user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name     String
+  relation String
+  phone    String
+  email    String?
+  note     String?
+
+  @@map("trusted_contacts")
+}
+
+model SimulationResult {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  simulationId String
+  hits        Int
+  timeSeconds Int
+  completedAt DateTime @default(now())
+
+  @@unique([userId, simulationId])
+  @@map("simulation_results")
+}
+
+/// Um atendimento de emergência. `closedAt` marca o fim (vira Relatório).
+model Incident {
+  id         String            @id @default(cuid())
+  userId     String
+  user       User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  scenarioId String
+  startedAt  DateTime          @default(now())
+  closedAt   DateTime?
+  actions    IncidentAction[]
+
+  @@map("incidents")
+}
+
+/// Ação concluída dentro de um atendimento. `completedAt` é sempre o horário
+/// do SERVIDOR na chegada — mesmo se o app registrou offline com um horário
+/// otimista local (`clientTimestamp`, só exibido antes de sincronizar).
+model IncidentAction {
+  id              String   @id @default(cuid())
+  incidentId      String
+  incident        Incident @relation(fields: [incidentId], references: [id], onDelete: Cascade)
+  actionId        String
+  completedAt     DateTime @default(now())
+  clientTimestamp DateTime?
+
+  @@unique([incidentId, actionId])
+  @@map("incident_actions")
+}
+
+/// Guarda o HASH do refresh token, nunca o valor — leitura é por hash exato.
+model RefreshToken {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@map("refresh_tokens")
+}

@@ -1,0 +1,41 @@
+/*
+ * Ana Paula Fiório — Spacing Tokens
+ *
+ * Sistema em múltiplos de 4px. Seções usam padding generoso
+ * (80–112px) para o "layout respirável" da identidade editorial.
+ */
+
+:root {
+  /* Escala base */
+  --space-0:  0;      /* @kind spacing */
+  --space-1:  4px;    /* @kind spacing */
+  --space-2:  8px;    /* @kind spacing */
+  --space-3:  12px;   /* @kind spacing */
+  --space-4:  16px;   /* @kind spacing */
+  --space-5:  20px;   /* @kind spacing */
+  --space-6:  24px;   /* @kind spacing */
+  --space-8:  32px;   /* @kind spacing */
+  --space-10: 40px;   /* @kind spacing */
+  --space-12: 48px;   /* @kind spacing */
+  --space-14: 56px;   /* @kind spacing */
+  --space-16: 64px;   /* @kind spacing */
+  --space-20: 80px;   /* @kind spacing */
+  --space-24: 96px;   /* @kind spacing */
+  --space-28: 112px;  /* @kind spacing */
+  --space-32: 128px;  /* @kind spacing */
+  --space-40: 160px;  /* @kind spacing */
+
+  /* Layout */
+  --container-max: 1152px;                       /* @kind spacing */
+  --container-px:  clamp(16px, 4vw, 24px);       /* @kind spacing */
+  --section-py:    clamp(80px, 10vw, 112px);      /* @kind spacing */
+
+  /* Raios de borda */
+  --radius-xs:      4px;    /* @kind radius */
+  --radius-sm:      6px;    /* @kind radius */
+  --radius-md:      8px;    /* @kind radius */
+  --radius-lg:      12px;   /* @kind radius */
+  --radius-xl:      16px;   /* @kind radius */
+  --radius-full:    9999px; /* @kind radius */
+  --radius-DEFAULT: var(--radius-md); /* @kind radius */
+}

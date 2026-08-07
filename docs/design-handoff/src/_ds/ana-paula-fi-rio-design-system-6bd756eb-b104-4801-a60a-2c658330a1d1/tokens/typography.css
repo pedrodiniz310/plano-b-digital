@@ -1,0 +1,88 @@
+/*
+ * Ana Paula Fiório — Typography Tokens
+ *
+ * FONTE
+ *   Poppins — sans-serif geométrica (Google Fonts)
+ *             Pesos: 300, 400, 500, 600, 700
+ *             Uso: headings E body — fonte única, pesos diferenciados
+ *
+ * Carregada via Google Fonts CDN.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap');
+
+:root {
+  /* Famílias */
+  --font-heading: "Poppins", system-ui, sans-serif; /* @kind font */
+  --font-body:    "Poppins", system-ui, sans-serif; /* @kind font */
+
+  /* Escala modular (base 16px) */
+  --text-2xs:  0.6875rem;  /* @kind font */ /* 11px */
+  --text-xs:   0.75rem;    /* @kind font */ /* 12px */
+  --text-sm:   0.875rem;   /* @kind font */ /* 14px */
+  --text-base: 1rem;       /* @kind font */ /* 16px */
+  --text-lg:   1.125rem;   /* @kind font */ /* 18px */
+  --text-xl:   1.25rem;    /* @kind font */ /* 20px */
+  --text-2xl:  1.5rem;     /* @kind font */ /* 24px */
+  --text-3xl:  1.875rem;   /* @kind font */ /* 30px */
+  --text-4xl:  2.25rem;    /* @kind font */ /* 36px */
+  --text-5xl:  3rem;       /* @kind font */ /* 48px */
+  --text-hero: clamp(2.6rem, 8vw, 5.5rem); /* @kind font */
+
+  /* Line heights */
+  --leading-none:    1;    /* @kind other */
+  --leading-tight:   1.1;  /* @kind other */
+  --leading-snug:    1.3;  /* @kind other */
+  --leading-normal:  1.5;  /* @kind other */
+  --leading-relaxed: 1.75; /* @kind other */
+
+  /* Letter spacing */
+  --tracking-tight:   -0.025em; /* @kind other */
+  --tracking-normal:   0;       /* @kind other */
+  --tracking-wide:     0.05em;  /* @kind other */
+  --tracking-wider:    0.1em;   /* @kind other */
+  --tracking-widest:   0.25em;  /* @kind other */
+
+  /* Pesos */
+  --weight-light:    300; /* @kind other */
+  --weight-normal:   400; /* @kind other */
+  --weight-medium:   500; /* @kind other */
+  --weight-semibold: 600; /* @kind other */
+  --weight-bold:     700; /* @kind other */
+}
+
+/* Reset tipográfico base */
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  font-weight: var(--weight-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: hsl(var(--foreground));
+  background-color: hsl(var(--background));
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+}
+
+h1 { font-weight: var(--weight-bold); }
+
+h1 em, h2 em, h3 em {
+  font-style: italic;
+  color: hsl(var(--primary));
+  font-weight: inherit;
+}
+
+::selection {
+  background-color: hsl(var(--rose-300) / 0.35);
+}
+
+:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}

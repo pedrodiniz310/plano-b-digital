@@ -1,0 +1,104 @@
+/*
+ * Ana Paula Fiório — Color Tokens
+ *
+ * PROPOSTA DE NOVA PALETA (junho 2026)
+ * Bordeaux + Forest Sage + Mel — veja readme.md para o raciocínio completo.
+ *
+ * Camada 1 — Escala bruta (H S% L%)
+ * Camada 2 — Tokens semânticos
+ * Camada 3 — Tema escuro (.dark)
+ */
+
+:root {
+  /* ===== Bordeaux — cor de marca principal ===== */
+  --rose-100: 348 65% 93%; /* @kind color */
+  --rose-300: 348 52% 76%; /* @kind color */
+  --rose-500: 348 46% 48%; /* @kind color */
+  --rose-600: 348 48% 40%; /* @kind color */
+  --rose-700: 348 50% 32%; /* @kind color */
+
+  /* ===== Forest Sage — secundária de apoio ===== */
+  --sage-200: 155 22% 70%; /* @kind color */
+  --sage-400: 155 18% 50%; /* @kind color */
+  --sage-600: 155 20% 34%; /* @kind color */
+  --sage-800: 155 18% 22%; /* @kind color */
+  --sage-900: 155 16% 15%; /* @kind color */
+
+  /* ===== Mel — acento de detalhe ===== */
+  --honey-300: 40 68% 78%; /* @kind color */
+  --honey-500: 40 58% 62%; /* @kind color */
+
+  /* ===== Neutros quentes ===== */
+  --warm-50:  40 38% 97%; /* @kind color */
+  --warm-100: 40 26% 93%; /* @kind color */
+  --warm-200: 36 18% 87%; /* @kind color */
+  --warm-400: 35 10% 62%; /* @kind color */
+  --warm-600: 40  6% 40%; /* @kind color */
+  --warm-900: 60  8% 13%; /* @kind color */
+  --warm-950: 60  8%  8%; /* @kind color */
+
+  /* ===== Camada 2 — Tokens semânticos ===== */
+  --background:             var(--warm-50);  /* @kind color */
+  --foreground:             var(--warm-950); /* @kind color */
+
+  --card:                   40 55% 99%;      /* @kind color */
+  --card-foreground:        var(--warm-950); /* @kind color */
+
+  --popover:                40 55% 99%;      /* @kind color */
+  --popover-foreground:     var(--warm-950); /* @kind color */
+
+  --primary:                var(--rose-500); /* @kind color */
+  --primary-foreground:     40 38% 97%;      /* @kind color */
+  --primary-dark:           var(--rose-600); /* @kind color */
+
+  --secondary:              var(--sage-600); /* @kind color */
+  --secondary-foreground:   40 38% 97%;      /* @kind color */
+  --secondary-dark:         var(--sage-800); /* @kind color */
+
+  --muted:                  var(--warm-100); /* @kind color */
+  --muted-foreground:       var(--warm-600); /* @kind color */
+
+  --accent:                 var(--honey-500); /* @kind color */
+  --accent-foreground:      var(--warm-950);  /* @kind color */
+
+  --destructive:            0 84% 60%;  /* @kind color */
+  --destructive-foreground: 0  0% 98%;  /* @kind color */
+
+  --border:                 var(--warm-200); /* @kind color */
+  --input:                  var(--warm-200); /* @kind color */
+  --ring:                   var(--rose-500); /* @kind color */
+
+  --radius: 0.5rem; /* @kind radius */
+}
+
+/* ===== Tema escuro — seções de contraste editorial ===== */
+.dark {
+  --background:             var(--sage-900); /* @kind color */
+  --foreground:             40 38% 95%;      /* @kind color */
+
+  --card:                   155 16% 18%;     /* @kind color */
+  --card-foreground:        40 38% 95%;      /* @kind color */
+
+  --popover:                155 16% 18%;     /* @kind color */
+  --popover-foreground:     40 38% 95%;      /* @kind color */
+
+  --primary:                348 50% 65%;     /* @kind color */
+  --primary-foreground:     155 16% 12%;     /* @kind color */
+  --primary-dark:           348 48% 58%;     /* @kind color */
+
+  --secondary:              155 18% 44%;     /* @kind color */
+  --secondary-foreground:   40 38% 97%;      /* @kind color */
+
+  --muted:                  155 14% 20%;     /* @kind color */
+  --muted-foreground:       40 12% 68%;      /* @kind color */
+
+  --accent:                 var(--honey-500); /* @kind color */
+  --accent-foreground:      var(--warm-950);  /* @kind color */
+
+  --destructive:            0 63% 31%;  /* @kind color */
+  --destructive-foreground: 0  0% 98%;  /* @kind color */
+
+  --border:                 155 12% 26%; /* @kind color */
+  --input:                  155 12% 26%; /* @kind color */
+  --ring:                   348 50% 65%; /* @kind color */
+}
