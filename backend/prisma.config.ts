@@ -1,4 +1,4 @@
-import { defineConfig, env } from 'prisma/config';
+import { defineConfig } from 'prisma/config';
 
 try {
   // Opcional pra `prisma generate` (não conecta no banco); obrigatório pra
@@ -14,6 +14,10 @@ export default defineConfig({
     path: 'prisma/migrations',
   },
   datasource: {
-    url: env('DATABASE_URL'),
+    // Leitura direta em vez de `env('DATABASE_URL')` do prisma/config: o helper
+    // resolve na hora de carregar este arquivo e derruba até `prisma generate`,
+    // que não conecta no banco. Como o generate roda no `postinstall`, isso
+    // quebraria `npm ci` em qualquer ambiente sem DATABASE_URL — CI e clone limpo.
+    url: process.env.DATABASE_URL,
   },
 });

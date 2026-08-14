@@ -9,7 +9,7 @@ documento — índice desatualizado é pior que índice ausente.
 | ---- | ------- | ------ |
 | 0001 | [Escolha de stack](decisions/0001-escolha-de-stack.md) | aceita |
 | 0002 | [Estrutura de monorepo](decisions/0002-estrutura-monorepo.md) | aceita |
-| 0003 | [Criptografia do Cofre de Preparação](decisions/0003-criptografia-cofre.md) | aceita |
+| 0003 | [Criptografia do Cofre de Preparação](decisions/0003-criptografia-cofre.md) | proposta — pendente de implementação |
 | 0004 | [Catálogo estático no app + sync offline do incidente](decisions/0004-modelo-de-dados-e-sync.md) | aceita |
 
 ## Notas técnicas
