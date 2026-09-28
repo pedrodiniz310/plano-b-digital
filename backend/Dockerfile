@@ -10,9 +10,11 @@ RUN apt-get update -y && apt-get install -y --no-install-recommends python3 make
 COPY package.json package-lock.json ./
 COPY app/package.json ./app/package.json
 COPY backend/package.json ./backend/package.json
-RUN npm ci
+# O schema entra ANTES do install: o `postinstall` do backend roda
+# `prisma generate` e sem o schema em disco a instalação falha.
 COPY backend/prisma ./backend/prisma
-RUN npm run prisma:generate --workspace=backend
+COPY backend/prisma.config.ts ./backend/prisma.config.ts
+RUN npm ci
 
 FROM deps AS build
 COPY backend ./backend

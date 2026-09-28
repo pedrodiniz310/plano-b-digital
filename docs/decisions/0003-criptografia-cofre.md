@@ -1,7 +1,40 @@
 # 0003 — Criptografia do Cofre de Preparação
 
 - Data: 2026-08-07
-- Estado: aceita
+- Estado: **proposta — pendente de implementação** (revisado em 2026-08-12)
+
+> **Nada do que a seção "Decisão" descreve existe em código ainda.** Este ADR
+> registra o desenho escolhido para o Cofre, não uma entrega. O estado era
+> "aceita" e foi corrigido: num projeto de Cyber Security lido por terceiros, um
+> ADR que descreve criptografia inexistente é pior do que ADR nenhum.
+
+## Estado da implementação
+
+Já existe:
+
+- as três dependências instaladas em `app/package.json` — `@noble/ciphers`,
+  `expo-crypto`, `expo-local-authentication`;
+- o modelo `VaultItem` com `ciphertext` e `nonce` em `backend/prisma/schema.prisma`;
+- `getVaultKey`/`setVaultKey` em `app/src/state/secureStore.ts`, **declarados e
+  sem nenhum chamador**;
+- o catálogo editorial dos itens do Cofre em `app/src/content/vault.ts`.
+
+Falta:
+
+- gerar a chave de 256 bits com `expo-crypto` no primeiro uso do Cofre;
+- qualquer chamada a `@noble/ciphers` — o pacote está instalado e não é importado
+  em lugar nenhum do app;
+- o desbloqueio por biometria com `expo-local-authentication`;
+- rotas de leitura e escrita de `VaultItem` no backend;
+- a tela do Cofre, hoje um `PlaceholderScreen` em `app/src/navigation/RootNavigator.tsx`.
+
+Nenhum dado sensível está exposto por isso: o Cofre não guarda nada ainda. O que
+esta seção evita é a leitura errada — dependências de criptografia instaladas
+mais uma API de chave no `secureStore` sugerem, de fora, que o recurso está
+entregue.
+
+Sinal de que este ADR pode voltar a "aceita": as cinco linhas de "Falta" acima
+existirem em código, com teste de regressão de cifragem/decifragem.
 
 ## Contexto
 
