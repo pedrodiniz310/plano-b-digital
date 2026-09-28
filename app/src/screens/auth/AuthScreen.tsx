@@ -108,6 +108,14 @@ export function AuthScreen({ route, navigation }: Props) {
       }
       await setSession(session.user, session);
       await goToApp('Confirmando sua identidade');
+    } catch (e) {
+      // Falha temporária (rate limit, servidor fora, sem rede) não é sessão
+      // expirada: o acesso continua guardado no aparelho e tentar de novo
+      // resolve. Mandar essa pessoa para "entre com e-mail e senha" seria
+      // mentira — e, para conta visitante, um beco sem saída.
+      setFormError(
+        e instanceof ApiError ? e.message : 'Não foi possível entrar agora. Tente novamente em instantes.'
+      );
     } finally {
       setSubmitting(false);
     }

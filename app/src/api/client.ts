@@ -49,15 +49,24 @@ async function rawRequest<T>(path: string, options: RequestOptions, accessToken?
  * já existente, nunca cria uma nova: ver docs/decisions/0003-criptografia-
  * cofre.md sobre biometria nunca substituir auth de servidor). Só uma
  * renovação por vez em voo.
+ *
+ * `null` significa uma coisa só: a credencial guardada não vale mais — não
+ * existe, ou o servidor a recusou com 401 — e aí o Keystore é limpo. Falha
+ * transitória (429 do rate limit, 5xx, timeout, rede fora) preserva o token e
+ * sobe como erro, porque a sessão continua válida. Apagar o refresh token de
+ * uma conta visitante, que não tem e-mail e senha, é perda irreversível de
+ * conta.
  */
 let refreshInFlight: Promise<AuthSession | null> | null = null;
 
 export async function refreshSession(): Promise<AuthSession | null> {
   if (!refreshInFlight) {
     refreshInFlight = (async () => {
-      const refreshToken = await secureStore.getRefreshToken();
-      if (!refreshToken) return null;
+      // O `finally` precisa cobrir toda saída, inclusive a de "não há token
+      // guardado" — senão a renovação fica presa num resultado antigo.
       try {
+        const refreshToken = await secureStore.getRefreshToken();
+        if (!refreshToken) return null;
         const session = await rawRequest<AuthSession>('/auth/refresh', {
           method: 'POST',
           body: { refreshToken },
@@ -68,9 +77,12 @@ export async function refreshSession(): Promise<AuthSession | null> {
           secureStore.setRefreshToken(session.refreshToken),
         ]);
         return session;
-      } catch {
-        await secureStore.clearSession();
-        return null;
+      } catch (err) {
+        if (err instanceof ApiError && err.status === 401) {
+          await secureStore.clearSession();
+          return null;
+        }
+        throw err;
       } finally {
         refreshInFlight = null;
       }
@@ -88,6 +100,8 @@ export async function apiRequest<T>(path: string, options: RequestOptions = {}):
     return await rawRequest<T>(path, options, accessToken ?? undefined);
   } catch (err) {
     if (err instanceof ApiError && err.status === 401) {
+      // Se a renovação falhar por motivo transitório, o erro dela sobe daqui e
+      // substitui o 401: é a causa atual e é a que a tela sabe explicar.
       const renewed = await refreshSession();
       if (renewed) return rawRequest<T>(path, options, renewed.accessToken);
     }
