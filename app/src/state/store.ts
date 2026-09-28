@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { FontSizeKey, ThemeName } from '../theme/tokens';
 import type { User } from '../types/auth';
+import type { Answers } from '../lib/scoring';
 import { asyncStorageAdapter, PERSIST_KEY } from './persist';
 import { secureStore } from './secureStore';
 
@@ -26,7 +27,13 @@ interface SessionSlice {
   logout: () => Promise<void>;
 }
 
-type AppStore = PrefsSlice & SessionSlice;
+interface AssessmentSlice {
+  answers: Answers | null;
+  baseScore: number | null;
+  setAssessment: (answers: Answers, baseScore: number) => void;
+}
+
+type AppStore = PrefsSlice & SessionSlice & AssessmentSlice;
 
 export const useAppStore = create<AppStore>()(
   persist(
@@ -42,17 +49,26 @@ export const useAppStore = create<AppStore>()(
 
       user: null,
       status: 'idle',
+      answers: null,
+      baseScore: null,
+      setAssessment: (answers, baseScore) => set({ answers, baseScore }),
       setAuthenticating: () => set({ status: 'authenticating' }),
       setSession: async (user, tokens) => {
         await Promise.all([
           secureStore.setAccessToken(tokens.accessToken),
           secureStore.setRefreshToken(tokens.refreshToken),
         ]);
-        set({ user, status: 'authenticated', obDone: true });
+        // Outra conta no mesmo aparelho não herda o teste da anterior.
+        set((s) => ({
+          user,
+          status: 'authenticated',
+          obDone: true,
+          ...(s.user?.id !== user.id ? { answers: null, baseScore: null } : {}),
+        }));
       },
       logout: async () => {
         await secureStore.clearSession();
-        set({ user: null, status: 'idle' });
+        set({ user: null, status: 'idle', answers: null, baseScore: null });
       },
     }),
     {
@@ -65,6 +81,8 @@ export const useAppStore = create<AppStore>()(
         font: s.font,
         obDone: s.obDone,
         user: s.user,
+        answers: s.answers,
+        baseScore: s.baseScore,
       }),
     }
   )

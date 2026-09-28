@@ -4,6 +4,7 @@ import type { CompositeScreenProps } from '@react-navigation/native';
 import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Icon } from '../../theme/Icon';
+import { Button } from '../../components/Button';
 import { useTheme } from '../../theme/ThemeProvider';
 import { useAppStore } from '../../state/store';
 import { readinessScore, levelOf } from '../../lib/scoring';
@@ -26,16 +27,15 @@ function greeting(): string {
 export function HomeScreen({ navigation }: Props) {
   const theme = useTheme();
   const user = useAppStore((s) => s.user);
+  const baseScore = useAppStore((s) => s.baseScore);
 
-  // Marco 1: ainda sem Teste de Prontidão/tarefas/simulações reais (marcos 2-6).
-  // A conta é sempre feita pelas mesmas funções de lib/, só com contagens em 0 —
-  // prova a fórmula certa hoje, os números sobem sozinhos quando o resto plugar.
+  // Tarefas e simulações reais chegam nos próximos marcos.
   const completedTaskCount = 0;
   const completedSimulationCount = 0;
-  const score = readinessScore({ baseScore: null, completedTaskCount, completedSimulationCount });
+  const score = readinessScore({ baseScore, completedTaskCount, completedSimulationCount });
   const level = levelOf(score);
   const points = totalPoints({
-    assessmentDone: false,
+    assessmentDone: baseScore !== null,
     completedTaskCount,
     hasTrustedContact: false,
     completedSimulationCount,
@@ -75,8 +75,11 @@ export function HomeScreen({ navigation }: Props) {
         </View>
       </View>
 
+      {baseScore === null ? <Button label="Iniciar teste" onPress={() => navigation.navigate('Quiz')} /> : null}
+
       <Pressable
         accessibilityRole="button"
+        accessibilityLabel="Preciso de ajuda agora — Modo Emergência"
         onPress={() => navigation.navigate('EmergencyPick')}
         style={[styles.emergencyButton, { backgroundColor: 'rgba(229,72,77,.12)', borderColor: theme.colors.red }]}
       >
@@ -92,6 +95,7 @@ export function HomeScreen({ navigation }: Props) {
             <Pressable
               key={task.id}
               accessibilityRole="button"
+              accessibilityLabel={task.title}
               onPress={() => navigation.navigate('Plan')}
               style={[styles.taskRow, { borderColor: theme.colors.border, backgroundColor: theme.colors.surface }]}
             >
@@ -110,6 +114,7 @@ export function HomeScreen({ navigation }: Props) {
           <Pressable
             key={item.label}
             accessibilityRole="button"
+            accessibilityLabel={item.label}
             onPress={item.onPress}
             style={[styles.gridItem, { backgroundColor: theme.colors.surface, borderColor: theme.colors.border }]}
           >

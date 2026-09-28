@@ -24,6 +24,7 @@ import {
   Eye,
   EyeOff,
   ChevronDown,
+  ChevronLeft,
   Plus,
   Trash2,
   type LucideIcon,
@@ -61,6 +62,7 @@ export const GLYPHS = {
   eye: Eye,
   eyeOff: EyeOff,
   down: ChevronDown,
+  back: ChevronLeft,
   plus: Plus,
   trash: Trash2,
 } satisfies Record<string, LucideIcon>;
