@@ -1,5 +1,10 @@
 # Handoff — Plano B Digital (app mobile)
 
+> **Licença:** este diretório está **fora** do MIT da raiz do repositório. O
+> design system em `src/_ds/` é de autoria de Ana Paula Fiório e não traz licença
+> própria. Ver [`NOTICE.md`](NOTICE.md) antes de reaproveitar qualquer arquivo
+> daqui.
+
 ## Visão geral
 
 Aplicativo mobile de **prevenção e resposta a emergências digitais**: ajuda a pessoa a se preparar

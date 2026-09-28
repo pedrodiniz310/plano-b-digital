@@ -5,6 +5,11 @@ import { hashPassword, verifyPassword } from '../lib/hash.js';
 import { Conflict, Unauthorized } from '../lib/httpErrors.js';
 import { generateRefreshToken, guestEmail, hashRefreshToken } from '../lib/tokens.js';
 import {
+  AUTH_RATE_LIMIT,
+  GUEST_RATE_LIMIT,
+  REFRESH_RATE_LIMIT,
+} from '../plugins/rateLimit.js';
+import {
   authSessionSchema,
   loginBodySchema,
   recoverBodySchema,
@@ -32,7 +37,10 @@ export const authRoutes: FastifyPluginAsync = async (rawApp) => {
 
   app.post(
     '/auth/signup',
-    { schema: { body: signupBodySchema, response: { 200: authSessionSchema } } },
+    {
+      config: { rateLimit: AUTH_RATE_LIMIT },
+      schema: { body: signupBodySchema, response: { 200: authSessionSchema } },
+    },
     async (req) => {
       const { name, email, password } = req.body;
       const existing = await app.prisma.user.findUnique({ where: { email } });
@@ -48,7 +56,10 @@ export const authRoutes: FastifyPluginAsync = async (rawApp) => {
 
   app.post(
     '/auth/login',
-    { schema: { body: loginBodySchema, response: { 200: authSessionSchema } } },
+    {
+      config: { rateLimit: AUTH_RATE_LIMIT },
+      schema: { body: loginBodySchema, response: { 200: authSessionSchema } },
+    },
     async (req) => {
       const { email, password } = req.body;
       const user = await app.prisma.user.findUnique({ where: { email } });
@@ -60,17 +71,27 @@ export const authRoutes: FastifyPluginAsync = async (rawApp) => {
     }
   );
 
-  app.post('/auth/guest', { schema: { response: { 200: authSessionSchema } } }, async () => {
-    const user = await app.prisma.user.create({
-      data: { name: 'Visitante', email: guestEmail(), isGuest: true },
-    });
-    const tokens = await issueSession(app, user.id);
-    return { user: toPublicUser(user), ...tokens };
-  });
+  app.post(
+    '/auth/guest',
+    {
+      config: { rateLimit: GUEST_RATE_LIMIT },
+      schema: { response: { 200: authSessionSchema } },
+    },
+    async () => {
+      const user = await app.prisma.user.create({
+        data: { name: 'Visitante', email: guestEmail(), isGuest: true },
+      });
+      const tokens = await issueSession(app, user.id);
+      return { user: toPublicUser(user), ...tokens };
+    }
+  );
 
   app.post(
     '/auth/refresh',
-    { schema: { body: refreshBodySchema, response: { 200: authSessionSchema } } },
+    {
+      config: { rateLimit: REFRESH_RATE_LIMIT },
+      schema: { body: refreshBodySchema, response: { 200: authSessionSchema } },
+    },
     async (req) => {
       const tokenHash = hashRefreshToken(req.body.refreshToken);
       const stored = await app.prisma.refreshToken.findUnique({
@@ -90,7 +111,10 @@ export const authRoutes: FastifyPluginAsync = async (rawApp) => {
 
   app.post(
     '/auth/recover',
-    { schema: { body: recoverBodySchema, response: { 200: recoverResponseSchema } } },
+    {
+      config: { rateLimit: AUTH_RATE_LIMIT },
+      schema: { body: recoverBodySchema, response: { 200: recoverResponseSchema } },
+    },
     async () => {
       // TODO(marco futuro): disparar e-mail de verdade. Por ora, resposta
       // sempre positiva — não revela se o e-mail existe na base.
