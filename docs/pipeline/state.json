@@ -1,0 +1,81 @@
+{
+  "projeto": "plano-b-digital",
+  "fase": "ship",
+  "atualizado": "2026-08-14",
+  "gates": {
+    "scout": "n/a",
+    "spec": "n/a",
+    "architect": "n/a",
+    "build": "pass",
+    "design": "n/a",
+    "verify": "pass",
+    "ship": "pendente"
+  },
+  "artefatos": {
+    "adrs": "docs/decisions/",
+    "instrucoes": "AGENTS.md",
+    "indice": "docs/_INDEX.md",
+    "verdict": "docs/pipeline/05-verdict.md",
+    "decisoes": "docs/pipeline/decisoes-ship.md"
+  },
+  "tarefas": {
+    "total": 14,
+    "concluidas": ["T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12", "T13", "T14"],
+    "proxima": "ship"
+  },
+  "voltas_builder": 3,
+  "gate_final": {
+    "passada": "4a do pipe-sentinel",
+    "resultado": "PASS",
+    "contagem": "0 CRITICOS, 0 ALTOS, 1 MEDIO, 0 BAIXOS, 0 REGRESSOES",
+    "verify": "npm run verify exit 0 — app 20 + backend 16 = 36 testes",
+    "ci": "reproduzido verde em dir limpo fora do repo (108 arquivos, sem .env)",
+    "publicacao": "4 varreduras limpas, 0 segredos; migration = 152 linhas de DDL puro",
+    "libera_prs": "SIM"
+  },
+  "bloqueios": [],
+  "decisoes": {
+    "arquivo": "docs/pipeline/decisoes-ship.md",
+    "D1_argon2": "voltar a m=65536 t=3; gate de 2 slots resolve o OOM; pico 128.2MiB cabe em 256",
+    "D2_repo": "gh repo create plano-b-digital --private, conta pedrodiniz310 - CONFIRMADO",
+    "D3_prs": "5 PRs: docs/agents-md, feat/prisma-migration, chore/dev-tooling, docs/codex-workflow, fix/auditoria-seguranca",
+    "D4_volta3": "autorizada pelo usuario, escopo fechado A1-3 + M1-3 + B1-3",
+    "D5_parallelism": "p=4 -> p=1; em 1 vCPU as 4 lanes disputam o mesmo nucleo, vazao 4.0 -> 22.4 hash/s"
+  },
+  "achados_abertos": [
+    "M1-4 MEDIO trustProxy:1 aposta em modelo de X-Forwarded-For que a doc da Fly contradiz; sob o modelo da doc, 8 pessoas distintas -> trustProxy:1 da [200x5,429,429,429]; nenhum modelo abre brecha, so disponibilidade; resolver antes do primeiro fly deploy",
+    "M2 MEDIO signup vaza email_taken; auth.ts:60 pula argon2 para email inexistente -> oraculo de temporizacao ~40ms",
+    "M3 MEDIO logout nao revoga server-side; RefreshToken 30 dias",
+    "M4 MEDIO rotacao de refresh sem reuse detection",
+    "M5 MEDIO Dockerfile sem USER, devDependencies no runtime, sem .dockerignore",
+    "M7 MEDIO priorityRisks acoplado a indices posicionais de QUESTIONS",
+    "B1 BAIXO JSON.parse sem guard",
+    "B3 BAIXO JWT_ACCESS_SECRET sem check de forca",
+    "B4 BAIXO nome/email plaintext no AsyncStorage",
+    "BAIXO fila do concurrencyGate sem teto nem timeout; trabalho abandonado ainda executa",
+    "BAIXO balde de rate limit in-memory zera em cold start (min_machines_running = 0)",
+    "BAIXO README.md:34 lista recuperacao como entregue; recover() sem chamador em .tsx",
+    "BAIXO cobertura sem gate; npm audit com 19 avisos, 12 alta severidade, todos na toolchain Expo/Metro",
+    "M2-2 LICENSE: escopo resolvido via docs/design-handoff/NOTICE.md; reavaliar antes de tornar o repo publico"
+  ],
+  "confirmados_por_execucao": [
+    "A1 postinstall: export limpo, npm ci + npm run verify verdes ponta a ponta",
+    "A1 process.env nao quebra prisma migrate",
+    "A2 rate limit: 5 passam, 6a = 429 {code: rate_limited}",
+    "A2 m=19456,t=2,p=1 bate com o minimo OWASP Argon2id",
+    "A2 hash legado com outros parametros continua validando (fixture nao tautologica)",
+    "A2 concurrencyGate sem deadlock/starvation/leak; running volta a 0",
+    "A1-3 trustProxy:1 + XFF rotacionado: bloqueia; trustProxy:true contornava o limite",
+    "A1-2 429 nao apaga mais o Keystore; so 401 limpa sessao",
+    "M1-3 p=1 mede 253.0 ms/op contra 261.9 do p=4 em 1 nucleo",
+    "B1-3 LICENSE 100.0% de similaridade MIT (era 70.8%)",
+    "app.ts nao mudou bootstrap: plugins, error handler, /health, close limpo"
+  ],
+  "nao_auditado": [
+    "docker build (engine Docker Desktop parado)",
+    "deploy real na Fly; flyctl config validate falhou com 'no access token available'",
+    "rate limit atras de proxy real",
+    "backend contra Postgres real",
+    "app em device/emulador"
+  ]
+}
