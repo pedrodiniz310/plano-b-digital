@@ -1,6 +1,7 @@
 {
   "name": "plano-b-digital",
   "private": true,
+  "license": "MIT",
   "workspaces": [
     "app",
     "backend"

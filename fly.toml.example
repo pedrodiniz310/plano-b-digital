@@ -6,6 +6,17 @@ primary_region = "gru"
 [build]
   dockerfile = "backend/Dockerfile"
 
+# Configuração pública, não-segredo. Aqui é obrigatório: na Fly todo request
+# chega pelo proxy, então sem isto o rate limit por IP vira um balde único pro
+# tráfego inteiro — 5 logins por minuto para a base toda, e 429 em quem nunca
+# errou nada. Fora daqui é perigoso: sem proxy confiável na frente, `true` deixa
+# qualquer um forjar o IP de origem via X-Forwarded-For. Ver `backend/.env.example`.
+# Vale para exatamente UM proxy na frente, que é o caso aqui: o app lê isto como
+# contagem de saltos confiáveis (`app.ts`). Pondo uma CDN sobre a Fly, o número
+# lá dentro precisa subir junto.
+[env]
+  TRUST_PROXY = "true"
+
 [http_service]
   internal_port = 3000
   force_https = true
@@ -20,3 +31,5 @@ primary_region = "gru"
 
 # Secrets NÃO ficam aqui — cadastre com:
 #   fly secrets set DATABASE_URL="..." JWT_ACCESS_SECRET="..."
+# `TRUST_PROXY` não é segredo e fica no `[env]` acima de propósito: precisa ser
+# revisável no diff, porque ligá-lo no ambiente errado abre forja de IP.
