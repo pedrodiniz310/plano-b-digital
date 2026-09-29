@@ -36,7 +36,9 @@ item no aparelho com AES-256-GCM; o servidor armazena apenas blobs cifrados. A
 chave permanece no armazenamento seguro do dispositivo e ainda não tem mecanismo
 de recuperação ou migração para outro aparelho. O contato é armazenado no
 servidor em colunas comuns, com telefone e e-mail mascarados nas respostas.
-Simulações, Emergência, Perfil e Protocolo familiar ainda têm telas provisórias.
+O Modo Emergência registra atendimentos offline, sincroniza o histórico com o
+servidor e gera relatório em texto compartilhável. Perfil e Protocolo familiar
+ainda têm telas provisórias.
 
 ## Pré-requisitos
 

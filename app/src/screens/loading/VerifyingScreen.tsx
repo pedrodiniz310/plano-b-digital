@@ -8,6 +8,7 @@ import { fetchPlan } from '../../api/plan';
 import { fetchSimulationResults } from '../../api/simulations';
 import { fetchContact } from '../../api/contact';
 import { useAppStore } from '../../state/store';
+import { syncOutbox } from '../../state/syncIncidents';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Verifying'>;
 
@@ -27,6 +28,7 @@ export function VerifyingScreen({ route, navigation }: Props) {
     const minimumDuration = new Promise<void>((resolve) => setTimeout(resolve, DURATION_MS));
 
     async function verify() {
+      void syncOutbox();
       let destination: 'MainTabs' | 'Ready' = baseScore !== null ? 'MainTabs' : 'Ready';
       await Promise.all([
         (async () => {

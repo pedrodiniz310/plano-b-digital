@@ -1,4 +1,5 @@
 import { useAppStore } from '../store';
+import { asyncStorageAdapter } from '../persist';
 
 jest.mock('../persist', () => ({
   PERSIST_KEY: 'test-store',
@@ -17,7 +18,7 @@ const user = { id: 'user-1', name: 'Teste', email: 'teste@example.test', guest: 
 const tokens = { accessToken: 'access', refreshToken: 'refresh' };
 
 beforeEach(() => {
-  useAppStore.setState({ user: null, status: 'idle', answers: null, baseScore: null, completedTaskIds: [], completedSimulationIds: [], hasTrustedContact: false });
+  useAppStore.setState({ user: null, status: 'idle', answers: null, baseScore: null, completedTaskIds: [], completedSimulationIds: [], hasTrustedContact: false, activeIncident: null, lastReport: null, outbox: [] });
 });
 
 it('toggles task completion without duplicates', () => {
@@ -39,6 +40,33 @@ it('clears task state on account switch and logout', async () => {
   useAppStore.getState().setTaskCompleted('t3', true);
   await useAppStore.getState().logout();
   expect(useAppStore.getState().completedTaskIds).toEqual([]);
+});
+
+it('records incident operations locally in order and keeps completed actions append-only', async () => {
+  await useAppStore.getState().setSession(user, tokens);
+  const store = useAppStore.getState();
+  store.startIncident('incident-1', 'celular', '2026-09-29T10:00:00.000Z');
+  expect(asyncStorageAdapter?.setItem).toHaveBeenLastCalledWith('test-store', expect.objectContaining({
+    state: expect.objectContaining({ activeIncident: expect.objectContaining({ id: 'incident-1' }), outbox: [expect.objectContaining({ kind: 'create' })] }),
+  }));
+  store.completeAction('c1', '2026-09-29T10:01:00.000Z');
+  store.completeAction('c1', '2026-09-29T10:02:00.000Z');
+  store.finishIncident('2026-09-29T10:03:00.000Z');
+  expect(useAppStore.getState().activeIncident).toBeNull();
+  expect(useAppStore.getState().lastReport?.actions.c1.clientTimestamp).toBe('2026-09-29T10:01:00.000Z');
+  expect(useAppStore.getState().outbox.map((op) => op.kind)).toEqual(['create', 'action', 'close']);
+});
+
+it('clears incident and outbox on account switch and logout', async () => {
+  await useAppStore.getState().setSession(user, tokens);
+  useAppStore.getState().startIncident('incident-1', 'celular', '2026-09-29T10:00:00.000Z');
+  await useAppStore.getState().setSession({ ...user, id: 'user-2' }, tokens);
+  expect(useAppStore.getState().activeIncident).toBeNull();
+  expect(useAppStore.getState().outbox).toEqual([]);
+  useAppStore.getState().startIncident('incident-2', 'zap', '2026-09-29T10:00:00.000Z');
+  await useAppStore.getState().logout();
+  expect(useAppStore.getState().activeIncident).toBeNull();
+  expect(useAppStore.getState().outbox).toEqual([]);
 });
 
 it('keeps contact status for the same account and clears it on switch and logout', async () => {

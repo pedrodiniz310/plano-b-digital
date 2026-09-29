@@ -1,5 +1,5 @@
-import React from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { ActivityIndicator, AppState, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -12,8 +12,21 @@ import {
 } from '@expo-google-fonts/poppins';
 import { ThemeProvider } from './src/theme/ThemeProvider';
 import { RootNavigator } from './src/navigation/RootNavigator';
+import { syncOutbox } from './src/state/syncIncidents';
+import { useAppStore } from './src/state/store';
 
 export default function App() {
+  useEffect(() => {
+    const unsubscribeStore = useAppStore.subscribe((state, previous) => {
+      if (state.outbox.length > previous.outbox.length) void syncOutbox();
+    });
+    const unsubscribeHydration = useAppStore.persist.onFinishHydration(() => { void syncOutbox(); });
+    const appState = AppState.addEventListener('change', (state) => {
+      if (state === 'active') void syncOutbox();
+    });
+    void syncOutbox();
+    return () => { unsubscribeStore(); unsubscribeHydration(); appState.remove(); };
+  }, []);
   const [fontsLoaded] = useFonts({
     Poppins_300Light,
     Poppins_400Regular,

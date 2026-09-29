@@ -11,6 +11,7 @@ import { planRoutes } from './routes/plan.js';
 import { simulationRoutes } from './routes/simulations.js';
 import { vaultRoutes } from './routes/vault.js';
 import { contactRoutes } from './routes/contact.js';
+import { incidentRoutes } from './routes/incidents.js';
 
 export interface BuildAppOptions {
   /**
@@ -79,6 +80,7 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
   await app.register(simulationRoutes);
   await app.register(vaultRoutes);
   await app.register(contactRoutes);
+  await app.register(incidentRoutes);
 
   return app;
 }
