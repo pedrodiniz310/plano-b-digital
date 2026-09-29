@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { HomeScreen } from '../screens/home/HomeScreen';
+import { PlanScreen } from '../screens/plan/PlanScreen';
 import { PlaceholderScreen } from '../screens/shared/PlaceholderScreen';
 import { Icon } from '../theme/Icon';
 import { useTheme } from '../theme/ThemeProvider';
@@ -51,7 +52,7 @@ export function TabNavigator() {
       />
       <Tab.Screen
         name="Plan"
-        component={PlaceholderScreen}
+        component={PlanScreen}
         options={{
           title: 'Meu Plano',
           tabBarIcon: ({ color, size }) => <Icon glyph="plan" color={color} size={size} />,

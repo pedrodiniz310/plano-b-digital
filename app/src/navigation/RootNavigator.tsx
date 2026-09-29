@@ -8,6 +8,8 @@ import { ReadyScreen } from '../screens/assessment/ReadyScreen';
 import { QuizScreen } from '../screens/assessment/QuizScreen';
 import { ProcessingScreen } from '../screens/assessment/ProcessingScreen';
 import { ResultScreen } from '../screens/assessment/ResultScreen';
+import { PlanCategoryScreen } from '../screens/plan/PlanCategoryScreen';
+import { TaskDetailScreen } from '../screens/plan/TaskDetailScreen';
 import { PlaceholderScreen } from '../screens/shared/PlaceholderScreen';
 import { TabNavigator } from './TabNavigator';
 import type { RootStackParamList } from './types';
@@ -27,6 +29,8 @@ export function RootNavigator() {
       <Stack.Screen name="Processing" component={ProcessingScreen} />
       <Stack.Screen name="Result" component={ResultScreen} />
       <Stack.Screen name="MainTabs" component={TabNavigator} />
+      <Stack.Screen name="PlanCategory" component={PlanCategoryScreen} />
+      <Stack.Screen name="TaskDetail" component={TaskDetailScreen} options={{ presentation: 'modal' }} />
       <Stack.Screen name="Vault" component={PlaceholderScreen} />
       <Stack.Screen name="Contact" component={PlaceholderScreen} />
       <Stack.Screen name="FamilyProtocol" component={PlaceholderScreen} />

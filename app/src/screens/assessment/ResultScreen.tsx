@@ -5,7 +5,7 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import Svg, { Circle } from 'react-native-svg';
 import { Button } from '../../components/Button';
 import { CATEGORIES } from '../../content/questions';
-import { categoryScores, levelOf, priorityRisks } from '../../lib/scoring';
+import { categoryScores, levelOf, priorityRisks, readinessScore } from '../../lib/scoring';
 import type { MainTabParamList, RootStackParamList } from '../../navigation/types';
 import { useAppStore } from '../../state/store';
 import { Icon } from '../../theme/Icon';
@@ -19,6 +19,7 @@ export function ResultScreen({ navigation }: Props) {
   const insets = useSafeAreaInsets();
   const answers = useAppStore((s) => s.answers);
   const baseScore = useAppStore((s) => s.baseScore);
+  const completedTaskIds = useAppStore((s) => s.completedTaskIds);
 
   useEffect(() => {
     if (!answers || baseScore === null) navigation.replace('Ready');
@@ -26,8 +27,9 @@ export function ResultScreen({ navigation }: Props) {
 
   if (!answers || baseScore === null) return null;
 
-  const level = levelOf(baseScore);
-  const levelColor = baseScore >= 85 ? theme.colors.green : baseScore >= 70 ? theme.colors.blue : baseScore >= 40 ? theme.colors.amber : theme.colors.red;
+  const score = readinessScore({ baseScore, completedTaskCount: completedTaskIds.length, completedSimulationCount: 0 });
+  const level = levelOf(score);
+  const levelColor = score >= 85 ? theme.colors.green : score >= 70 ? theme.colors.blue : score >= 40 ? theme.colors.amber : theme.colors.red;
   const scores = categoryScores(answers);
   const risks = priorityRisks(answers);
 
@@ -50,7 +52,7 @@ export function ResultScreen({ navigation }: Props) {
       <Text style={[styles.eyebrow, { color: theme.colors.text2, fontSize: 11 * theme.fontScale }]}>SEU RESULTADO</Text>
 
       <View style={styles.summary}>
-        <View style={styles.ring} accessible accessibilityLabel={`Pontuação de prontidão: ${baseScore} de 100`}>
+        <View style={styles.ring} accessible accessibilityLabel={`Pontuação de prontidão: ${score} de 100`}>
           <Svg width={168} height={168} style={styles.ringSvg}>
             <Circle cx={84} cy={84} r={62} stroke={theme.colors.soft} strokeWidth={14} fill="none" />
             <Circle
@@ -61,12 +63,12 @@ export function ResultScreen({ navigation }: Props) {
               strokeWidth={14}
               strokeLinecap="round"
               strokeDasharray={`${CIRCUMFERENCE} ${CIRCUMFERENCE}`}
-              strokeDashoffset={CIRCUMFERENCE * (1 - baseScore / 100)}
+              strokeDashoffset={CIRCUMFERENCE * (1 - score / 100)}
               transform="rotate(-90 84 84)"
               fill="none"
             />
           </Svg>
-          <Text style={[styles.score, { color: theme.colors.text, fontFamily: theme.typography.bigNumber.family, fontSize: 44 * theme.fontScale, lineHeight: 52 * theme.fontScale }]}>{baseScore}</Text>
+          <Text style={[styles.score, { color: theme.colors.text, fontFamily: theme.typography.bigNumber.family, fontSize: 44 * theme.fontScale, lineHeight: 52 * theme.fontScale }]}>{score}</Text>
           <Text style={[styles.scoreCaption, { color: theme.colors.text2, fontSize: 12 * theme.fontScale }]}>de 100</Text>
         </View>
         <Text style={[styles.levelBadge, { backgroundColor: theme.colors.soft, color: theme.ink(levelColor), fontSize: 13 * theme.fontScale }]}>{level.label}</Text>

@@ -4,6 +4,7 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useTheme } from '../../theme/ThemeProvider';
 import type { RootStackParamList } from '../../navigation/types';
 import { fetchLatestAssessment } from '../../api/assessments';
+import { fetchPlan } from '../../api/plan';
 import { useAppStore } from '../../state/store';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Verifying'>;
@@ -14,6 +15,7 @@ export function VerifyingScreen({ route, navigation }: Props) {
   const theme = useTheme();
   const label = route.params?.label ?? 'Carregando';
   const setAssessment = useAppStore((s) => s.setAssessment);
+  const setCompletedTasks = useAppStore((s) => s.setCompletedTasks);
 
   useEffect(() => {
     let active = true;
@@ -22,24 +24,35 @@ export function VerifyingScreen({ route, navigation }: Props) {
 
     async function verify() {
       let destination: 'MainTabs' | 'Ready' = baseScore !== null ? 'MainTabs' : 'Ready';
-      if (baseScore === null) {
-        try {
-          const assessment = await fetchLatestAssessment();
-          if (assessment && active) {
-            setAssessment(assessment.answers, assessment.baseScore);
-            destination = 'MainTabs';
+      await Promise.all([
+        (async () => {
+          if (baseScore !== null) return;
+          try {
+            const assessment = await fetchLatestAssessment();
+            if (assessment && active) {
+              setAssessment(assessment.answers, assessment.baseScore);
+              destination = 'MainTabs';
+            }
+          } catch {
+            // Sem rede ou falha do servidor: o teste continua disponível localmente.
           }
-        } catch {
-          // Sem rede ou falha do servidor: o teste continua disponível localmente.
-        }
-      }
+        })(),
+        (async () => {
+          try {
+            const plan = await fetchPlan();
+            if (active) setCompletedTasks(plan.tasks.filter((task) => task.completed).map((task) => task.taskId));
+          } catch {
+            // Sem rede ou falha do servidor: mantemos as tarefas locais.
+          }
+        })(),
+      ]);
       await minimumDuration;
       if (active) navigation.replace(destination);
     }
 
     void verify();
     return () => { active = false; };
-  }, [navigation, setAssessment]);
+  }, [navigation, setAssessment, setCompletedTasks]);
 
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.bg }]}>
