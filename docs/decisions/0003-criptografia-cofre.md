@@ -1,40 +1,21 @@
 # 0003 — Criptografia do Cofre de Preparação
 
 - Data: 2026-08-07
-- Estado: **proposta — pendente de implementação** (revisado em 2026-08-12)
-
-> **Nada do que a seção "Decisão" descreve existe em código ainda.** Este ADR
-> registra o desenho escolhido para o Cofre, não uma entrega. O estado era
-> "aceita" e foi corrigido: num projeto de Cyber Security lido por terceiros, um
-> ADR que descreve criptografia inexistente é pior do que ADR nenhum.
+- Estado: **aceita** (implementada em 2026-09-29)
 
 ## Estado da implementação
 
-Já existe:
-
-- as três dependências instaladas em `app/package.json` — `@noble/ciphers`,
-  `expo-crypto`, `expo-local-authentication`;
-- o modelo `VaultItem` com `ciphertext` e `nonce` em `backend/prisma/schema.prisma`;
-- `getVaultKey`/`setVaultKey` em `app/src/state/secureStore.ts`, **declarados e
-  sem nenhum chamador**;
-- o catálogo editorial dos itens do Cofre em `app/src/content/vault.ts`.
-
-Falta:
-
-- gerar a chave de 256 bits com `expo-crypto` no primeiro uso do Cofre;
-- qualquer chamada a `@noble/ciphers` — o pacote está instalado e não é importado
-  em lugar nenhum do app;
-- o desbloqueio por biometria com `expo-local-authentication`;
-- rotas de leitura e escrita de `VaultItem` no backend;
-- a tela do Cofre, hoje um `PlaceholderScreen` em `app/src/navigation/RootNavigator.tsx`.
-
-Nenhum dado sensível está exposto por isso: o Cofre não guarda nada ainda. O que
-esta seção evita é a leitura errada — dependências de criptografia instaladas
-mais uma API de chave no `secureStore` sugerem, de fora, que o recurso está
-entregue.
-
-Sinal de que este ADR pode voltar a "aceita": as cinco linhas de "Falta" acima
-existirem em código, com teste de regressão de cifragem/decifragem.
+- `app/src/lib/vaultCrypto.ts` gera a chave e executa AES-256-GCM com nonce
+  aleatório e AAD por usuário e item; `app/src/state/secureStore.ts` guarda a
+  chave exclusivamente no armazenamento seguro do dispositivo.
+- `app/src/screens/vault/VaultScreen.tsx` pede autenticação local, mantém o texto
+  decifrado só em memória enquanto aberto e rebloqueia após 45 segundos sem
+  atividade, ao sair da tela ou ao colocar o app em segundo plano.
+- `backend/src/routes/vault.ts` armazena e devolve apenas `ciphertext`, `nonce`,
+  `promptId` e `updatedAt`, com limite de 40 itens por usuário.
+- `app/src/lib/__tests__/vaultCrypto.test.ts` e
+  `backend/src/routes/vault-contact.test.ts` cobrem autenticação da cifra,
+  isolamento por usuário e validação da API.
 
 ## Contexto
 
@@ -49,12 +30,16 @@ escrutinada de perto.
 
 Criptografia ponta a ponta **client-side**, com `@noble/ciphers` (AES-256-GCM,
 pure-JS, auditada, sem binding nativo). Chave simétrica de 256 bits gerada no
-primeiro uso do Cofre via `expo-crypto` (`getRandomBytesAsync`), guardada
+primeiro uso do Cofre via `expo-crypto` (`getRandomBytes`), guardada
 exclusivamente em `expo-secure-store` (Keychain no iOS, Keystore no Android) — nunca
 transmitida, nunca derivada de senha. O servidor recebe e armazena só
 `{ciphertext, nonce}` por item; não tem meio de decifrar. Biometria
 (`expo-local-authentication`) desbloqueia só a *leitura local* do Cofre já
 decifrado em memória — nunca substitui o login nem participa da criptografia.
+Cada cifragem usa um nonce aleatório novo de 12 bytes e AAD
+`planob.vault.v1:${userId}:${promptId}`, que liga o blob ao usuário e ao espaço
+do catálogo. O servidor aceita até 40 itens por usuário; o rótulo de um item
+personalizado fica dentro do texto cifrado, junto com o valor.
 
 ## Alternativas descartadas
 

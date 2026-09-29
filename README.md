@@ -30,16 +30,13 @@ O porquê de cada escolha está em
 
 ## Estado
 
-Em andamento desde 2026-08. **Marco 1 entregue:** monorepo, modelo de dados e a
-fatia vertical de autenticação (cadastro, login, visitante, refresh, recuperação).
-
-As telas de Splash, Onboarding, Auth e Início são reais; o restante da navegação
-(Plano, Cofre, Simulações, Emergência, Perfil) ainda usa `PlaceholderScreen`. O
-catálogo editorial dessas telas já existe em `app/src/content/`, e a lógica de
-pontuação e de conquistas em `app/src/lib/` — o que falta é a interface e as
-rotas de sincronização. A criptografia do Cofre **não está implementada**: ver o
-aviso no topo de
-[`docs/decisions/0003-criptografia-cofre.md`](docs/decisions/0003-criptografia-cofre.md).
+Em andamento desde 2026-08. Autenticação, Teste de Prontidão, Plano B, Cofre de
+Preparação e Contato de confiança têm telas e rotas de API. O Cofre cifra cada
+item no aparelho com AES-256-GCM; o servidor armazena apenas blobs cifrados. A
+chave permanece no armazenamento seguro do dispositivo e ainda não tem mecanismo
+de recuperação ou migração para outro aparelho. O contato é armazenado no
+servidor em colunas comuns, com telefone e e-mail mascarados nas respostas.
+Simulações, Emergência, Perfil e Protocolo familiar ainda têm telas provisórias.
 
 ## Pré-requisitos
 

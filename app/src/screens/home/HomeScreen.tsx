@@ -29,6 +29,7 @@ export function HomeScreen({ navigation }: Props) {
   const user = useAppStore((s) => s.user);
   const baseScore = useAppStore((s) => s.baseScore);
   const completedTaskIds = useAppStore((s) => s.completedTaskIds);
+  const hasTrustedContact = useAppStore((s) => s.hasTrustedContact);
 
   const completedTaskCount = completedTaskIds.length;
   const completedSimulationCount = 0;
@@ -37,7 +38,7 @@ export function HomeScreen({ navigation }: Props) {
   const points = totalPoints({
     assessmentDone: baseScore !== null,
     completedTaskCount,
-    hasTrustedContact: false,
+    hasTrustedContact,
     completedSimulationCount,
   });
   const pendingTasks = TASKS.filter((task) => !completedTaskIds.includes(task.id)).slice(0, 3);

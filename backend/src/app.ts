@@ -8,6 +8,8 @@ import { registerRateLimit } from './plugins/rateLimit.js';
 import { authRoutes } from './routes/auth.js';
 import { assessmentRoutes } from './routes/assessments.js';
 import { planRoutes } from './routes/plan.js';
+import { vaultRoutes } from './routes/vault.js';
+import { contactRoutes } from './routes/contact.js';
 
 export interface BuildAppOptions {
   /**
@@ -50,7 +52,8 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
       reply.code(err.status).send({ code: err.code, message: err.message });
       return;
     }
-    app.log.error(err);
+    // Prisma and validation errors can embed submitted values. Never log request data.
+    app.log.error({ code: 'internal_error' }, 'Unhandled request error');
     reply.code(statusCodeOf(err)).send({
       code: 'internal_error',
       message: 'Algo deu errado. Tente novamente.',
@@ -72,6 +75,8 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
   await app.register(authRoutes);
   await app.register(assessmentRoutes);
   await app.register(planRoutes);
+  await app.register(vaultRoutes);
+  await app.register(contactRoutes);
 
   return app;
 }

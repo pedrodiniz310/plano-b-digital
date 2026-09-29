@@ -5,6 +5,7 @@ import { useTheme } from '../../theme/ThemeProvider';
 import type { RootStackParamList } from '../../navigation/types';
 import { fetchLatestAssessment } from '../../api/assessments';
 import { fetchPlan } from '../../api/plan';
+import { fetchContact } from '../../api/contact';
 import { useAppStore } from '../../state/store';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Verifying'>;
@@ -16,6 +17,7 @@ export function VerifyingScreen({ route, navigation }: Props) {
   const label = route.params?.label ?? 'Carregando';
   const setAssessment = useAppStore((s) => s.setAssessment);
   const setCompletedTasks = useAppStore((s) => s.setCompletedTasks);
+  const setHasTrustedContact = useAppStore((s) => s.setHasTrustedContact);
 
   useEffect(() => {
     let active = true;
@@ -45,6 +47,14 @@ export function VerifyingScreen({ route, navigation }: Props) {
             // Sem rede ou falha do servidor: mantemos as tarefas locais.
           }
         })(),
+        (async () => {
+          try {
+            const contact = await fetchContact();
+            if (active) setHasTrustedContact(contact !== null);
+          } catch {
+            // Sem rede ou falha do servidor: mantemos o estado local.
+          }
+        })(),
       ]);
       await minimumDuration;
       if (active) navigation.replace(destination);
@@ -52,7 +62,7 @@ export function VerifyingScreen({ route, navigation }: Props) {
 
     void verify();
     return () => { active = false; };
-  }, [navigation, setAssessment, setCompletedTasks]);
+  }, [navigation, setAssessment, setCompletedTasks, setHasTrustedContact]);
 
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.bg }]}>
