@@ -8,6 +8,7 @@ import { registerRateLimit } from './plugins/rateLimit.js';
 import { authRoutes } from './routes/auth.js';
 import { assessmentRoutes } from './routes/assessments.js';
 import { planRoutes } from './routes/plan.js';
+import { simulationRoutes } from './routes/simulations.js';
 import { vaultRoutes } from './routes/vault.js';
 import { contactRoutes } from './routes/contact.js';
 
@@ -75,6 +76,7 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
   await app.register(authRoutes);
   await app.register(assessmentRoutes);
   await app.register(planRoutes);
+  await app.register(simulationRoutes);
   await app.register(vaultRoutes);
   await app.register(contactRoutes);
 

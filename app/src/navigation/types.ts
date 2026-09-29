@@ -27,7 +27,7 @@ export type RootStackParamList = {
   Contact: undefined;
   FamilyProtocol: undefined;
   SimulationPlay: { simulationId: string };
-  SimulationResult: { simulationId: string };
+  SimulationResult: { simulationId: string; hits: number; timeSeconds: number };
   EmergencyPick: undefined;
   EmergencyRun: { scenarioId: string };
   Report: undefined;

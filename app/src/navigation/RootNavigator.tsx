@@ -12,6 +12,8 @@ import { PlanCategoryScreen } from '../screens/plan/PlanCategoryScreen';
 import { TaskDetailScreen } from '../screens/plan/TaskDetailScreen';
 import { VaultScreen } from '../screens/vault/VaultScreen';
 import { ContactScreen } from '../screens/contact/ContactScreen';
+import { SimulationPlayScreen } from '../screens/simulations/SimulationPlayScreen';
+import { SimulationResultScreen } from '../screens/simulations/SimulationResultScreen';
 import { PlaceholderScreen } from '../screens/shared/PlaceholderScreen';
 import { TabNavigator } from './TabNavigator';
 import type { RootStackParamList } from './types';
@@ -36,8 +38,8 @@ export function RootNavigator() {
       <Stack.Screen name="Vault" component={VaultScreen} />
       <Stack.Screen name="Contact" component={ContactScreen} />
       <Stack.Screen name="FamilyProtocol" component={PlaceholderScreen} />
-      <Stack.Screen name="SimulationPlay" component={PlaceholderScreen} />
-      <Stack.Screen name="SimulationResult" component={PlaceholderScreen} />
+      <Stack.Screen name="SimulationPlay" component={SimulationPlayScreen} />
+      <Stack.Screen name="SimulationResult" component={SimulationResultScreen} />
       <Stack.Screen name="EmergencyPick" component={PlaceholderScreen} />
       <Stack.Screen name="EmergencyRun" component={PlaceholderScreen} />
       <Stack.Screen name="Report" component={PlaceholderScreen} />

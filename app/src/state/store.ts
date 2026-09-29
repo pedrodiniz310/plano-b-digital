@@ -39,12 +39,18 @@ interface PlanSlice {
   setCompletedTasks: (ids: string[]) => void;
 }
 
+interface SimulationSlice {
+  completedSimulationIds: string[];
+  completeSimulation: (id: string) => void;
+  setCompletedSimulations: (ids: string[]) => void;
+}
+
 interface ContactSlice {
   hasTrustedContact: boolean;
   setHasTrustedContact: (value: boolean) => void;
 }
 
-type AppStore = PrefsSlice & SessionSlice & AssessmentSlice & PlanSlice & ContactSlice;
+type AppStore = PrefsSlice & SessionSlice & AssessmentSlice & PlanSlice & SimulationSlice & ContactSlice;
 
 export const useAppStore = create<AppStore>()(
   persist(
@@ -64,6 +70,13 @@ export const useAppStore = create<AppStore>()(
       baseScore: null,
       setAssessment: (answers, baseScore) => set({ answers, baseScore }),
       completedTaskIds: [],
+      completedSimulationIds: [],
+      completeSimulation: (id) => set((s) => ({
+        completedSimulationIds: s.completedSimulationIds.includes(id)
+          ? s.completedSimulationIds
+          : [...s.completedSimulationIds, id],
+      })),
+      setCompletedSimulations: (ids) => set({ completedSimulationIds: [...new Set(ids)] }),
       hasTrustedContact: false,
       setHasTrustedContact: (hasTrustedContact) => set({ hasTrustedContact }),
       setTaskCompleted: (id, completed) => set((s) => ({
@@ -83,12 +96,12 @@ export const useAppStore = create<AppStore>()(
           user,
           status: 'authenticated',
           obDone: true,
-          ...(s.user?.id !== user.id ? { answers: null, baseScore: null, completedTaskIds: [], hasTrustedContact: false } : {}),
+          ...(s.user?.id !== user.id ? { answers: null, baseScore: null, completedTaskIds: [], completedSimulationIds: [], hasTrustedContact: false } : {}),
         }));
       },
       logout: async () => {
         await secureStore.clearSession();
-        set({ user: null, status: 'idle', answers: null, baseScore: null, completedTaskIds: [], hasTrustedContact: false });
+        set({ user: null, status: 'idle', answers: null, baseScore: null, completedTaskIds: [], completedSimulationIds: [], hasTrustedContact: false });
       },
     }),
     {
@@ -104,6 +117,7 @@ export const useAppStore = create<AppStore>()(
         answers: s.answers,
         baseScore: s.baseScore,
         completedTaskIds: s.completedTaskIds,
+        completedSimulationIds: s.completedSimulationIds,
         hasTrustedContact: s.hasTrustedContact,
       }),
     }

@@ -17,7 +17,7 @@ const user = { id: 'user-1', name: 'Teste', email: 'teste@example.test', guest: 
 const tokens = { accessToken: 'access', refreshToken: 'refresh' };
 
 beforeEach(() => {
-  useAppStore.setState({ user: null, status: 'idle', answers: null, baseScore: null, completedTaskIds: [], hasTrustedContact: false });
+  useAppStore.setState({ user: null, status: 'idle', answers: null, baseScore: null, completedTaskIds: [], completedSimulationIds: [], hasTrustedContact: false });
 });
 
 it('toggles task completion without duplicates', () => {
@@ -51,4 +51,19 @@ it('keeps contact status for the same account and clears it on switch and logout
   useAppStore.getState().setHasTrustedContact(true);
   await useAppStore.getState().logout();
   expect(useAppStore.getState().hasTrustedContact).toBe(false);
+});
+
+it('deduplicates completed simulations and clears them on account switch and logout', async () => {
+  await useAppStore.getState().setSession(user, tokens);
+  useAppStore.getState().completeSimulation('roubo');
+  useAppStore.getState().completeSimulation('roubo');
+  expect(useAppStore.getState().completedSimulationIds).toEqual(['roubo']);
+  await useAppStore.getState().setSession(user, tokens);
+  expect(useAppStore.getState().completedSimulationIds).toEqual(['roubo']);
+  await useAppStore.getState().setSession({ ...user, id: 'user-2' }, tokens);
+  expect(useAppStore.getState().completedSimulationIds).toEqual([]);
+  useAppStore.getState().setCompletedSimulations(['roubo', 'roubo']);
+  expect(useAppStore.getState().completedSimulationIds).toEqual(['roubo']);
+  await useAppStore.getState().logout();
+  expect(useAppStore.getState().completedSimulationIds).toEqual([]);
 });
