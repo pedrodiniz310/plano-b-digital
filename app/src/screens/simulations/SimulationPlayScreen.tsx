@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { radii, spacing } from '../../theme/tokens';
+import { PressableFeedback } from '../../components/PressableFeedback';
+import { ProgressBar } from '../../components/ProgressBar';
+import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { usePreventRemove } from '@react-navigation/native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -94,25 +97,23 @@ export function SimulationPlayScreen({ route, navigation }: Props) {
       }]}
     >
       <View style={styles.header}>
-        <Pressable accessibilityRole="button" accessibilityLabel="Sair da simulação" onPress={() => navigation.goBack()} style={[styles.exit, { backgroundColor: theme.colors.surface, borderColor: theme.colors.border }]}>
-          <Text style={{ color: theme.colors.text, fontSize: 24 * theme.fontScale, lineHeight: 28 * theme.fontScale }}>×</Text>
-        </Pressable>
+        <PressableFeedback accessibilityRole="button" accessibilityLabel="Sair da simulação" onPress={() => navigation.goBack()} style={[styles.exit, { backgroundColor: theme.colors.surface, borderColor: theme.colors.border }]}>
+          <Text style={{ color: theme.colors.text, fontSize: theme.typography.cardTitle.size * theme.fontScale, lineHeight: 28 * theme.fontScale }}>×</Text>
+        </PressableFeedback>
         <View style={styles.progressBody}>
           <View style={styles.progressLabel}>
-            <Text style={{ color: theme.colors.text2, fontFamily: theme.typography.sectionLabel.family, fontSize: 11 * theme.fontScale, letterSpacing: 1.5, flexShrink: 1 }}>{simulation.title.toUpperCase()}</Text>
-            <Text style={{ color: theme.colors.text2, fontSize: 12 * theme.fontScale }}>{stepIndex + 1}/{ROUBO_STEPS.length}</Text>
+            <Text style={{ color: theme.colors.text2, fontFamily: theme.typography.sectionLabel.family, fontSize: theme.typography.sectionLabel.size * theme.fontScale, letterSpacing: 1.5, flexShrink: 1 }}>{simulation.title.toUpperCase()}</Text>
+            <Text style={{ color: theme.colors.text2, fontSize: theme.typography.small.size * theme.fontScale }}>{stepIndex + 1}/{ROUBO_STEPS.length}</Text>
           </View>
-          <View style={[styles.track, { backgroundColor: theme.colors.soft }]}>
-            <View style={{ width: `${stepIndex / ROUBO_STEPS.length * 100}%`, height: 5, backgroundColor: theme.colors.blue, borderRadius: 99 }} />
-          </View>
+          <ProgressBar value={stepIndex} max={ROUBO_STEPS.length} />
         </View>
       </View>
 
       <View style={styles.content}>
         <View>
-          <Text style={{ color: theme.colors.text, fontFamily: theme.typography.screenTitle.family, fontSize: 23 * theme.fontScale, lineHeight: 30 * theme.fontScale }}>{step.title}</Text>
-          {step.type === 'intro' && <Text style={{ color: theme.colors.text2, fontFamily: theme.typography.body.family, fontSize: 15 * theme.fontScale, lineHeight: 24 * theme.fontScale, marginTop: 14 }}>{step.description}</Text>}
-          {(step.type === 'multi' || step.type === 'order') && <Text style={{ color: theme.colors.blueInk, fontFamily: theme.typography.listItem.family, fontSize: 12.5 * theme.fontScale, marginTop: 10 }}>{step.type === 'multi' ? `Selecione as ${correctCount} corretas` : step.hint}</Text>}
+          <Text style={{ color: theme.colors.text, fontFamily: theme.typography.screenTitle.family, fontSize: theme.typography.cardTitle.size * theme.fontScale, lineHeight: 30 * theme.fontScale }}>{step.title}</Text>
+          {step.type === 'intro' && <Text style={{ color: theme.colors.text2, fontFamily: theme.typography.body.family, fontSize: theme.typography.body.size * theme.fontScale, lineHeight: 24 * theme.fontScale, marginTop: 14 }}>{step.description}</Text>}
+          {(step.type === 'multi' || step.type === 'order') && <Text style={{ color: theme.colors.blueInk, fontFamily: theme.typography.listItem.family, fontSize: theme.typography.secondary.size * theme.fontScale, marginTop: 10 }}>{step.type === 'multi' ? `Selecione as ${correctCount} corretas` : step.hint}</Text>}
         </View>
 
         {(step.type === 'choice' || step.type === 'multi') && (
@@ -120,7 +121,7 @@ export function SimulationPlayScreen({ route, navigation }: Props) {
             {step.options.map((option, index) => {
               const selected = step.type === 'choice' ? choice === index : multi.includes(index);
               return (
-                <Pressable
+                <PressableFeedback
                   key={option.label}
                   accessibilityRole={step.type === 'choice' ? 'radio' : 'checkbox'}
                   accessibilityLabel={option.label}
@@ -135,8 +136,8 @@ export function SimulationPlayScreen({ route, navigation }: Props) {
                   <View style={[styles.square, { borderColor: selected ? theme.colors.blue : theme.colors.border }]}>
                     {selected && <View style={[styles.squareFill, { backgroundColor: theme.colors.blue }]} />}
                   </View>
-                  <Text style={{ color: selected ? theme.colors.blueInk : theme.colors.text, fontFamily: theme.typography.listItem.family, fontSize: 14.5 * theme.fontScale, flex: 1 }}>{option.label}</Text>
-                </Pressable>
+                  <Text style={{ color: selected ? theme.colors.blueInk : theme.colors.text, fontFamily: theme.typography.listItem.family, fontSize: theme.typography.body.size * theme.fontScale, flex: 1 }}>{option.label}</Text>
+                </PressableFeedback>
               );
             })}
           </View>
@@ -148,7 +149,7 @@ export function SimulationPlayScreen({ route, navigation }: Props) {
               const position = order.indexOf(item.id);
               const selected = position >= 0;
               return (
-                <Pressable
+                <PressableFeedback
                   key={item.id}
                   accessibilityRole="button"
                   accessibilityLabel={`${item.label}${selected ? `, posição ${position + 1}` : ', não selecionada'}`}
@@ -158,10 +159,10 @@ export function SimulationPlayScreen({ route, navigation }: Props) {
                   style={[styles.option, { borderColor: selected ? theme.colors.blue : theme.colors.border, backgroundColor: selected ? theme.colors.tint : theme.colors.surface }]}
                 >
                   <View style={[styles.orderNumber, { backgroundColor: selected ? theme.colors.blue : theme.colors.soft }]}>
-                    <Text style={{ color: selected ? '#fff' : theme.colors.text2, fontSize: 12 * theme.fontScale, fontWeight: '600' }}>{selected ? position + 1 : ''}</Text>
+                    <Text style={{ color: selected ? '#fff' : theme.colors.text2, fontSize: theme.typography.small.size * theme.fontScale, fontWeight: '600' }}>{selected ? position + 1 : ''}</Text>
                   </View>
-                  <Text style={{ color: selected ? theme.colors.blueInk : theme.colors.text, fontFamily: theme.typography.listItem.family, fontSize: 14.5 * theme.fontScale, flex: 1 }}>{item.label}</Text>
-                </Pressable>
+                  <Text style={{ color: selected ? theme.colors.blueInk : theme.colors.text, fontFamily: theme.typography.listItem.family, fontSize: theme.typography.body.size * theme.fontScale, flex: 1 }}>{item.label}</Text>
+                </PressableFeedback>
               );
             })}
           </View>
@@ -170,7 +171,7 @@ export function SimulationPlayScreen({ route, navigation }: Props) {
         {feedback && step.type !== 'intro' && (
           <View accessible accessibilityLiveRegion="polite" style={[styles.feedback, { borderColor: feedback === 'correct' ? theme.colors.green : theme.colors.amber, backgroundColor: theme.colors.soft }]}>
             <Icon glyph={feedback === 'correct' ? 'check' : 'alert'} size={18} color={theme.ink(feedback === 'correct' ? theme.colors.green : theme.colors.amber)} />
-            <Text style={{ color: theme.ink(feedback === 'correct' ? theme.colors.green : theme.colors.amber), fontFamily: theme.typography.body.family, fontSize: 13.5 * theme.fontScale, lineHeight: 21 * theme.fontScale, flex: 1 }}>{feedback === 'correct' ? step.feedbackOk : step.feedbackNo}</Text>
+            <Text style={{ color: theme.ink(feedback === 'correct' ? theme.colors.green : theme.colors.amber), fontFamily: theme.typography.body.family, fontSize: theme.typography.bodySmall.size * theme.fontScale, lineHeight: 21 * theme.fontScale, flex: 1 }}>{feedback === 'correct' ? step.feedbackOk : step.feedbackNo}</Text>
           </View>
         )}
       </View>
@@ -183,15 +184,14 @@ export function SimulationPlayScreen({ route, navigation }: Props) {
 const styles = StyleSheet.create({
   container: { flexGrow: 1 },
   header: { flexDirection: 'row', alignItems: 'center', gap: 14, marginBottom: 26 },
-  exit: { width: 44, height: 44, borderWidth: 1, borderRadius: 14, alignItems: 'center', justifyContent: 'center' },
+  exit: { width: 44, height: 44, borderWidth: 1, borderRadius: radii.iconSquare, alignItems: 'center', justifyContent: 'center' },
   progressBody: { flex: 1 },
   progressLabel: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 6, marginBottom: 7 },
-  track: { height: 5, borderRadius: 99, overflow: 'hidden' },
-  content: { flex: 1, gap: 22, marginBottom: 22 },
-  options: { gap: 10 },
-  option: { minHeight: 56, flexDirection: 'row', alignItems: 'center', gap: 13, paddingHorizontal: 17, paddingVertical: 14, borderRadius: 18, borderWidth: 1.5 },
-  square: { width: 22, height: 22, borderRadius: 7, borderWidth: 2, alignItems: 'center', justifyContent: 'center' },
-  squareFill: { width: 10, height: 10, borderRadius: 3 },
-  orderNumber: { width: 26, height: 26, borderRadius: 13, alignItems: 'center', justifyContent: 'center' },
-  feedback: { flexDirection: 'row', gap: 11, padding: 16, borderWidth: 1, borderRadius: 18 },
+  content: { flex: 1, gap: spacing.blockGap, marginBottom: 22 },
+  options: { gap: spacing.listGap },
+  option: { minHeight: 56, flexDirection: 'row', alignItems: 'center', gap: 13, paddingHorizontal: 17, paddingVertical: 14, borderRadius: radii.field, borderWidth: 1.5 },
+  square: { width: 22, height: 22, borderRadius: radii.checkbox, borderWidth: 2, alignItems: 'center', justifyContent: 'center' },
+  squareFill: { width: 10, height: 10, borderRadius: radii.pill },
+  orderNumber: { width: 26, height: 26, borderRadius: radii.pill, alignItems: 'center', justifyContent: 'center' },
+  feedback: { flexDirection: 'row', gap: spacing.listGap, padding: spacing.inset, borderWidth: 1, borderRadius: radii.card },
 });

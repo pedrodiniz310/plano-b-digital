@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { radii, spacing } from '../../theme/tokens';
+import { PressableFeedback } from '../../components/PressableFeedback';
+import { ProgressBar } from '../../components/ProgressBar';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import * as LocalAuthentication from 'expo-local-authentication';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Button } from '../../components/Button';
@@ -127,10 +130,10 @@ export function AuthScreen({ route, navigation }: Props) {
       contentContainerStyle={[styles.container, { paddingHorizontal: theme.spacing.marginX, paddingTop: theme.spacing.screenTop }]}
       keyboardShouldPersistTaps="handled"
     >
-      <Text style={{ fontSize: 25 * theme.fontScale, color: theme.colors.text, fontFamily: theme.typography.screenTitle.family }}>
+      <Text style={{ fontSize: theme.typography.screenTitle.size * theme.fontScale, color: theme.colors.text, fontFamily: theme.typography.screenTitle.family }}>
         {isSignup ? 'Criar sua conta' : 'Bem-vindo de volta'}
       </Text>
-      <Text style={[styles.subtitle, { fontSize: 15 * theme.fontScale, color: theme.colors.text2, fontFamily: theme.typography.body.family }]}>
+      <Text style={[styles.subtitle, { fontSize: theme.typography.body.size * theme.fontScale, color: theme.colors.text2, fontFamily: theme.typography.body.family }]}>
         {isSignup ? 'Leva menos de um minuto. Você pode revisar tudo depois.' : 'Entre para retomar seu Plano B de onde parou.'}
       </Text>
 
@@ -138,7 +141,7 @@ export function AuthScreen({ route, navigation }: Props) {
         {(['signup', 'login'] as Mode[]).map((m) => {
           const active = mode === m;
           return (
-            <Pressable
+            <PressableFeedback
               key={m}
               accessibilityRole="button"
               onPress={() => {
@@ -155,7 +158,7 @@ export function AuthScreen({ route, navigation }: Props) {
               <Text style={{ color: active ? theme.colors.text : theme.colors.text2, fontWeight: active ? '600' : '400' }}>
                 {m === 'signup' ? 'Criar conta' : 'Entrar'}
               </Text>
-            </Pressable>
+            </PressableFeedback>
           );
         })}
       </View>
@@ -181,10 +184,8 @@ export function AuthScreen({ route, navigation }: Props) {
         />
         {strength ? (
           <View style={styles.strengthWrap}>
-            <View style={[styles.strengthTrack, { backgroundColor: theme.colors.soft }]}>
-              <View style={[styles.strengthFill, { width: `${strength.widthPercent}%`, backgroundColor: strength.color }]} />
-            </View>
-            <Text style={{ fontSize: 12 * theme.fontScale, color: theme.colors.text2 }}>{strength.label}</Text>
+            <ProgressBar value={strength.widthPercent} max={100} color={strength.color} />
+            <Text style={{ fontSize: theme.typography.small.size * theme.fontScale, color: theme.ink(strength.color) }}>{strength.label}</Text>
           </View>
         ) : null}
         {isSignup ? (
@@ -192,12 +193,12 @@ export function AuthScreen({ route, navigation }: Props) {
         ) : null}
 
         {!isSignup ? (
-          <Pressable accessibilityRole="button" onPress={() => navigation.navigate('Recover')} style={styles.textAction}>
-            <Text style={[styles.link, { fontSize: 13 * theme.fontScale, color: theme.colors.blueInk }]}>Esqueci meu acesso</Text>
-          </Pressable>
+          <PressableFeedback accessibilityRole="button" onPress={() => navigation.navigate('Recover')} style={styles.textAction}>
+            <Text style={[styles.link, { fontSize: theme.typography.secondary.size * theme.fontScale, color: theme.colors.blueInk }]}>Esqueci meu acesso</Text>
+          </PressableFeedback>
         ) : null}
 
-        {formError ? <Text style={{ fontSize: 13 * theme.fontScale, color: theme.colors.red }}>{formError}</Text> : null}
+        {formError ? <Text style={{ fontSize: theme.typography.secondary.size * theme.fontScale, color: theme.ink(theme.colors.red) }}>{formError}</Text> : null}
 
         <Button label={isSignup ? 'Criar conta' : 'Entrar'} onPress={handleSubmit} loading={submitting} />
       </View>
@@ -216,7 +217,7 @@ export function AuthScreen({ route, navigation }: Props) {
 
       <View style={[styles.footerNote, { backgroundColor: theme.colors.tint }]}>
         <Icon glyph="lock" size={16} color={theme.colors.blueInk} />
-        <Text style={[styles.footerNoteText, { fontSize: 12 * theme.fontScale, lineHeight: 17 * theme.fontScale, color: theme.colors.blueInk }]}>
+        <Text style={[styles.footerNoteText, { fontSize: theme.typography.small.size * theme.fontScale, lineHeight: 17 * theme.fontScale, color: theme.colors.blueInk }]}>
           Seus dados são protegidos com criptografia e usados só para o seu Plano B.
         </Text>
       </View>
@@ -227,16 +228,14 @@ export function AuthScreen({ route, navigation }: Props) {
 const styles = StyleSheet.create({
   container: { paddingBottom: 48, gap: 4 },
   subtitle: { marginTop: 6, marginBottom: 20 },
-  tabs: { flexDirection: 'row', borderRadius: 99, padding: 4, marginBottom: 24 },
-  tab: { flex: 1, minHeight: 44, justifyContent: 'center', borderRadius: 99, alignItems: 'center' },
+  tabs: { flexDirection: 'row', borderRadius: radii.segmented, padding: 4, marginBottom: spacing.blockGap },
+  tab: { flex: 1, minHeight: 44, justifyContent: 'center', borderRadius: radii.segmentedTab, alignItems: 'center' },
   textAction: { minHeight: 44, justifyContent: 'center', alignSelf: 'flex-end' },
   form: { gap: 16 },
   strengthWrap: { gap: 4, marginTop: -8 },
-  strengthTrack: { height: 4, borderRadius: 2, overflow: 'hidden' },
-  strengthFill: { height: 4, borderRadius: 2 },
   link: { textAlign: 'right' },
   dividerRow: { flexDirection: 'row', alignItems: 'center', gap: 12, marginVertical: 24 },
   dividerLine: { flex: 1, height: 1 },
-  footerNote: { flexDirection: 'row', gap: 10, alignItems: 'center', padding: 14, borderRadius: 14, marginTop: 24 },
+  footerNote: { flexDirection: 'row', gap: spacing.listGap, alignItems: 'center', padding: spacing.compactInset, borderRadius: radii.segmented, marginTop: 24 },
   footerNoteText: { flex: 1 },
 });

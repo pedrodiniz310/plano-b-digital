@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { radii } from '../../theme/tokens';
+import { PressableFeedback } from '../../components/PressableFeedback';
+import { useReduceMotion } from '../../components/useReduceMotion';
+import { Animated, Easing, StyleSheet, Text, View } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Button } from '../../components/Button';
 import { Icon } from '../../theme/Icon';
@@ -11,9 +14,24 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Onboarding'>;
 
 export function OnboardingScreen({ navigation }: Props) {
   const theme = useTheme();
+  const reduceMotion = useReduceMotion();
+  const [orbit] = useState(() => new Animated.Value(0));
   const [index, setIndex] = useState(0);
   const slide = ONBOARDING_SLIDES[index];
   const isLast = index === ONBOARDING_SLIDES.length - 1;
+  const accent = theme.name === 'dark' ? [theme.colors.blue, theme.colors.blueInk, theme.colors.green, theme.colors.amber][index] : slide.accent;
+  const tint = theme.name === 'dark' ? theme.colors.soft : slide.tint;
+
+  useEffect(() => {
+    if (reduceMotion) {
+      orbit.stopAnimation();
+      orbit.setValue(0);
+      return;
+    }
+    const animation = Animated.loop(Animated.timing(orbit, { toValue: 1, duration: theme.motion.onboardingOrbitMs, easing: Easing.linear, useNativeDriver: true }));
+    animation.start();
+    return () => animation.stop();
+  }, [orbit, reduceMotion, theme.motion]);
 
   const skip = () => navigation.replace('Auth', { mode: 'login' });
   const next = () => {
@@ -32,30 +50,30 @@ export function OnboardingScreen({ navigation }: Props) {
                 styles.dot,
                 {
                   width: i === index ? 26 : 6,
-                  backgroundColor: i === index ? slide.accent : theme.colors.border,
+                  backgroundColor: i === index ? accent : theme.colors.border,
                 },
               ]}
             />
           ))}
         </View>
-        <Pressable accessibilityRole="button" onPress={skip} style={styles.textAction}>
-          <Text style={{ fontSize: 13 * theme.fontScale, color: theme.colors.text2 }}>Pular introdução</Text>
-        </Pressable>
+        <PressableFeedback accessibilityRole="button" onPress={skip} style={styles.textAction}>
+          <Text style={{ fontSize: theme.typography.secondary.size * theme.fontScale, color: theme.colors.text2 }}>Pular introdução</Text>
+        </PressableFeedback>
       </View>
 
       <View style={styles.illustrationWrap}>
-        <View style={[styles.illustrationRing, { borderColor: slide.accent }]} />
-        <View style={[styles.illustrationCircle, { backgroundColor: slide.tint, shadowColor: slide.glow }]}>
-          <Icon glyph={slide.glyph} size={64} color={slide.accent} strokeWidth={1.6} />
+        <Animated.View style={[styles.illustrationRing, { borderColor: accent, transform: [{ rotate: orbit.interpolate({ inputRange: [0, 1], outputRange: ['0deg', '360deg'] }) }] }]} />
+        <View style={[styles.illustrationCircle, { backgroundColor: tint, shadowColor: theme.name === 'dark' ? accent : slide.glow }]}>
+          <Icon glyph={slide.glyph} size={64} color={accent} strokeWidth={1.6} />
         </View>
       </View>
 
       <View style={[styles.body, { paddingHorizontal: theme.spacing.marginX }]}>
-        <Text style={[styles.chip, { fontSize: 11 * theme.fontScale, color: slide.accent, backgroundColor: slide.tint }]}>{slide.chip.toUpperCase()}</Text>
-        <Text style={[styles.title, { fontSize: 26 * theme.fontScale, lineHeight: 32 * theme.fontScale, color: theme.colors.text, fontFamily: theme.typography.screenTitle.family }]}>
+        <Text style={[styles.chip, { fontSize: theme.typography.sectionLabel.size * theme.fontScale, color: theme.ink(accent), backgroundColor: tint }]}>{slide.chip.toUpperCase()}</Text>
+        <Text style={[styles.title, { fontSize: theme.typography.screenTitle.size * theme.fontScale, lineHeight: 32 * theme.fontScale, color: theme.colors.text, fontFamily: theme.typography.screenTitle.family }]}>
           {slide.title}
         </Text>
-        <Text style={{ fontSize: 15 * theme.fontScale, lineHeight: 23 * theme.fontScale, color: theme.colors.text2, fontFamily: theme.typography.body.family }}>
+        <Text style={{ fontSize: theme.typography.body.size * theme.fontScale, lineHeight: 23 * theme.fontScale, color: theme.colors.text2, fontFamily: theme.typography.body.family }}>
           {slide.description}
         </Text>
       </View>
@@ -63,9 +81,9 @@ export function OnboardingScreen({ navigation }: Props) {
       <View style={[styles.footer, { paddingHorizontal: theme.spacing.marginX }]}>
         <Button label={isLast ? 'Começar' : 'Continuar'} onPress={next} />
         {isLast ? (
-          <Pressable accessibilityRole="button" onPress={() => navigation.replace('Auth', { mode: 'login' })} style={styles.textAction}>
-            <Text style={[styles.haveplan, { fontSize: 14 * theme.fontScale, color: theme.colors.blueInk }]}>Já tenho um plano</Text>
-          </Pressable>
+          <PressableFeedback accessibilityRole="button" onPress={() => navigation.replace('Auth', { mode: 'login' })} style={styles.textAction}>
+            <Text style={[styles.haveplan, { fontSize: theme.typography.bodySmall.size * theme.fontScale, color: theme.colors.blueInk }]}>Já tenho um plano</Text>
+          </PressableFeedback>
         ) : null}
       </View>
     </View>
@@ -77,13 +95,13 @@ const styles = StyleSheet.create({
   header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   textAction: { minHeight: 44, justifyContent: 'center' },
   dots: { flexDirection: 'row', gap: 6, alignItems: 'center' },
-  dot: { height: 6, borderRadius: 3 },
+  dot: { height: 6, borderRadius: radii.pill },
   illustrationWrap: { alignItems: 'center', justifyContent: 'center', height: 236, marginTop: 24 },
-  illustrationRing: { position: 'absolute', width: 200, height: 200, borderRadius: 100, borderWidth: 1.5, borderStyle: 'dashed', opacity: 0.4 },
+  illustrationRing: { position: 'absolute', width: 200, height: 200, borderRadius: radii.pill, borderWidth: 1.5, borderStyle: 'dashed', opacity: 0.4 },
   illustrationCircle: {
     width: 148,
     height: 148,
-    borderRadius: 74,
+    borderRadius: radii.pill,
     alignItems: 'center',
     justifyContent: 'center',
     shadowOffset: { width: 0, height: 12 },
@@ -98,7 +116,7 @@ const styles = StyleSheet.create({
     letterSpacing: 1.5,
     paddingHorizontal: 12,
     paddingVertical: 6,
-    borderRadius: 99,
+    borderRadius: radii.pill,
     overflow: 'hidden',
   },
   title: { letterSpacing: -0.4 },

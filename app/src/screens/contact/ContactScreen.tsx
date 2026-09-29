@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { radii, spacing } from '../../theme/tokens';
+import { PressableFeedback } from '../../components/PressableFeedback';
+import { IconButton } from '../../components/IconButton';
+import { ActivityIndicator, Alert, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Button } from '../../components/Button';
 import { deleteContact, fetchContact, saveContact, type TrustedContact } from '../../api/contact';
 import type { RootStackParamList } from '../../navigation/types';
 import { useAppStore } from '../../state/store';
-import { Icon } from '../../theme/Icon';
 import { useTheme } from '../../theme/ThemeProvider';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Contact'>;
@@ -126,22 +128,20 @@ export function ContactScreen({ navigation }: Props) {
         multiline={multiline}
         style={[styles.input, multiline && styles.multiline, { borderColor: fieldErrors[field] ? theme.colors.red : theme.colors.border, backgroundColor: theme.colors.surface, color: theme.colors.text }]}
       />
-      {fieldErrors[field] ? <Text accessibilityRole="alert" style={{ color: theme.colors.red }}>{fieldErrors[field]}</Text> : null}
+      {fieldErrors[field] ? <Text accessibilityRole="alert" style={{ color: theme.ink(theme.colors.red) }}>{fieldErrors[field]}</Text> : null}
     </View>
   );
 
   return (
     <ScrollView style={{ backgroundColor: theme.colors.bg }} contentContainerStyle={{ paddingTop: insets.top + 16, paddingBottom: insets.bottom + 30, paddingHorizontal: theme.spacing.marginX, flexGrow: 1 }}>
-      <Pressable accessibilityRole="button" accessibilityLabel="Voltar" onPress={() => navigation.goBack()} style={styles.back}>
-        <Icon glyph="back" size={20} color={theme.colors.text} />
-      </Pressable>
-      <Text style={[styles.title, { fontSize: 25 * theme.fontScale, color: theme.colors.text, fontFamily: theme.typography.screenTitle.family }]}>Contato de confiança</Text>
+      <IconButton glyph="back" accessibilityLabel="Voltar" onPress={() => navigation.goBack()} style={styles.back} />
+      <Text style={[styles.title, { fontSize: theme.typography.screenTitle.size * theme.fontScale, color: theme.colors.text, fontFamily: theme.typography.screenTitle.family }]}>Contato de confiança</Text>
       {loading ? <ActivityIndicator color={theme.colors.blue} /> : null}
-      {error ? <Text accessibilityRole="alert" style={[styles.error, { color: theme.colors.red }]}>{error}</Text> : null}
+      {error ? <Text accessibilityRole="alert" style={[styles.error, { color: theme.ink(theme.colors.red) }]}>{error}</Text> : null}
       {error?.includes('carregar') ? <Button label="Tentar novamente" variant="secondary" onPress={() => void load()} /> : null}
       {!loading && !contact && !error?.includes('carregar') ? (
         <>
-          <Text style={[styles.intro, { fontSize: 14 * theme.fontScale, lineHeight: 23 * theme.fontScale, color: theme.colors.text2 }]}>Escolha alguém que possa confirmar sua identidade e agir com você em uma emergência.</Text>
+          <Text style={[styles.intro, { fontSize: theme.typography.bodySmall.size * theme.fontScale, lineHeight: 23 * theme.fontScale, color: theme.colors.text2 }]}>Escolha alguém que possa confirmar sua identidade e agir com você em uma emergência.</Text>
           {input('name', 'Nome', 'Ex.: Marina Alves')}
           {input('relation', 'Relação', 'Ex.: irmã, cônjuge, amigo')}
           {input('phone', 'Telefone', '(11) 90000-0000')}
@@ -154,9 +154,9 @@ export function ContactScreen({ navigation }: Props) {
         <>
           <View style={[styles.card, { backgroundColor: theme.colors.surface, borderColor: theme.colors.border }]}>
             <View style={styles.person}>
-              <View style={[styles.avatar, { backgroundColor: theme.colors.deep }]}><Text style={[styles.initial, { fontSize: 21 * theme.fontScale }]}>{contact.name[0]?.toUpperCase()}</Text></View>
+              <View style={[styles.avatar, { backgroundColor: theme.colors.deep }]}><Text style={[styles.initial, { fontSize: theme.typography.sectionTitle.size * theme.fontScale }]}>{contact.name[0]?.toUpperCase()}</Text></View>
               <View style={{ flex: 1 }}>
-                <Text style={[styles.name, { fontSize: 18 * theme.fontScale, color: theme.colors.text }]}>{contact.name}</Text>
+                <Text style={[styles.name, { fontSize: theme.typography.subheading.size * theme.fontScale, color: theme.colors.text }]}>{contact.name}</Text>
                 <Text style={{ color: theme.colors.text2 }}>{contact.relation}</Text>
               </View>
             </View>
@@ -167,9 +167,9 @@ export function ContactScreen({ navigation }: Props) {
             </View>
           </View>
           <Button label="Ver Protocolo familiar" variant="secondary" onPress={() => navigation.navigate('FamilyProtocol')} />
-          <Pressable accessibilityRole="button" accessibilityLabel="Remover contato" onPress={confirmRemove} style={styles.remove}>
-            <Text style={{ color: theme.colors.red }}>Remover contato</Text>
-          </Pressable>
+          <PressableFeedback accessibilityRole="button" accessibilityLabel="Remover contato" onPress={confirmRemove} style={styles.remove}>
+            <Text style={{ color: theme.ink(theme.colors.red) }}>Remover contato</Text>
+          </PressableFeedback>
         </>
       ) : null}
     </ScrollView>
@@ -181,14 +181,14 @@ const styles = StyleSheet.create({
   title: { marginBottom: 18 },
   intro: { marginBottom: 20 },
   fieldGroup: { gap: 7, marginBottom: 15 },
-  input: { minHeight: 54, borderWidth: 1.5, borderRadius: 16, paddingHorizontal: 16 },
+  input: { minHeight: 54, borderWidth: 1.5, borderRadius: radii.field, paddingHorizontal: spacing.inset },
   multiline: { minHeight: 98, textAlignVertical: 'top', paddingTop: 14 },
   error: { marginBottom: 16 },
-  card: { padding: 22, borderRadius: 22, borderWidth: 1, gap: 18, marginBottom: 18 },
+  card: { padding: spacing.heroInset, borderRadius: radii.card, borderWidth: 1, gap: 18, marginBottom: 18 },
   person: { flexDirection: 'row', gap: 14, alignItems: 'center' },
-  avatar: { width: 56, height: 56, borderRadius: 20, alignItems: 'center', justifyContent: 'center' },
+  avatar: { width: 56, height: 56, borderRadius: radii.card, alignItems: 'center', justifyContent: 'center' },
   initial: { color: '#fff', fontWeight: '600' },
   name: { fontWeight: '600' },
-  details: { gap: 9, borderTopWidth: 1, paddingTop: 16 },
+  details: { gap: spacing.listGap, borderTopWidth: 1, paddingTop: 16 },
   remove: { minHeight: 52, alignItems: 'center', justifyContent: 'center', marginTop: 12 },
 });

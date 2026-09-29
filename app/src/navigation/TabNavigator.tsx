@@ -1,5 +1,7 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
+import { PressableFeedback } from '../components/PressableFeedback';
+import { radii } from '../theme/tokens';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -18,7 +20,7 @@ function SosButton() {
   const theme = useTheme();
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   return (
-    <Pressable
+    <PressableFeedback
       accessibilityRole="button"
       accessibilityLabel="Modo Emergência"
       onPress={() => navigation.navigate('EmergencyPick')}
@@ -27,8 +29,8 @@ function SosButton() {
         { backgroundColor: theme.colors.red, shadowColor: theme.colors.red },
       ]}
     >
-      <Text style={styles.sosLabel}>SOS</Text>
-    </Pressable>
+      <Text style={[styles.sosLabel, { color: theme.colors.onDanger, fontFamily: theme.typography.sectionLabel.family, fontSize: theme.typography.small.size * theme.fontScale }]}>SOS</Text>
+    </PressableFeedback>
   );
 }
 
@@ -98,7 +100,7 @@ const styles = StyleSheet.create({
   sos: {
     width: 58,
     height: 58,
-    borderRadius: 22,
+    borderRadius: radii.sos,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: -22,
@@ -107,5 +109,5 @@ const styles = StyleSheet.create({
     shadowRadius: 12,
     elevation: 8,
   },
-  sosLabel: { color: '#fff', fontWeight: '700', fontSize: 12, letterSpacing: 0.5 },
+  sosLabel: { letterSpacing: 0.5 },
 });

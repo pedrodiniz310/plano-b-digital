@@ -22,6 +22,14 @@ export interface ColorPalette {
   text2: string;
   border: string;
   soft: string;
+  dangerTint: string;
+  onDeep: string;
+  onPrimary: string;
+  onDanger: string;
+  onDeepMuted: string;
+  onDeepSubtle: string;
+  onDeepTile: string;
+  onDeepBorder: string;
 }
 
 export const lightPalette: ColorPalette = {
@@ -39,6 +47,14 @@ export const lightPalette: ColorPalette = {
   text2: '#667085',
   border: '#E4EAF2',
   soft: 'rgba(18,59,93,.06)',
+  dangerTint: 'rgba(229,72,77,.08)',
+  onDeep: '#FFFFFF',
+  onPrimary: '#FFFFFF',
+  onDanger: '#0B1525',
+  onDeepMuted: 'rgba(234,242,255,.86)',
+  onDeepSubtle: 'rgba(234,242,255,.78)',
+  onDeepTile: 'rgba(255,255,255,.09)',
+  onDeepBorder: 'rgba(255,255,255,.12)',
 };
 
 export const darkPalette: ColorPalette = {
@@ -56,6 +72,14 @@ export const darkPalette: ColorPalette = {
   text2: '#94A3B8',
   border: '#28364D',
   soft: 'rgba(255,255,255,.05)',
+  dangerTint: 'rgba(255,107,110,.12)',
+  onDeep: '#FFFFFF',
+  onPrimary: '#0B2540',
+  onDanger: '#0B2540',
+  onDeepMuted: 'rgba(234,242,255,.86)',
+  onDeepSubtle: 'rgba(234,242,255,.78)',
+  onDeepTile: 'rgba(255,255,255,.09)',
+  onDeepBorder: 'rgba(255,255,255,.12)',
 };
 
 /**
@@ -70,8 +94,13 @@ export const lightTextInk: Record<string, string> = {
   [lightPalette.red]: '#B02A2E',
 };
 
+/** Reforço da tinta verde sobre superfície clara no modo de alto contraste. */
+export const highContrastTextInk: Record<string, string> = {
+  [lightPalette.green]: '#167548',
+};
+
 export const highContrastOverrides: Record<ThemeName, Partial<ColorPalette>> = {
-  light: { text2: '#3B4759', border: '#94A3B8' },
+  light: { text2: '#3B4759', border: '#94A3B8', onDanger: '#0B1525' },
   dark: { text2: '#D2DCEA', border: '#6B7C96' },
 };
 
@@ -90,6 +119,13 @@ export const fontScale: Record<FontSizeKey, number> = {
 };
 
 export const typography = {
+  micro: { size: 10, lineHeight: 1.2, tracking: 0, family: fontFamily.semibold },
+  small: { size: 12, lineHeight: 1.5, tracking: 0, family: fontFamily.light },
+  bodySmall: { size: 14, lineHeight: 1.55, tracking: 0, family: fontFamily.regular },
+  compactHeading: { size: 17, lineHeight: 1.25, tracking: 0, family: fontFamily.semibold },
+  subheading: { size: 18, lineHeight: 1.25, tracking: 0, family: fontFamily.semibold },
+  compactTitle: { size: 22, lineHeight: 1.25, tracking: -0.02, family: fontFamily.semibold },
+  cardTitle: { size: 24, lineHeight: 1.25, tracking: -0.02, family: fontFamily.semibold },
   displaySplash: { size: 31, lineHeight: 1.1, tracking: -0.03, family: fontFamily.semibold },
   screenTitle: { size: 26, lineHeight: 1.2, tracking: -0.03, family: fontFamily.semibold },
   sectionTitle: { size: 20, lineHeight: 1.25, tracking: -0.025, family: fontFamily.semibold },
@@ -107,14 +143,32 @@ export const spacing = {
   tabBarReserve: 116,
   listGap: 10,
   blockGap: 24,
+  inset: 16,
+  compactInset: 14,
+  heroInset: 22,
 } as const;
 
 export const radii = {
   field: 17,
   card: 20,
   iconSquare: 14,
+  segmented: 16,
+  segmentedTab: 12,
+  checkbox: 8,
+  heroCard: 24,
+  largeIcon: 34,
+  vaultIcon: 38,
+  sos: 22,
   sheetTop: 28,
   pill: 99,
+} as const;
+
+/** Alturas de trilho presentes nas telas do protótipo. */
+export const progressHeight = {
+  thin: 5,
+  regular: 6,
+  incident: 7,
+  overview: 8,
 } as const;
 
 export const heights = {
@@ -145,6 +199,7 @@ export const primaryButtonShadow = {
 
 export const motion = {
   easing: [0.22, 1, 0.36, 1] as [number, number, number, number],
+  pressMs: 140,
   fadeMs: 350,
   sheetMs: 320,
   sheetBackdrop: 'rgba(11,37,64,.42)',
@@ -153,6 +208,8 @@ export const motion = {
   splashRippleMs: 3400,
   splashRippleStaggerMs: 900,
   splashStrokeMs: 1400,
+  vaultScanMs: 1400,
+  onboardingOrbitMs: 34000,
 } as const;
 
 /** Cor da barra/badge por faixa de percentual — mesma regra em todo o app. */
