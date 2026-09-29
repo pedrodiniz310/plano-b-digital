@@ -7,6 +7,7 @@ import { fetchLatestAssessment } from '../../api/assessments';
 import { fetchPlan } from '../../api/plan';
 import { fetchSimulationResults } from '../../api/simulations';
 import { fetchContact } from '../../api/contact';
+import { fetchMe } from '../../api/me';
 import { useAppStore } from '../../state/store';
 import { syncOutbox } from '../../state/syncIncidents';
 
@@ -21,6 +22,7 @@ export function VerifyingScreen({ route, navigation }: Props) {
   const setCompletedTasks = useAppStore((s) => s.setCompletedTasks);
   const setCompletedSimulations = useAppStore((s) => s.setCompletedSimulations);
   const setHasTrustedContact = useAppStore((s) => s.setHasTrustedContact);
+  const applyMe = useAppStore((s) => s.applyMe);
 
   useEffect(() => {
     let active = true;
@@ -31,6 +33,14 @@ export function VerifyingScreen({ route, navigation }: Props) {
       void syncOutbox();
       let destination: 'MainTabs' | 'Ready' = baseScore !== null ? 'MainTabs' : 'Ready';
       await Promise.all([
+        (async () => {
+          try {
+            const me = await fetchMe();
+            if (active) applyMe(me);
+          } catch {
+            // Preferências locais permanecem disponíveis sem rede.
+          }
+        })(),
         (async () => {
           if (baseScore !== null) return;
           try {
@@ -74,15 +84,15 @@ export function VerifyingScreen({ route, navigation }: Props) {
 
     void verify();
     return () => { active = false; };
-  }, [navigation, setAssessment, setCompletedTasks, setCompletedSimulations, setHasTrustedContact]);
+  }, [navigation, setAssessment, setCompletedTasks, setCompletedSimulations, setHasTrustedContact, applyMe]);
 
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.bg }]}>
       <ActivityIndicator size={62 > 48 ? 'large' : 'small'} color={theme.colors.blue} />
-      <Text style={[styles.label, { color: theme.colors.text, fontFamily: theme.typography.sectionTitle.family }]}>
+      <Text style={[styles.label, { fontSize: 18 * theme.fontScale, color: theme.colors.text, fontFamily: theme.typography.sectionTitle.family }]}>
         {label}
       </Text>
-      <Text style={[styles.subtitle, { color: theme.colors.text2, fontFamily: theme.typography.secondary.family }]}>
+      <Text style={[styles.subtitle, { fontSize: 13 * theme.fontScale, color: theme.colors.text2, fontFamily: theme.typography.secondary.family }]}>
         Preparando seu ambiente local
       </Text>
     </View>
@@ -91,6 +101,6 @@ export function VerifyingScreen({ route, navigation }: Props) {
 
 const styles = StyleSheet.create({
   container: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 12, paddingHorizontal: 40 },
-  label: { fontSize: 18, textAlign: 'center' },
-  subtitle: { fontSize: 13, textAlign: 'center' },
+  label: { textAlign: 'center' },
+  subtitle: { textAlign: 'center' },
 });

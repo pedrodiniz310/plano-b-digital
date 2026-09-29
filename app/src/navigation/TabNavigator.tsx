@@ -7,6 +7,7 @@ import { HomeScreen } from '../screens/home/HomeScreen';
 import { PlanScreen } from '../screens/plan/PlanScreen';
 import { SimulationsScreen } from '../screens/simulations/SimulationsScreen';
 import { PlaceholderScreen } from '../screens/shared/PlaceholderScreen';
+import { ProfileScreen } from '../screens/profile/ProfileScreen';
 import { Icon } from '../theme/Icon';
 import { useTheme } from '../theme/ThemeProvider';
 import type { MainTabParamList, RootStackParamList } from './types';
@@ -83,7 +84,7 @@ export function TabNavigator() {
       />
       <Tab.Screen
         name="Profile"
-        component={PlaceholderScreen}
+        component={ProfileScreen}
         options={{
           title: 'Perfil',
           tabBarIcon: ({ color, size }) => <Icon glyph="user" color={color} size={size} />,

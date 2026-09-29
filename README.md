@@ -37,8 +37,15 @@ chave permanece no armazenamento seguro do dispositivo e ainda não tem mecanism
 de recuperação ou migração para outro aparelho. O contato é armazenado no
 servidor em colunas comuns, com telefone e e-mail mascarados nas respostas.
 O Modo Emergência registra atendimentos offline, sincroniza o histórico com o
-servidor e gera relatório em texto compartilhável. Perfil e Protocolo familiar
-ainda têm telas provisórias.
+servidor e gera relatório em texto compartilhável. Perfil, preferências e avisos
+editoriais locais têm telas próprias; o Protocolo familiar ainda tem tela
+provisória. O logout tenta revogar o refresh token no servidor antes de limpar
+a sessão local.
+
+## Próximos passos
+
+- Notificações push e agendamento de lembretes ainda não foram implementados.
+  A folha de Notificações mostra avisos editoriais locais, sem horários simulados.
 
 ## Pré-requisitos
 

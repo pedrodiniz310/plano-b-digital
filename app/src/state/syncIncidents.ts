@@ -29,7 +29,7 @@ export function syncOutbox(): Promise<void> {
   inFlight = (async () => {
     while (true) {
       const state = useAppStore.getState();
-      if (!state.user || state.outbox.length === 0) return;
+      if (!state.user || state.outbox.length === 0 || (state.incidentOwnerId && state.incidentOwnerId !== state.user.id)) return;
       const owner = state.user.id;
       const snapshot = [...state.outbox];
       const result = await flush(snapshot, sendIncidentOp);

@@ -31,6 +31,7 @@ export type RootStackParamList = {
   EmergencyPick: undefined;
   EmergencyRun: { scenarioId: string };
   Report: undefined;
+  Notifications: undefined;
 };
 
 declare global {

@@ -12,10 +12,10 @@ export function PlaceholderScreen({ route }: { route: RouteProp<Record<string, o
   const theme = useTheme();
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.bg }]}>
-      <Text style={[styles.title, { color: theme.colors.text, fontFamily: theme.typography.screenTitle.family }]}>
+      <Text style={{ fontSize: 22 * theme.fontScale, color: theme.colors.text, fontFamily: theme.typography.screenTitle.family }}>
         {route.name}
       </Text>
-      <Text style={[styles.subtitle, { color: theme.colors.text2, fontFamily: theme.typography.body.family }]}>
+      <Text style={[styles.subtitle, { fontSize: 14 * theme.fontScale, color: theme.colors.text2, fontFamily: theme.typography.body.family }]}>
         Tela em construção — chega num marco seguinte do plano.
       </Text>
     </View>
@@ -24,6 +24,5 @@ export function PlaceholderScreen({ route }: { route: RouteProp<Record<string, o
 
 const styles = StyleSheet.create({
   container: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 26, gap: 8 },
-  title: { fontSize: 22 },
-  subtitle: { fontSize: 14, textAlign: 'center' },
+  subtitle: { textAlign: 'center' },
 });

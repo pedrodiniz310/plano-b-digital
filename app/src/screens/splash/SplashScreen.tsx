@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Animated, Easing, StyleSheet, Text, View } from 'react-native';
+import { AccessibilityInfo, Animated, Easing, StyleSheet, Text, View } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Icon } from '../../theme/Icon';
 import { useTheme } from '../../theme/ThemeProvider';
@@ -17,15 +17,23 @@ export function SplashScreen({ navigation }: Props) {
   // inacessível durante o render, o que .interpolate() faria logo abaixo.
   const [ripple] = useState(() => new Animated.Value(0));
   const [progress] = useState(() => new Animated.Value(0));
+  const [reduceMotion, setReduceMotion] = useState(false);
 
   useEffect(() => {
+    let active = true;
     const loop = Animated.loop(
       Animated.timing(ripple, { toValue: 1, duration: 3400, easing: Easing.out(Easing.ease), useNativeDriver: true })
     );
-    loop.start();
-    Animated.timing(progress, { toValue: 1, duration: AUTO_ADVANCE_MS, easing: Easing.linear, useNativeDriver: false }).start();
+    void AccessibilityInfo.isReduceMotionEnabled().then((enabled) => {
+      if (!active) return;
+      setReduceMotion(enabled);
+      if (enabled) progress.setValue(1);
+      else {
+        loop.start();
+        Animated.timing(progress, { toValue: 1, duration: AUTO_ADVANCE_MS, easing: Easing.linear, useNativeDriver: false }).start();
+      }
+    }).catch(() => {});
 
-    let active = true;
     let unsubscribeHydration = () => {};
     const hydrated = new Promise<void>((resolve) => {
       if (useAppStore.persist.hasHydrated()) resolve();
@@ -43,6 +51,7 @@ export function SplashScreen({ navigation }: Props) {
 
     return () => {
       loop.stop();
+      progress.stopAnimation();
       active = false;
       clearTimeout(timer);
       unsubscribeHydration();
@@ -57,22 +66,22 @@ export function SplashScreen({ navigation }: Props) {
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.bg }]}>
       <View style={styles.badgeWrap}>
-        <Animated.View
+        {!reduceMotion ? <Animated.View
           pointerEvents="none"
           style={[
             styles.ripple,
             { borderColor: theme.colors.blue, opacity: rippleOpacity, transform: [{ scale: rippleScale }] },
           ]}
-        />
+        /> : null}
         <View style={[styles.badge, { backgroundColor: theme.colors.deep }]}>
           <Icon glyph="shield" size={44} color="#fff" strokeWidth={1.8} />
         </View>
       </View>
 
-      <Text style={[styles.wordmark, { color: theme.colors.deep, fontFamily: theme.typography.displaySplash.family }]}>
+      <Text style={[styles.wordmark, { fontSize: 31 * theme.fontScale, color: theme.colors.deep, fontFamily: theme.typography.displaySplash.family }]}>
         Plano B Digital
       </Text>
-      <Text style={[styles.subtitle, { color: theme.colors.text2, fontFamily: theme.typography.body.family }]}>
+      <Text style={[styles.subtitle, { fontSize: 15 * theme.fontScale, color: theme.colors.text2, fontFamily: theme.typography.body.family }]}>
         Prepare-se antes que aconteça
       </Text>
 
@@ -82,7 +91,7 @@ export function SplashScreen({ navigation }: Props) {
         </View>
         <View style={styles.privacyRow}>
           <Icon glyph="lock" size={14} color={theme.colors.text2} />
-          <Text style={[styles.privacyText, { color: theme.colors.text2, fontFamily: theme.typography.secondary.family }]}>
+          <Text style={{ fontSize: 12 * theme.fontScale, color: theme.colors.text2, fontFamily: theme.typography.secondary.family }}>
             Seus dados ficam apenas neste aparelho
           </Text>
         </View>
@@ -102,11 +111,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  wordmark: { fontSize: 31, letterSpacing: -0.9 },
-  subtitle: { fontSize: 15, marginTop: 8 },
+  wordmark: { letterSpacing: -0.9 },
+  subtitle: { marginTop: 8 },
   footer: { position: 'absolute', bottom: 62, alignItems: 'center', gap: 14, width: 200 },
   progressTrack: { width: 120, height: 3, borderRadius: 2, overflow: 'hidden' },
   progressFill: { height: 3, borderRadius: 2 },
   privacyRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
-  privacyText: { fontSize: 12 },
 });

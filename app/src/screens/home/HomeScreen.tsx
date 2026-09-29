@@ -60,20 +60,22 @@ export function HomeScreen({ navigation }: Props) {
       ]}
     >
       <View style={styles.headerRow}>
-        <Text style={[styles.hello, { color: theme.colors.text, fontFamily: theme.typography.screenTitle.family }]}>
+        <Text style={{ fontSize: 22 * theme.fontScale, color: theme.colors.text, fontFamily: theme.typography.screenTitle.family }}>
           {greeting()}, {user?.name ?? 'visitante'}
         </Text>
-        <Icon glyph="bell" size={22} color={theme.colors.text2} />
+        <Pressable accessibilityRole="button" accessibilityLabel="Abrir notificações" onPress={() => navigation.navigate('Notifications')} style={styles.bell}>
+          <Icon glyph="bell" size={22} color={theme.colors.text2} />
+        </Pressable>
       </View>
 
       <View style={[styles.readinessCard, { backgroundColor: theme.colors.deep }]}>
         <View>
-          <Text style={styles.readinessScore}>{score}</Text>
-          <Text style={[styles.readinessLevel, { color: level.color }]}>{level.label}</Text>
+          <Text style={[styles.readinessScore, { fontSize: 44 * theme.fontScale }]}>{score}</Text>
+          <Text style={[styles.readinessLevel, { fontSize: 14 * theme.fontScale, color: theme.ink(level.color) }]}>{level.label}</Text>
         </View>
         <View style={styles.readinessMeta}>
-          <Text style={styles.readinessMetaText}>{completedTaskCount}/{TASKS.length} tarefas</Text>
-          <Text style={styles.readinessMetaText}>{points} pontos</Text>
+          <Text style={[styles.readinessMetaText, { fontSize: 13 * theme.fontScale }]}>{completedTaskCount}/{TASKS.length} tarefas</Text>
+          <Text style={[styles.readinessMetaText, { fontSize: 13 * theme.fontScale }]}>{points} pontos</Text>
         </View>
       </View>
 
@@ -86,10 +88,10 @@ export function HomeScreen({ navigation }: Props) {
         style={[styles.emergencyButton, { backgroundColor: 'rgba(229,72,77,.12)', borderColor: theme.colors.red }]}
       >
         <Icon glyph="alert" size={18} color={theme.colors.red} />
-        <Text style={[styles.emergencyText, { color: theme.colors.red }]}>Preciso de ajuda agora — Modo Emergência</Text>
+        <Text style={[styles.emergencyText, { fontSize: 14 * theme.fontScale, color: theme.ink(theme.colors.red) }]}>Preciso de ajuda agora — Modo Emergência</Text>
       </Pressable>
 
-      <Text style={[styles.sectionLabel, { color: theme.colors.text2 }]}>PRÓXIMAS TAREFAS</Text>
+      <Text style={[styles.sectionLabel, { fontSize: 11 * theme.fontScale, color: theme.colors.text2 }]}>PRÓXIMAS TAREFAS</Text>
       <View style={styles.taskList}>
         {pendingTasks.map((task) => {
           const category = PLAN_CATEGORIES.find((c) => c.id === task.planCategoryId);
@@ -102,15 +104,15 @@ export function HomeScreen({ navigation }: Props) {
               style={[styles.taskRow, { borderColor: theme.colors.border, backgroundColor: theme.colors.surface }]}
             >
               <View style={{ flex: 1 }}>
-                <Text style={[styles.taskTitle, { color: theme.colors.text }]}>{task.title}</Text>
-                <Text style={[styles.taskMeta, { color: theme.colors.text2 }]}>{task.minutes} min · {category?.name}</Text>
+                <Text style={[styles.taskTitle, { fontSize: 15 * theme.fontScale, color: theme.colors.text }]}>{task.title}</Text>
+                <Text style={[styles.taskMeta, { fontSize: 12 * theme.fontScale, color: theme.colors.text2 }]}>{task.minutes} min · {category?.name}</Text>
               </View>
             </Pressable>
           );
         })}
       </View>
 
-      <Text style={[styles.sectionLabel, { color: theme.colors.text2 }]}>ACESSO RÁPIDO</Text>
+      <Text style={[styles.sectionLabel, { fontSize: 11 * theme.fontScale, color: theme.colors.text2 }]}>ACESSO RÁPIDO</Text>
       <View style={styles.grid}>
         {quickAccess.map((item) => (
           <Pressable
@@ -121,7 +123,7 @@ export function HomeScreen({ navigation }: Props) {
             style={[styles.gridItem, { backgroundColor: theme.colors.surface, borderColor: theme.colors.border }]}
           >
             <Icon glyph={item.glyph} size={20} color={theme.colors.blue} />
-            <Text style={[styles.gridLabel, { color: theme.colors.text }]}>{item.label}</Text>
+            <Text style={[styles.gridLabel, { fontSize: 13 * theme.fontScale, color: theme.colors.text }]}>{item.label}</Text>
           </Pressable>
         ))}
       </View>
@@ -132,20 +134,20 @@ export function HomeScreen({ navigation }: Props) {
 const styles = StyleSheet.create({
   container: { gap: 20 },
   headerRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  hello: { fontSize: 22 },
+  bell: { width: 44, height: 44, alignItems: 'center', justifyContent: 'center' },
   readinessCard: { borderRadius: 20, padding: 22, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  readinessScore: { fontSize: 44, fontWeight: '600', color: '#fff', letterSpacing: -1.5 },
-  readinessLevel: { fontSize: 14, fontWeight: '600', marginTop: 2 },
+  readinessScore: { fontWeight: '600', color: '#fff', letterSpacing: -1.5 },
+  readinessLevel: { fontWeight: '600', marginTop: 2 },
   readinessMeta: { alignItems: 'flex-end', gap: 4 },
-  readinessMetaText: { color: 'rgba(255,255,255,.85)', fontSize: 13 },
+  readinessMetaText: { color: 'rgba(255,255,255,.85)' },
   emergencyButton: { flexDirection: 'row', alignItems: 'center', gap: 10, padding: 16, borderRadius: 16, borderWidth: 1 },
-  emergencyText: { fontSize: 14, fontWeight: '600', flex: 1 },
-  sectionLabel: { fontSize: 11, fontWeight: '600', letterSpacing: 1.5 },
+  emergencyText: { fontWeight: '600', flex: 1 },
+  sectionLabel: { fontWeight: '600', letterSpacing: 1.5 },
   taskList: { gap: 10 },
   taskRow: { flexDirection: 'row', alignItems: 'center', padding: 14, borderRadius: 16, borderWidth: 1 },
-  taskTitle: { fontSize: 15, fontWeight: '500' },
-  taskMeta: { fontSize: 12, marginTop: 2 },
+  taskTitle: { fontWeight: '500' },
+  taskMeta: { marginTop: 2 },
   grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
   gridItem: { width: '47%', padding: 16, borderRadius: 16, borderWidth: 1, gap: 8 },
-  gridLabel: { fontSize: 13, fontWeight: '500' },
+  gridLabel: { fontWeight: '500' },
 });

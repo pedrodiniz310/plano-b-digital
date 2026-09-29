@@ -19,6 +19,8 @@ interface RequestOptions {
   body?: unknown;
   /** Rotas de auth (signup/login/refresh/recover) não devem tentar anexar/renovar token. */
   auth?: boolean;
+  signal?: AbortSignal;
+  retryOnUnauthorized?: boolean;
 }
 
 async function rawRequest<T>(path: string, options: RequestOptions, accessToken?: string): Promise<T> {
@@ -29,6 +31,7 @@ async function rawRequest<T>(path: string, options: RequestOptions, accessToken?
       ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
     },
     body: options.body === undefined ? undefined : JSON.stringify(options.body),
+    signal: options.signal,
   });
 
   const text = await res.text();
@@ -99,7 +102,7 @@ export async function apiRequest<T>(path: string, options: RequestOptions = {}):
   try {
     return await rawRequest<T>(path, options, accessToken ?? undefined);
   } catch (err) {
-    if (err instanceof ApiError && err.status === 401) {
+    if (err instanceof ApiError && err.status === 401 && options.retryOnUnauthorized !== false) {
       // Se a renovação falhar por motivo transitório, o erro dela sobe daqui e
       // substitui o 401: é a causa atual e é a que a tela sabe explicar.
       const renewed = await refreshSession();

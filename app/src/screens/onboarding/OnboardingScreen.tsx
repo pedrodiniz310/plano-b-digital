@@ -38,8 +38,8 @@ export function OnboardingScreen({ navigation }: Props) {
             />
           ))}
         </View>
-        <Pressable accessibilityRole="button" onPress={skip}>
-          <Text style={[styles.skip, { color: theme.colors.text2 }]}>Pular introdução</Text>
+        <Pressable accessibilityRole="button" onPress={skip} style={styles.textAction}>
+          <Text style={{ fontSize: 13 * theme.fontScale, color: theme.colors.text2 }}>Pular introdução</Text>
         </Pressable>
       </View>
 
@@ -51,11 +51,11 @@ export function OnboardingScreen({ navigation }: Props) {
       </View>
 
       <View style={[styles.body, { paddingHorizontal: theme.spacing.marginX }]}>
-        <Text style={[styles.chip, { color: slide.accent, backgroundColor: slide.tint }]}>{slide.chip.toUpperCase()}</Text>
-        <Text style={[styles.title, { color: theme.colors.text, fontFamily: theme.typography.screenTitle.family }]}>
+        <Text style={[styles.chip, { fontSize: 11 * theme.fontScale, color: slide.accent, backgroundColor: slide.tint }]}>{slide.chip.toUpperCase()}</Text>
+        <Text style={[styles.title, { fontSize: 26 * theme.fontScale, lineHeight: 32 * theme.fontScale, color: theme.colors.text, fontFamily: theme.typography.screenTitle.family }]}>
           {slide.title}
         </Text>
-        <Text style={[styles.description, { color: theme.colors.text2, fontFamily: theme.typography.body.family }]}>
+        <Text style={{ fontSize: 15 * theme.fontScale, lineHeight: 23 * theme.fontScale, color: theme.colors.text2, fontFamily: theme.typography.body.family }}>
           {slide.description}
         </Text>
       </View>
@@ -63,8 +63,8 @@ export function OnboardingScreen({ navigation }: Props) {
       <View style={[styles.footer, { paddingHorizontal: theme.spacing.marginX }]}>
         <Button label={isLast ? 'Começar' : 'Continuar'} onPress={next} />
         {isLast ? (
-          <Pressable accessibilityRole="button" onPress={() => navigation.replace('Auth', { mode: 'login' })}>
-            <Text style={[styles.haveplan, { color: theme.colors.blueInk }]}>Já tenho um plano</Text>
+          <Pressable accessibilityRole="button" onPress={() => navigation.replace('Auth', { mode: 'login' })} style={styles.textAction}>
+            <Text style={[styles.haveplan, { fontSize: 14 * theme.fontScale, color: theme.colors.blueInk }]}>Já tenho um plano</Text>
           </Pressable>
         ) : null}
       </View>
@@ -75,9 +75,9 @@ export function OnboardingScreen({ navigation }: Props) {
 const styles = StyleSheet.create({
   container: { flex: 1 },
   header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
+  textAction: { minHeight: 44, justifyContent: 'center' },
   dots: { flexDirection: 'row', gap: 6, alignItems: 'center' },
   dot: { height: 6, borderRadius: 3 },
-  skip: { fontSize: 13 },
   illustrationWrap: { alignItems: 'center', justifyContent: 'center', height: 236, marginTop: 24 },
   illustrationRing: { position: 'absolute', width: 200, height: 200, borderRadius: 100, borderWidth: 1.5, borderStyle: 'dashed', opacity: 0.4 },
   illustrationCircle: {
@@ -94,7 +94,6 @@ const styles = StyleSheet.create({
   body: { marginTop: 32, gap: 12 },
   chip: {
     alignSelf: 'flex-start',
-    fontSize: 11,
     fontWeight: '600',
     letterSpacing: 1.5,
     paddingHorizontal: 12,
@@ -102,8 +101,7 @@ const styles = StyleSheet.create({
     borderRadius: 99,
     overflow: 'hidden',
   },
-  title: { fontSize: 26, lineHeight: 32, letterSpacing: -0.4 },
-  description: { fontSize: 15, lineHeight: 23 },
+  title: { letterSpacing: -0.4 },
   footer: { marginTop: 'auto', marginBottom: 32, gap: 16, alignItems: 'center' },
-  haveplan: { fontSize: 14, fontWeight: '500' },
+  haveplan: { fontWeight: '500' },
 });
