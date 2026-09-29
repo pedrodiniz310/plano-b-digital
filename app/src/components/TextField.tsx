@@ -16,7 +16,7 @@ export function TextField({ label, error, secure, ...inputProps }: TextFieldProp
 
   return (
     <View style={styles.wrap}>
-      <Text style={[styles.label, { color: theme.colors.text2, fontFamily: theme.typography.secondary.family }]}>
+      <Text style={{ fontSize: 13 * theme.fontScale, color: theme.colors.text2, fontFamily: theme.typography.secondary.family }}>
         {label}
       </Text>
       <View
@@ -29,7 +29,7 @@ export function TextField({ label, error, secure, ...inputProps }: TextFieldProp
           {...inputProps}
           secureTextEntry={secure && !reveal}
           placeholderTextColor={theme.colors.text2}
-          style={[styles.input, { color: theme.colors.text, fontFamily: theme.typography.body.family }]}
+          style={[styles.input, { fontSize: 15 * theme.fontScale, color: theme.colors.text, fontFamily: theme.typography.body.family }]}
         />
         {secure ? (
           <Pressable
@@ -45,7 +45,7 @@ export function TextField({ label, error, secure, ...inputProps }: TextFieldProp
       {error ? (
         <View style={styles.errorRow}>
           <Icon glyph="alert" size={14} color={theme.colors.red} />
-          <Text style={[styles.errorText, { color: theme.colors.red }]}>{error}</Text>
+          <Text style={{ fontSize: 12 * theme.fontScale, color: theme.ink(theme.colors.red) }}>{error}</Text>
         </View>
       ) : null}
     </View>
@@ -54,10 +54,8 @@ export function TextField({ label, error, secure, ...inputProps }: TextFieldProp
 
 const styles = StyleSheet.create({
   wrap: { width: '100%', gap: 6 },
-  label: { fontSize: 13 },
   fieldRow: { flexDirection: 'row', alignItems: 'center', borderWidth: 1.5, paddingHorizontal: 16 },
-  input: { flex: 1, fontSize: 15 },
-  eyeButton: { padding: 4 },
+  input: { flex: 1 },
+  eyeButton: { width: 44, height: 44, alignItems: 'center', justifyContent: 'center' },
   errorRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
-  errorText: { fontSize: 12 },
 });

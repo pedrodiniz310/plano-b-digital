@@ -18,6 +18,7 @@ import { PlaceholderScreen } from '../screens/shared/PlaceholderScreen';
 import { EmergencyPickScreen } from '../screens/emergency/EmergencyPickScreen';
 import { EmergencyRunScreen } from '../screens/emergency/EmergencyRunScreen';
 import { ReportScreen } from '../screens/emergency/ReportScreen';
+import { NotificationsScreen } from '../screens/profile/NotificationsScreen';
 import { TabNavigator } from './TabNavigator';
 import type { RootStackParamList } from './types';
 
@@ -46,6 +47,7 @@ export function RootNavigator() {
       <Stack.Screen name="EmergencyPick" component={EmergencyPickScreen} />
       <Stack.Screen name="EmergencyRun" component={EmergencyRunScreen} />
       <Stack.Screen name="Report" component={ReportScreen} />
+      <Stack.Screen name="Notifications" component={NotificationsScreen} options={{ presentation: 'modal' }} />
     </Stack.Navigator>
   );
 }

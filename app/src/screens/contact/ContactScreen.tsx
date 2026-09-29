@@ -135,13 +135,13 @@ export function ContactScreen({ navigation }: Props) {
       <Pressable accessibilityRole="button" accessibilityLabel="Voltar" onPress={() => navigation.goBack()} style={styles.back}>
         <Icon glyph="back" size={20} color={theme.colors.text} />
       </Pressable>
-      <Text style={[styles.title, { color: theme.colors.text, fontFamily: theme.typography.screenTitle.family }]}>Contato de confiança</Text>
+      <Text style={[styles.title, { fontSize: 25 * theme.fontScale, color: theme.colors.text, fontFamily: theme.typography.screenTitle.family }]}>Contato de confiança</Text>
       {loading ? <ActivityIndicator color={theme.colors.blue} /> : null}
       {error ? <Text accessibilityRole="alert" style={[styles.error, { color: theme.colors.red }]}>{error}</Text> : null}
       {error?.includes('carregar') ? <Button label="Tentar novamente" variant="secondary" onPress={() => void load()} /> : null}
       {!loading && !contact && !error?.includes('carregar') ? (
         <>
-          <Text style={[styles.intro, { color: theme.colors.text2 }]}>Escolha alguém que possa confirmar sua identidade e agir com você em uma emergência.</Text>
+          <Text style={[styles.intro, { fontSize: 14 * theme.fontScale, lineHeight: 23 * theme.fontScale, color: theme.colors.text2 }]}>Escolha alguém que possa confirmar sua identidade e agir com você em uma emergência.</Text>
           {input('name', 'Nome', 'Ex.: Marina Alves')}
           {input('relation', 'Relação', 'Ex.: irmã, cônjuge, amigo')}
           {input('phone', 'Telefone', '(11) 90000-0000')}
@@ -154,9 +154,9 @@ export function ContactScreen({ navigation }: Props) {
         <>
           <View style={[styles.card, { backgroundColor: theme.colors.surface, borderColor: theme.colors.border }]}>
             <View style={styles.person}>
-              <View style={[styles.avatar, { backgroundColor: theme.colors.deep }]}><Text style={styles.initial}>{contact.name[0]?.toUpperCase()}</Text></View>
+              <View style={[styles.avatar, { backgroundColor: theme.colors.deep }]}><Text style={[styles.initial, { fontSize: 21 * theme.fontScale }]}>{contact.name[0]?.toUpperCase()}</Text></View>
               <View style={{ flex: 1 }}>
-                <Text style={[styles.name, { color: theme.colors.text }]}>{contact.name}</Text>
+                <Text style={[styles.name, { fontSize: 18 * theme.fontScale, color: theme.colors.text }]}>{contact.name}</Text>
                 <Text style={{ color: theme.colors.text2 }}>{contact.relation}</Text>
               </View>
             </View>
@@ -178,8 +178,8 @@ export function ContactScreen({ navigation }: Props) {
 
 const styles = StyleSheet.create({
   back: { width: 44, height: 44, justifyContent: 'center', alignItems: 'center', marginBottom: 20 },
-  title: { fontSize: 25, marginBottom: 18 },
-  intro: { fontSize: 14, lineHeight: 23, marginBottom: 20 },
+  title: { marginBottom: 18 },
+  intro: { marginBottom: 20 },
   fieldGroup: { gap: 7, marginBottom: 15 },
   input: { minHeight: 54, borderWidth: 1.5, borderRadius: 16, paddingHorizontal: 16 },
   multiline: { minHeight: 98, textAlignVertical: 'top', paddingTop: 14 },
@@ -187,8 +187,8 @@ const styles = StyleSheet.create({
   card: { padding: 22, borderRadius: 22, borderWidth: 1, gap: 18, marginBottom: 18 },
   person: { flexDirection: 'row', gap: 14, alignItems: 'center' },
   avatar: { width: 56, height: 56, borderRadius: 20, alignItems: 'center', justifyContent: 'center' },
-  initial: { color: '#fff', fontSize: 21, fontWeight: '600' },
-  name: { fontSize: 18, fontWeight: '600' },
+  initial: { color: '#fff', fontWeight: '600' },
+  name: { fontWeight: '600' },
   details: { gap: 9, borderTopWidth: 1, paddingTop: 16 },
   remove: { minHeight: 52, alignItems: 'center', justifyContent: 'center', marginTop: 12 },
 });

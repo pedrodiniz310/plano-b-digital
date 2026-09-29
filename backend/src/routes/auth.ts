@@ -4,6 +4,7 @@ import type { User } from '../generated/prisma/client.js';
 import { hashPassword, verifyPassword } from '../lib/hash.js';
 import { Conflict, Unauthorized } from '../lib/httpErrors.js';
 import { generateRefreshToken, guestEmail, hashRefreshToken } from '../lib/tokens.js';
+import { authenticate, userIdFromRequest } from '../plugins/auth.js';
 import {
   AUTH_RATE_LIMIT,
   GUEST_RATE_LIMIT,
@@ -121,4 +122,14 @@ export const authRoutes: FastifyPluginAsync = async (rawApp) => {
       return { sent: true as const };
     }
   );
+
+  app.post('/auth/logout', {
+    preHandler: authenticate,
+    schema: { body: refreshBodySchema },
+  }, async (req, reply) => {
+    await app.prisma.refreshToken.deleteMany({
+      where: { tokenHash: hashRefreshToken(req.body.refreshToken), userId: userIdFromRequest(req) },
+    });
+    return reply.code(204).send();
+  });
 };

@@ -5,7 +5,17 @@ import type { User } from '../types/auth';
 import type { Answers } from '../lib/scoring';
 import { asyncStorageAdapter, PERSIST_KEY } from './persist';
 import { secureStore } from './secureStore';
+import { logoutRemote } from '../api/auth';
+import { ApiError } from '../api/client';
+import { updateMe, type Me } from '../api/me';
 import type { Op } from '../lib/outbox';
+
+function savePreference(patch: Parameters<typeof updateMe>[0]) {
+  if (!useAppStore.getState().user) return;
+  void updateMe(patch).catch((error: unknown) => {
+    console.warn(error instanceof ApiError ? error.code : 'network_error');
+  });
+}
 
 interface PrefsSlice {
   theme: ThemeName;
@@ -16,12 +26,14 @@ interface PrefsSlice {
   toggleContrast: () => void;
   setFont: (font: FontSizeKey) => void;
   setObDone: (done: boolean) => void;
+  applyMe: (me: Me) => void;
 }
 
 type SessionStatus = 'idle' | 'authenticating' | 'authenticated';
 
 interface SessionSlice {
   user: User | null;
+  emailMasked: string | null;
   status: SessionStatus;
   setAuthenticating: () => void;
   setSession: (user: User, tokens: { accessToken: string; refreshToken: string }) => Promise<void>;
@@ -61,10 +73,18 @@ export interface LocalIncident {
   closedAtServer?: string;
 }
 
+interface IncidentSnapshot {
+  activeIncident: LocalIncident | null;
+  lastReport: LocalIncident | null;
+  outbox: Op[];
+}
+
 interface IncidentSlice {
   activeIncident: LocalIncident | null;
   lastReport: LocalIncident | null;
   outbox: Op[];
+  incidentOwnerId: string | null;
+  retainedIncidents: Record<string, IncidentSnapshot>;
   startIncident: (id: string, scenarioId: string, now: string) => void;
   completeAction: (actionId: string, now: string) => void;
   finishIncident: (now: string) => void;
@@ -81,12 +101,22 @@ export const useAppStore = create<AppStore>()(
       contrast: false,
       font: 's',
       obDone: false,
-      setTheme: (theme) => set({ theme }),
-      toggleContrast: () => set((s) => ({ contrast: !s.contrast })),
-      setFont: (font) => set({ font }),
+      setTheme: (theme) => { set({ theme }); savePreference({ theme }); },
+      toggleContrast: () => {
+        const contrast = !useAppStore.getState().contrast;
+        set({ contrast });
+        savePreference({ contrast });
+      },
+      setFont: (font) => { set({ font }); savePreference({ fontSize: font }); },
       setObDone: (obDone) => set({ obDone }),
+      applyMe: (me) => set((s) => ({
+        theme: me.theme, contrast: me.contrast, font: me.fontSize,
+        emailMasked: me.emailMasked,
+        user: s.user ? { ...s.user, name: me.name, guest: me.guest } : null,
+      })),
 
       user: null,
+      emailMasked: null,
       status: 'idle',
       answers: null,
       baseScore: null,
@@ -103,9 +133,13 @@ export const useAppStore = create<AppStore>()(
       activeIncident: null,
       lastReport: null,
       outbox: [],
+      incidentOwnerId: null,
+      retainedIncidents: {},
       startIncident: (id, scenarioId, now) => set((s) => {
+        if (s.outbox.length > 0 && (s.incidentOwnerId ?? s.user?.id) !== s.user?.id) return s;
         if (s.activeIncident && !s.activeIncident.closedAtLocal) return s;
         return {
+          incidentOwnerId: s.user?.id ?? null,
           activeIncident: { id, scenarioId, startedAtLocal: now, actions: {} },
           outbox: [...s.outbox, { kind: 'create', incidentId: id, scenarioId }],
         };
@@ -155,12 +189,38 @@ export const useAppStore = create<AppStore>()(
           user,
           status: 'authenticated',
           obDone: true,
-          ...(s.user?.id !== user.id ? { answers: null, baseScore: null, completedTaskIds: [], completedSimulationIds: [], hasTrustedContact: false, activeIncident: null, lastReport: null, outbox: [] } : {}),
+          ...(s.user?.id !== user.id ? (() => {
+            const retainedIncidents = { ...s.retainedIncidents };
+            const incidentOwnerId = s.incidentOwnerId ?? s.user?.id;
+            if (s.outbox.length > 0 && incidentOwnerId && incidentOwnerId !== user.id) {
+              retainedIncidents[incidentOwnerId] = {
+                activeIncident: s.activeIncident, lastReport: s.lastReport, outbox: s.outbox,
+              };
+            }
+            const own = incidentOwnerId === user.id
+              ? { activeIncident: s.activeIncident, lastReport: s.lastReport, outbox: s.outbox }
+              : retainedIncidents[user.id] ?? { activeIncident: null, lastReport: null, outbox: [] };
+            delete retainedIncidents[user.id];
+            return {
+              answers: null, baseScore: null, completedTaskIds: [], completedSimulationIds: [], hasTrustedContact: false,
+              emailMasked: null, ...own, incidentOwnerId: own.outbox.length > 0 ? user.id : null, retainedIncidents,
+            };
+          })() : {}),
         }));
       },
       logout: async () => {
+        try {
+          const refreshToken = await secureStore.getRefreshToken();
+          if (refreshToken) await logoutRemote(refreshToken);
+        } catch (error) {
+          console.warn(error instanceof ApiError ? error.code : 'network_error');
+        }
         await secureStore.clearSession();
-        set({ user: null, status: 'idle', answers: null, baseScore: null, completedTaskIds: [], completedSimulationIds: [], hasTrustedContact: false, activeIncident: null, lastReport: null, outbox: [] });
+        set((s) => ({
+          user: null, emailMasked: null, status: 'idle', answers: null, baseScore: null,
+          completedTaskIds: [], completedSimulationIds: [], hasTrustedContact: false,
+          ...(s.outbox.length === 0 ? { activeIncident: null, lastReport: null, outbox: [], incidentOwnerId: null } : { incidentOwnerId: s.incidentOwnerId ?? s.user?.id ?? null }),
+        }));
       },
     }),
     {
@@ -173,6 +233,7 @@ export const useAppStore = create<AppStore>()(
         font: s.font,
         obDone: s.obDone,
         user: s.user,
+        emailMasked: s.emailMasked,
         answers: s.answers,
         baseScore: s.baseScore,
         completedTaskIds: s.completedTaskIds,
@@ -181,6 +242,8 @@ export const useAppStore = create<AppStore>()(
         activeIncident: s.activeIncident,
         lastReport: s.lastReport,
         outbox: s.outbox,
+        incidentOwnerId: s.incidentOwnerId,
+        retainedIncidents: s.retainedIncidents,
       }),
     }
   )

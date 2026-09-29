@@ -29,7 +29,7 @@ export function EmergencyPickScreen({ navigation }: Props) {
       <Pressable accessibilityRole="button" accessibilityLabel="Voltar" onPress={() => navigation.goBack()} style={[styles.back, { borderColor: theme.colors.border, backgroundColor: theme.colors.surface }]}>
         <Icon glyph="back" size={19} color={theme.colors.text} />
       </Pressable>
-      <Text style={[styles.chip, { color: theme.ink(theme.colors.red), backgroundColor: theme.colors.soft, fontFamily: theme.typography.sectionLabel.family }]}>Modo Emergência</Text>
+      <Text style={[styles.chip, { fontSize: 11 * theme.fontScale, color: theme.ink(theme.colors.red), backgroundColor: theme.colors.soft, fontFamily: theme.typography.sectionLabel.family }]}>Modo Emergência</Text>
       <Text style={{ color: theme.colors.text, fontFamily: theme.typography.screenTitle.family, fontSize: 26 * theme.fontScale }}>O que aconteceu?</Text>
       <Text style={[styles.intro, { color: theme.colors.text2, fontFamily: theme.typography.secondary.family, fontSize: 14 * theme.fontScale }]}>Escolha a situação. Você recebe um passo a passo na ordem certa, sem precisar pensar em tudo de uma vez.</Text>
       {active && !active.closedAtLocal ? (
@@ -50,7 +50,7 @@ export function EmergencyPickScreen({ navigation }: Props) {
 
 const styles = StyleSheet.create({
   back: { width: 44, height: 44, borderRadius: 14, borderWidth: 1, alignItems: 'center', justifyContent: 'center', marginBottom: 22 },
-  chip: { alignSelf: 'flex-start', paddingHorizontal: 13, paddingVertical: 8, borderRadius: 99, fontSize: 11, letterSpacing: 1.5, marginBottom: 16 },
+  chip: { alignSelf: 'flex-start', paddingHorizontal: 13, paddingVertical: 8, borderRadius: 99, letterSpacing: 1.5, marginBottom: 16 },
   intro: { lineHeight: 23, marginTop: 9, marginBottom: 22 },
   list: { gap: 9 },
   row: { flexDirection: 'row', alignItems: 'center', gap: 13, padding: 16, minHeight: 72, borderRadius: 18, borderWidth: 1 },

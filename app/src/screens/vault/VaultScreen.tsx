@@ -230,7 +230,7 @@ export function VaultScreen({ navigation }: Props) {
               <Icon glyph="lock" size={50} color={theme.colors.blue} />
               {scanning && !reduceMotion ? <Animated.View style={[styles.scanLine, { backgroundColor: theme.colors.blue, transform: [{ translateY: scanPosition }] }]} /> : null}
             </View>
-            <Text style={[styles.title, { color: theme.colors.text, fontFamily: theme.typography.screenTitle.family }]}>Cofre de Preparação</Text>
+            <Text style={[styles.title, { fontSize: 24 * theme.fontScale, color: theme.colors.text, fontFamily: theme.typography.screenTitle.family }]}>Cofre de Preparação</Text>
             <Text style={[styles.explanation, { color: theme.colors.text2 }]}>Suas informações críticas ficam protegidas. Confirme sua identidade para abrir.</Text>
             <Button label="Desbloquear com biometria" loading={scanning} onPress={() => void open()} />
             {manualUnlock ? (
@@ -245,7 +245,7 @@ export function VaultScreen({ navigation }: Props) {
           <>
             <View style={styles.heading}>
               <View style={{ flex: 1 }}>
-                <Text style={[styles.title, { color: theme.colors.text, fontFamily: theme.typography.screenTitle.family }]}>Cofre de Preparação</Text>
+                <Text style={[styles.title, { fontSize: 24 * theme.fontScale, color: theme.colors.text, fontFamily: theme.typography.screenTitle.family }]}>Cofre de Preparação</Text>
                 <Text style={{ color: theme.colors.text2 }}>Bloqueia automaticamente após inatividade</Text>
               </View>
               <Pressable accessibilityRole="button" accessibilityLabel="Bloquear" onPress={lock} style={[styles.lockButton, { borderColor: theme.colors.border }]}>
@@ -262,7 +262,7 @@ export function VaultScreen({ navigation }: Props) {
                   {/* eslint-disable-next-line react-hooks/refs */}
                   <Pressable accessibilityRole="button" accessibilityLabel={`Editar ${title}`} onPress={() => edit(id, isCustom)} style={{ flex: 1, minHeight: 44, justifyContent: 'center' }}>
                     <Text style={{ color: theme.colors.text, fontFamily: theme.typography.listItem.family }}>{title}</Text>
-                    <Text style={{ color: theme.colors.text2, fontSize: 11, textTransform: 'uppercase' }}>{tag}</Text>
+                    <Text style={{ color: theme.colors.text2, fontSize: 11 * theme.fontScale, textTransform: 'uppercase' }}>{tag}</Text>
                   </Pressable>
                   {item && !item.unreadable ? (
                     <Pressable accessibilityRole="button" accessibilityLabel={revealed[id] ? 'Ocultar' : 'Mostrar'} onPress={() => { touch(); setRevealed((current) => ({ ...current, [id]: !current[id] })); }} style={styles.eye}>
@@ -300,7 +300,7 @@ const styles = StyleSheet.create({
   locked: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 20, paddingBottom: 50 },
   lockIcon: { width: 112, height: 112, borderRadius: 38, alignItems: 'center', justifyContent: 'center', overflow: 'hidden' },
   scanLine: { position: 'absolute', left: 14, right: 14, top: 55, height: 2 },
-  title: { fontSize: 24, letterSpacing: -0.6 },
+  title: { letterSpacing: -0.6 },
   explanation: { maxWidth: 290, textAlign: 'center', lineHeight: 24 },
   notice: { textAlign: 'center', lineHeight: 21 },
   error: { marginVertical: 10, lineHeight: 21 },
