@@ -4,6 +4,10 @@ import { SplashScreen } from '../screens/splash/SplashScreen';
 import { OnboardingScreen } from '../screens/onboarding/OnboardingScreen';
 import { AuthScreen } from '../screens/auth/AuthScreen';
 import { VerifyingScreen } from '../screens/loading/VerifyingScreen';
+import { ReadyScreen } from '../screens/assessment/ReadyScreen';
+import { QuizScreen } from '../screens/assessment/QuizScreen';
+import { ProcessingScreen } from '../screens/assessment/ProcessingScreen';
+import { ResultScreen } from '../screens/assessment/ResultScreen';
 import { PlaceholderScreen } from '../screens/shared/PlaceholderScreen';
 import { TabNavigator } from './TabNavigator';
 import type { RootStackParamList } from './types';
@@ -18,10 +22,10 @@ export function RootNavigator() {
       <Stack.Screen name="Auth" component={AuthScreen} />
       <Stack.Screen name="Recover" component={PlaceholderScreen} />
       <Stack.Screen name="Verifying" component={VerifyingScreen} />
-      <Stack.Screen name="Ready" component={PlaceholderScreen} />
-      <Stack.Screen name="Quiz" component={PlaceholderScreen} />
-      <Stack.Screen name="Processing" component={PlaceholderScreen} />
-      <Stack.Screen name="Result" component={PlaceholderScreen} />
+      <Stack.Screen name="Ready" component={ReadyScreen} />
+      <Stack.Screen name="Quiz" component={QuizScreen} />
+      <Stack.Screen name="Processing" component={ProcessingScreen} />
+      <Stack.Screen name="Result" component={ResultScreen} />
       <Stack.Screen name="MainTabs" component={TabNavigator} />
       <Stack.Screen name="Vault" component={PlaceholderScreen} />
       <Stack.Screen name="Contact" component={PlaceholderScreen} />
