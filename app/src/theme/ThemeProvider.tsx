@@ -6,10 +6,12 @@ import {
   fontScale,
   heights,
   highContrastOverrides,
+  highContrastTextInk,
   lightPalette,
   lightTextInk,
   motion,
   primaryButtonShadow,
+  progressHeight,
   radii,
   spacing,
   statusColorFor,
@@ -30,6 +32,7 @@ export interface ResolvedTheme {
   spacing: typeof spacing;
   radii: typeof radii;
   heights: typeof heights;
+  progressHeight: typeof progressHeight;
   shadow: { card: typeof cardShadow; primaryButton: typeof primaryButtonShadow };
   motion: typeof motion;
 }
@@ -49,13 +52,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       name: themeName,
       contrast,
       colors,
-      ink: (statusColor) => (themeName === 'dark' ? statusColor : lightTextInk[statusColor] ?? statusColor),
+      ink: (statusColor) => (themeName === 'dark' ? statusColor : (contrast ? highContrastTextInk[statusColor] : undefined) ?? lightTextInk[statusColor] ?? statusColor),
       statusColor: (percent) => statusColorFor(percent, colors),
       fontScale: fontScale[font],
       typography,
       spacing,
       radii,
       heights,
+      progressHeight,
       shadow: { card: cardShadow, primaryButton: primaryButtonShadow },
       motion,
     };

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Pressable, StyleSheet, Text, TextInput, View, type TextInputProps } from 'react-native';
+import { PressableFeedback } from './PressableFeedback';
+import { StyleSheet, Text, TextInput, View, type TextInputProps } from 'react-native';
 import { Icon } from '../theme/Icon';
 import { useTheme } from '../theme/ThemeProvider';
 
@@ -16,7 +17,7 @@ export function TextField({ label, error, secure, ...inputProps }: TextFieldProp
 
   return (
     <View style={styles.wrap}>
-      <Text style={{ fontSize: 13 * theme.fontScale, color: theme.colors.text2, fontFamily: theme.typography.secondary.family }}>
+      <Text style={{ fontSize: theme.typography.secondary.size * theme.fontScale, color: theme.colors.text2, fontFamily: theme.typography.secondary.family }}>
         {label}
       </Text>
       <View
@@ -29,23 +30,23 @@ export function TextField({ label, error, secure, ...inputProps }: TextFieldProp
           {...inputProps}
           secureTextEntry={secure && !reveal}
           placeholderTextColor={theme.colors.text2}
-          style={[styles.input, { fontSize: 15 * theme.fontScale, color: theme.colors.text, fontFamily: theme.typography.body.family }]}
+          style={[styles.input, { fontSize: theme.typography.body.size * theme.fontScale, color: theme.colors.text, fontFamily: theme.typography.body.family }]}
         />
         {secure ? (
-          <Pressable
+          <PressableFeedback
             accessibilityRole="button"
             accessibilityLabel={reveal ? 'Ocultar senha' : 'Mostrar senha'}
             onPress={() => setReveal((v) => !v)}
             style={styles.eyeButton}
           >
             <Icon glyph={reveal ? 'eyeOff' : 'eye'} size={20} color={theme.colors.text2} />
-          </Pressable>
+          </PressableFeedback>
         ) : null}
       </View>
       {error ? (
         <View style={styles.errorRow}>
           <Icon glyph="alert" size={14} color={theme.colors.red} />
-          <Text style={{ fontSize: 12 * theme.fontScale, color: theme.ink(theme.colors.red) }}>{error}</Text>
+          <Text style={{ fontSize: theme.typography.small.size * theme.fontScale, color: theme.ink(theme.colors.red) }}>{error}</Text>
         </View>
       ) : null}
     </View>

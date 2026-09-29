@@ -1,5 +1,10 @@
 import React from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { radii, spacing } from '../../theme/tokens';
+import { PressableFeedback } from '../../components/PressableFeedback';
+import { SectionTitle } from '../../components/SectionTitle';
+import { ListRow } from '../../components/ListRow';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import Svg, { Circle } from 'react-native-svg';
 import type { CompositeScreenProps } from '@react-navigation/native';
 import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -10,6 +15,7 @@ import { useAppStore } from '../../state/store';
 import { readinessScore, levelOf } from '../../lib/scoring';
 import { totalPoints } from '../../lib/gamification';
 import { PLAN_CATEGORIES, TASKS } from '../../content/plan';
+import { NOTIFICATIONS } from '../../content/notifications';
 import type { MainTabParamList, RootStackParamList } from '../../navigation/types';
 
 type Props = CompositeScreenProps<
@@ -36,6 +42,7 @@ export function HomeScreen({ navigation }: Props) {
   const completedSimulationCount = completedSimulationIds.length;
   const score = readinessScore({ baseScore, completedTaskCount, completedSimulationCount });
   const level = levelOf(score);
+  const levelColor = score >= 85 ? theme.colors.green : score >= 70 ? theme.colors.blue : score >= 40 ? theme.colors.amber : theme.colors.red;
   const points = totalPoints({
     assessmentDone: baseScore !== null,
     completedTaskCount,
@@ -43,6 +50,7 @@ export function HomeScreen({ navigation }: Props) {
     completedSimulationCount,
   });
   const pendingTasks = TASKS.filter((task) => !completedTaskIds.includes(task.id)).slice(0, 3);
+  const notificationCount = NOTIFICATIONS.filter((item) => item.id !== 'n2' || !hasTrustedContact).length;
 
   const quickAccess: { label: string; glyph: 'lock' | 'users' | 'play' | 'doc'; onPress: () => void }[] = [
     { label: 'Cofre', glyph: 'lock', onPress: () => navigation.navigate('Vault') },
@@ -60,62 +68,67 @@ export function HomeScreen({ navigation }: Props) {
       ]}
     >
       <View style={styles.headerRow}>
-        <Text style={{ fontSize: 22 * theme.fontScale, color: theme.colors.text, fontFamily: theme.typography.screenTitle.family }}>
+        <Text style={{ fontSize: theme.typography.compactTitle.size * theme.fontScale, color: theme.colors.text, fontFamily: theme.typography.screenTitle.family }}>
           {greeting()}, {user?.name ?? 'visitante'}
         </Text>
-        <Pressable accessibilityRole="button" accessibilityLabel="Abrir notificações" onPress={() => navigation.navigate('Notifications')} style={styles.bell}>
+        <PressableFeedback accessibilityRole="button" accessibilityLabel="Abrir notificações" onPress={() => navigation.navigate('Notifications')} style={styles.bell}>
           <Icon glyph="bell" size={22} color={theme.colors.text2} />
-        </Pressable>
+          {notificationCount > 0 ? <View style={[styles.notificationCount, { backgroundColor: theme.colors.red, borderColor: theme.colors.surface }]}><Text style={{ color: theme.colors.onDeep, fontFamily: theme.typography.micro.family, fontSize: theme.typography.micro.size * theme.fontScale, lineHeight: 13 * theme.fontScale }}>{notificationCount}</Text></View> : null}
+        </PressableFeedback>
       </View>
 
       <View style={[styles.readinessCard, { backgroundColor: theme.colors.deep }]}>
-        <View>
-          <Text style={[styles.readinessScore, { fontSize: 44 * theme.fontScale }]}>{score}</Text>
-          <Text style={[styles.readinessLevel, { fontSize: 14 * theme.fontScale, color: theme.ink(level.color) }]}>{level.label}</Text>
+        <View style={styles.readinessRing} accessible accessibilityLabel={`Pontuação de prontidão: ${score} de 100`}>
+          <Svg width={92} height={92} style={styles.readinessRingSvg}>
+            <Circle cx={46} cy={46} r={34} stroke={theme.colors.onDeepBorder} strokeWidth={9} fill="none" />
+            <Circle cx={46} cy={46} r={34} stroke={theme.colors.green} strokeWidth={9} strokeLinecap="round" strokeDasharray={`${2 * Math.PI * 34}`} strokeDashoffset={2 * Math.PI * 34 * (1 - score / 100)} transform="rotate(-90 46 46)" fill="none" />
+          </Svg>
+          <Text style={[styles.readinessScore, { fontSize: theme.typography.cardTitle.size * theme.fontScale }]}>{score}</Text>
         </View>
         <View style={styles.readinessMeta}>
-          <Text style={[styles.readinessMetaText, { fontSize: 13 * theme.fontScale }]}>{completedTaskCount}/{TASKS.length} tarefas</Text>
-          <Text style={[styles.readinessMetaText, { fontSize: 13 * theme.fontScale }]}>{points} pontos</Text>
+          <Text style={[styles.readinessLevel, { fontSize: theme.typography.bodySmall.size * theme.fontScale, color: levelColor }]}>{level.label}</Text>
+          <Text style={{ color: theme.colors.onDeepMuted, fontSize: theme.typography.secondary.size * theme.fontScale }}>{completedTaskCount}/{TASKS.length} tarefas</Text>
+          <Text style={{ color: theme.colors.onDeepMuted, fontSize: theme.typography.secondary.size * theme.fontScale }}>{points} pontos</Text>
         </View>
       </View>
 
       {baseScore === null ? <Button label="Iniciar teste" onPress={() => navigation.navigate('Quiz')} /> : null}
 
-      <Pressable
+      <PressableFeedback
         accessibilityRole="button"
         accessibilityLabel="Preciso de ajuda agora — Modo Emergência"
         onPress={() => navigation.navigate('EmergencyPick')}
-        style={[styles.emergencyButton, { backgroundColor: 'rgba(229,72,77,.12)', borderColor: theme.colors.red }]}
+        style={[styles.emergencyButton, { backgroundColor: theme.colors.dangerTint, borderColor: theme.colors.red }]}
       >
         <Icon glyph="alert" size={18} color={theme.colors.red} />
-        <Text style={[styles.emergencyText, { fontSize: 14 * theme.fontScale, color: theme.ink(theme.colors.red) }]}>Preciso de ajuda agora — Modo Emergência</Text>
-      </Pressable>
+        <Text style={[styles.emergencyText, { fontSize: theme.typography.bodySmall.size * theme.fontScale, color: theme.ink(theme.colors.red) }]}>Preciso de ajuda agora — Modo Emergência</Text>
+      </PressableFeedback>
 
-      <Text style={[styles.sectionLabel, { fontSize: 11 * theme.fontScale, color: theme.colors.text2 }]}>PRÓXIMAS TAREFAS</Text>
+      <SectionTitle>PRÓXIMAS TAREFAS</SectionTitle>
       <View style={styles.taskList}>
         {pendingTasks.map((task) => {
           const category = PLAN_CATEGORIES.find((c) => c.id === task.planCategoryId);
           return (
-            <Pressable
+            <ListRow
               key={task.id}
               accessibilityRole="button"
               accessibilityLabel={task.title}
               onPress={() => navigation.navigate('TaskDetail', { taskId: task.id })}
-              style={[styles.taskRow, { borderColor: theme.colors.border, backgroundColor: theme.colors.surface }]}
+              style={styles.taskRow}
             >
               <View style={{ flex: 1 }}>
-                <Text style={[styles.taskTitle, { fontSize: 15 * theme.fontScale, color: theme.colors.text }]}>{task.title}</Text>
-                <Text style={[styles.taskMeta, { fontSize: 12 * theme.fontScale, color: theme.colors.text2 }]}>{task.minutes} min · {category?.name}</Text>
+                <Text style={[styles.taskTitle, { fontSize: theme.typography.body.size * theme.fontScale, color: theme.colors.text }]}>{task.title}</Text>
+                <Text style={[styles.taskMeta, { fontSize: theme.typography.small.size * theme.fontScale, color: theme.colors.text2 }]}>{task.minutes} min · {category?.name}</Text>
               </View>
-            </Pressable>
+            </ListRow>
           );
         })}
       </View>
 
-      <Text style={[styles.sectionLabel, { fontSize: 11 * theme.fontScale, color: theme.colors.text2 }]}>ACESSO RÁPIDO</Text>
+      <SectionTitle>ACESSO RÁPIDO</SectionTitle>
       <View style={styles.grid}>
         {quickAccess.map((item) => (
-          <Pressable
+          <PressableFeedback
             key={item.label}
             accessibilityRole="button"
             accessibilityLabel={item.label}
@@ -123,8 +136,8 @@ export function HomeScreen({ navigation }: Props) {
             style={[styles.gridItem, { backgroundColor: theme.colors.surface, borderColor: theme.colors.border }]}
           >
             <Icon glyph={item.glyph} size={20} color={theme.colors.blue} />
-            <Text style={[styles.gridLabel, { fontSize: 13 * theme.fontScale, color: theme.colors.text }]}>{item.label}</Text>
-          </Pressable>
+            <Text style={[styles.gridLabel, { fontSize: theme.typography.secondary.size * theme.fontScale, color: theme.colors.text }]}>{item.label}</Text>
+          </PressableFeedback>
         ))}
       </View>
     </ScrollView>
@@ -135,19 +148,20 @@ const styles = StyleSheet.create({
   container: { gap: 20 },
   headerRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   bell: { width: 44, height: 44, alignItems: 'center', justifyContent: 'center' },
-  readinessCard: { borderRadius: 20, padding: 22, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+  notificationCount: { position: 'absolute', top: 2, right: 2, minWidth: 18, height: 18, borderRadius: radii.pill, borderWidth: 2, alignItems: 'center', justifyContent: 'center' },
+  readinessCard: { borderRadius: radii.heroCard, padding: spacing.heroInset, flexDirection: 'row', alignItems: 'center', gap: 20 },
+  readinessRing: { width: 92, height: 92, alignItems: 'center', justifyContent: 'center' },
+  readinessRingSvg: { position: 'absolute' },
   readinessScore: { fontWeight: '600', color: '#fff', letterSpacing: -1.5 },
   readinessLevel: { fontWeight: '600', marginTop: 2 },
-  readinessMeta: { alignItems: 'flex-end', gap: 4 },
-  readinessMetaText: { color: 'rgba(255,255,255,.85)' },
-  emergencyButton: { flexDirection: 'row', alignItems: 'center', gap: 10, padding: 16, borderRadius: 16, borderWidth: 1 },
+  readinessMeta: { flex: 1, alignItems: 'flex-start', gap: 4 },
+  emergencyButton: { flexDirection: 'row', alignItems: 'center', gap: spacing.listGap, padding: spacing.inset, borderRadius: radii.card, borderWidth: 1 },
   emergencyText: { fontWeight: '600', flex: 1 },
-  sectionLabel: { fontWeight: '600', letterSpacing: 1.5 },
-  taskList: { gap: 10 },
-  taskRow: { flexDirection: 'row', alignItems: 'center', padding: 14, borderRadius: 16, borderWidth: 1 },
+  taskList: { gap: spacing.listGap },
+  taskRow: { padding: spacing.compactInset },
   taskTitle: { fontWeight: '500' },
   taskMeta: { marginTop: 2 },
   grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
-  gridItem: { width: '47%', padding: 16, borderRadius: 16, borderWidth: 1, gap: 8 },
+  gridItem: { width: '47%', padding: spacing.inset, borderRadius: radii.card, borderWidth: 1, gap: 8 },
   gridLabel: { fontWeight: '500' },
 });

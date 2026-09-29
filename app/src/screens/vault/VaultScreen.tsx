@@ -1,5 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { AccessibilityInfo, ActivityIndicator, Animated, AppState, Easing, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { radii, spacing } from '../../theme/tokens';
+import { PressableFeedback } from '../../components/PressableFeedback';
+import { useReduceMotion } from '../../components/useReduceMotion';
+import { ActivityIndicator, Animated, AppState, Easing, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as LocalAuthentication from 'expo-local-authentication';
 import { getRandomBytes } from 'expo-crypto';
@@ -18,7 +21,6 @@ type OpenItem = { value: string; label?: string; unreadable?: boolean };
 type Editor = { promptId: string; label: string; value: string; custom: boolean };
 
 const LOCK_MS = 45_000;
-const SCAN_MS = 1_400;
 
 function customId(): string {
   return `c-${Array.from(getRandomBytes(8), (byte) => byte.toString(16).padStart(2, '0')).join('')}`;
@@ -31,7 +33,7 @@ export function VaultScreen({ navigation }: Props) {
   const [unlocked, setUnlocked] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [scanning, setScanning] = useState(false);
-  const [reduceMotion, setReduceMotion] = useState(false);
+  const reduceMotion = useReduceMotion();
   const [manualUnlock, setManualUnlock] = useState(false);
   const [items, setItems] = useState<Record<string, OpenItem>>({});
   const [revealed, setRevealed] = useState<Record<string, boolean>>({});
@@ -65,18 +67,14 @@ export function VaultScreen({ navigation }: Props) {
   }
 
   useEffect(() => {
-    void AccessibilityInfo.isReduceMotionEnabled().then(setReduceMotion).catch(() => {});
-  }, []);
-
-  useEffect(() => {
     if (!scanning || reduceMotion) return;
     const animation = Animated.loop(Animated.sequence([
-      Animated.timing(scanPosition, { toValue: 34, duration: SCAN_MS / 2, easing: Easing.inOut(Easing.ease), useNativeDriver: true }),
-      Animated.timing(scanPosition, { toValue: -34, duration: SCAN_MS / 2, easing: Easing.inOut(Easing.ease), useNativeDriver: true }),
+      Animated.timing(scanPosition, { toValue: 34, duration: theme.motion.vaultScanMs / 2, easing: Easing.bezier(...theme.motion.easing), useNativeDriver: true }),
+      Animated.timing(scanPosition, { toValue: -34, duration: theme.motion.vaultScanMs / 2, easing: Easing.bezier(...theme.motion.easing), useNativeDriver: true }),
     ]));
     animation.start();
     return () => animation.stop();
-  }, [scanning, reduceMotion, scanPosition]);
+  }, [scanning, reduceMotion, scanPosition, theme.motion]);
 
   useEffect(() => {
     const epoch = epochRef;
@@ -145,7 +143,7 @@ export function VaultScreen({ navigation }: Props) {
       }
       const [key] = await Promise.all([
         getOrCreateVaultKey(),
-        reduceMotion ? Promise.resolve() : new Promise<void>((resolve) => setTimeout(resolve, SCAN_MS)),
+        reduceMotion ? Promise.resolve() : new Promise<void>((resolve) => setTimeout(resolve, theme.motion.vaultScanMs)),
       ]);
       if (epoch !== epochRef.current) return;
       keyRef.current = key;
@@ -221,16 +219,16 @@ export function VaultScreen({ navigation }: Props) {
   return (
     <View style={{ flex: 1, backgroundColor: theme.colors.bg }} onTouchStart={touch}>
       <ScrollView contentContainerStyle={{ paddingTop: insets.top + 16, paddingBottom: insets.bottom + 30, paddingHorizontal: theme.spacing.marginX, flexGrow: 1 }}>
-        <Pressable accessibilityRole="button" accessibilityLabel="Voltar" onPress={() => navigation.goBack()} style={styles.back}>
+        <PressableFeedback accessibilityRole="button" accessibilityLabel="Voltar" onPress={() => navigation.goBack()} style={styles.back}>
           <Icon glyph="back" size={20} color={theme.colors.text} />
-        </Pressable>
+        </PressableFeedback>
         {!unlocked ? (
           <View style={styles.locked}>
             <View style={[styles.lockIcon, { backgroundColor: theme.colors.tint }]}>
               <Icon glyph="lock" size={50} color={theme.colors.blue} />
               {scanning && !reduceMotion ? <Animated.View style={[styles.scanLine, { backgroundColor: theme.colors.blue, transform: [{ translateY: scanPosition }] }]} /> : null}
             </View>
-            <Text style={[styles.title, { fontSize: 24 * theme.fontScale, color: theme.colors.text, fontFamily: theme.typography.screenTitle.family }]}>Cofre de Preparação</Text>
+            <Text style={[styles.title, { fontSize: theme.typography.cardTitle.size * theme.fontScale, color: theme.colors.text, fontFamily: theme.typography.screenTitle.family }]}>Cofre de Preparação</Text>
             <Text style={[styles.explanation, { color: theme.colors.text2 }]}>Suas informações críticas ficam protegidas. Confirme sua identidade para abrir.</Text>
             <Button label="Desbloquear com biometria" loading={scanning} onPress={() => void open()} />
             {manualUnlock ? (
@@ -239,20 +237,20 @@ export function VaultScreen({ navigation }: Props) {
                 <Button label="Desbloquear sem biometria" variant="secondary" onPress={() => void open(true)} />
               </>
             ) : null}
-            {error ? <Text accessibilityRole="alert" style={[styles.error, { color: theme.colors.red }]}>{error}</Text> : null}
+            {error ? <Text accessibilityRole="alert" style={[styles.error, { color: theme.ink(theme.colors.red) }]}>{error}</Text> : null}
           </View>
         ) : (
           <>
             <View style={styles.heading}>
               <View style={{ flex: 1 }}>
-                <Text style={[styles.title, { fontSize: 24 * theme.fontScale, color: theme.colors.text, fontFamily: theme.typography.screenTitle.family }]}>Cofre de Preparação</Text>
+                <Text style={[styles.title, { fontSize: theme.typography.cardTitle.size * theme.fontScale, color: theme.colors.text, fontFamily: theme.typography.screenTitle.family }]}>Cofre de Preparação</Text>
                 <Text style={{ color: theme.colors.text2 }}>Bloqueia automaticamente após inatividade</Text>
               </View>
-              <Pressable accessibilityRole="button" accessibilityLabel="Bloquear" onPress={lock} style={[styles.lockButton, { borderColor: theme.colors.border }]}>
+              <PressableFeedback accessibilityRole="button" accessibilityLabel="Bloquear" onPress={lock} style={[styles.lockButton, { borderColor: theme.colors.border }]}>
                 <Text style={{ color: theme.colors.text }}>Bloquear</Text>
-              </Pressable>
+              </PressableFeedback>
             </View>
-            {error ? <Text accessibilityRole="alert" style={[styles.error, { color: theme.colors.red }]}>{error}</Text> : null}
+            {error ? <Text accessibilityRole="alert" style={[styles.error, { color: theme.ink(theme.colors.red) }]}>{error}</Text> : null}
             {error?.includes('carregar') ? <Button label="Tentar carregar novamente" variant="secondary" onPress={() => { if (keyRef.current) void loadItems(keyRef.current, epochRef.current); }} /> : null}
             {loaded ? [...catalog, ...custom].map(({ id, title, glyph, tag, item, custom: isCustom }) => (
               <View key={id} style={[styles.item, { borderColor: theme.colors.border, backgroundColor: theme.colors.surface }]}>
@@ -260,22 +258,22 @@ export function VaultScreen({ navigation }: Props) {
                   <View style={[styles.itemIcon, { backgroundColor: theme.colors.tint }]}><Icon glyph={glyph} size={18} color={theme.colors.blueInk} /></View>
                   {/* The callback reads the timer ref only when the user presses it. */}
                   {/* eslint-disable-next-line react-hooks/refs */}
-                  <Pressable accessibilityRole="button" accessibilityLabel={`Editar ${title}`} onPress={() => edit(id, isCustom)} style={{ flex: 1, minHeight: 44, justifyContent: 'center' }}>
+                  <PressableFeedback accessibilityRole="button" accessibilityLabel={`Editar ${title}`} onPress={() => edit(id, isCustom)} style={{ flex: 1, minHeight: 44, justifyContent: 'center' }}>
                     <Text style={{ color: theme.colors.text, fontFamily: theme.typography.listItem.family }}>{title}</Text>
-                    <Text style={{ color: theme.colors.text2, fontSize: 11 * theme.fontScale, textTransform: 'uppercase' }}>{tag}</Text>
-                  </Pressable>
+                    <Text style={{ color: theme.colors.text2, fontSize: theme.typography.sectionLabel.size * theme.fontScale, textTransform: 'uppercase' }}>{tag}</Text>
+                  </PressableFeedback>
                   {item && !item.unreadable ? (
-                    <Pressable accessibilityRole="button" accessibilityLabel={revealed[id] ? 'Ocultar' : 'Mostrar'} onPress={() => { touch(); setRevealed((current) => ({ ...current, [id]: !current[id] })); }} style={styles.eye}>
+                    <PressableFeedback accessibilityRole="button" accessibilityLabel={revealed[id] ? 'Ocultar' : 'Mostrar'} onPress={() => { touch(); setRevealed((current) => ({ ...current, [id]: !current[id] })); }} style={styles.eye}>
                       <Icon glyph={revealed[id] ? 'eyeOff' : 'eye'} size={19} color={theme.colors.text2} />
-                    </Pressable>
+                    </PressableFeedback>
                   ) : null}
                 </View>
-                {item?.unreadable ? <Text style={{ color: theme.colors.red }}>Cifrado em outro aparelho — não é possível ler aqui</Text> : (
-                  <Pressable accessibilityRole="button" accessibilityLabel={`Editar ${title}`} onPress={() => edit(id, isCustom)} style={[styles.value, { backgroundColor: theme.colors.soft }]}>
+                {item?.unreadable ? <Text style={{ color: theme.ink(theme.colors.red) }}>Cifrado em outro aparelho — não é possível ler aqui</Text> : (
+                  <PressableFeedback accessibilityRole="button" accessibilityLabel={`Editar ${title}`} onPress={() => edit(id, isCustom)} style={[styles.value, { backgroundColor: theme.colors.soft }]}>
                     <Text style={{ color: theme.colors.text }}>{item ? revealed[id] ? item.value : '••••' : 'Toque para adicionar'}</Text>
-                  </Pressable>
+                  </PressableFeedback>
                 )}
-                {item ? <Pressable accessibilityRole="button" accessibilityLabel={`Excluir ${title}`} onPress={() => void remove(id)} style={styles.delete}><Text style={{ color: theme.colors.red }}>Excluir</Text></Pressable> : null}
+                {item ? <PressableFeedback accessibilityRole="button" accessibilityLabel={`Excluir ${title}`} onPress={() => void remove(id)} style={styles.delete}><Text style={{ color: theme.ink(theme.colors.red) }}>Excluir</Text></PressableFeedback> : null}
               </View>
             )) : null}
             {loaded && editor ? (
@@ -298,21 +296,21 @@ export function VaultScreen({ navigation }: Props) {
 const styles = StyleSheet.create({
   back: { width: 44, height: 44, alignItems: 'center', justifyContent: 'center', marginBottom: 20 },
   locked: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 20, paddingBottom: 50 },
-  lockIcon: { width: 112, height: 112, borderRadius: 38, alignItems: 'center', justifyContent: 'center', overflow: 'hidden' },
+  lockIcon: { width: 112, height: 112, borderRadius: radii.vaultIcon, alignItems: 'center', justifyContent: 'center', overflow: 'hidden' },
   scanLine: { position: 'absolute', left: 14, right: 14, top: 55, height: 2 },
   title: { letterSpacing: -0.6 },
   explanation: { maxWidth: 290, textAlign: 'center', lineHeight: 24 },
   notice: { textAlign: 'center', lineHeight: 21 },
   error: { marginVertical: 10, lineHeight: 21 },
   heading: { flexDirection: 'row', gap: 12, alignItems: 'flex-start', marginBottom: 20 },
-  lockButton: { borderWidth: 1, borderRadius: 13, paddingHorizontal: 12, minHeight: 44, justifyContent: 'center' },
-  item: { padding: 16, borderWidth: 1, borderRadius: 18, marginBottom: 10 },
-  itemHeading: { flexDirection: 'row', gap: 11, alignItems: 'center', marginBottom: 8 },
-  itemIcon: { width: 34, height: 34, borderRadius: 12, alignItems: 'center', justifyContent: 'center' },
+  lockButton: { borderWidth: 1, borderRadius: radii.iconSquare, paddingHorizontal: 12, minHeight: 44, justifyContent: 'center' },
+  item: { padding: spacing.inset, borderWidth: 1, borderRadius: radii.card, marginBottom: 10 },
+  itemHeading: { flexDirection: 'row', gap: spacing.listGap, alignItems: 'center', marginBottom: 8 },
+  itemIcon: { width: 34, height: 34, borderRadius: radii.iconSquare, alignItems: 'center', justifyContent: 'center' },
   eye: { width: 44, height: 44, alignItems: 'center', justifyContent: 'center' },
-  value: { padding: 12, borderRadius: 12, minHeight: 44, justifyContent: 'center' },
+  value: { padding: 12, borderRadius: radii.iconSquare, minHeight: 44, justifyContent: 'center' },
   delete: { minHeight: 44, justifyContent: 'center', alignSelf: 'flex-end' },
-  editor: { gap: 12, padding: 16, borderWidth: 1, borderRadius: 18, marginVertical: 12 },
-  field: { minHeight: 54, borderWidth: 1, borderRadius: 16, paddingHorizontal: 14 },
+  editor: { gap: 12, padding: spacing.inset, borderWidth: 1, borderRadius: radii.card, marginVertical: 12 },
+  field: { minHeight: 54, borderWidth: 1, borderRadius: radii.field, paddingHorizontal: 14 },
   multiline: { minHeight: 90, textAlignVertical: 'top', paddingTop: 12 },
 });

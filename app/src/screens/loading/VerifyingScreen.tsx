@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useTheme } from '../../theme/ThemeProvider';
+import { useReduceMotion } from '../../components/useReduceMotion';
+import { Icon } from '../../theme/Icon';
 import type { RootStackParamList } from '../../navigation/types';
 import { fetchLatestAssessment } from '../../api/assessments';
 import { fetchPlan } from '../../api/plan';
@@ -17,6 +19,7 @@ const DURATION_MS = 1400;
 
 export function VerifyingScreen({ route, navigation }: Props) {
   const theme = useTheme();
+  const reduceMotion = useReduceMotion();
   const label = route.params?.label ?? 'Carregando';
   const setAssessment = useAppStore((s) => s.setAssessment);
   const setCompletedTasks = useAppStore((s) => s.setCompletedTasks);
@@ -88,11 +91,11 @@ export function VerifyingScreen({ route, navigation }: Props) {
 
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.bg }]}>
-      <ActivityIndicator size={62 > 48 ? 'large' : 'small'} color={theme.colors.blue} />
-      <Text style={[styles.label, { fontSize: 18 * theme.fontScale, color: theme.colors.text, fontFamily: theme.typography.sectionTitle.family }]}>
+      {reduceMotion ? <Icon glyph="check" size={62} color={theme.colors.blue} /> : <ActivityIndicator size="large" color={theme.colors.blue} />}
+      <Text style={[styles.label, { fontSize: theme.typography.subheading.size * theme.fontScale, color: theme.colors.text, fontFamily: theme.typography.sectionTitle.family }]}>
         {label}
       </Text>
-      <Text style={[styles.subtitle, { fontSize: 13 * theme.fontScale, color: theme.colors.text2, fontFamily: theme.typography.secondary.family }]}>
+      <Text style={[styles.subtitle, { fontSize: theme.typography.secondary.size * theme.fontScale, color: theme.colors.text2, fontFamily: theme.typography.secondary.family }]}>
         Preparando seu ambiente local
       </Text>
     </View>

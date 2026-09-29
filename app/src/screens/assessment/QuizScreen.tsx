@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { radii, spacing } from '../../theme/tokens';
+import { PressableFeedback } from '../../components/PressableFeedback';
+import { IconButton } from '../../components/IconButton';
+import { ProgressBar } from '../../components/ProgressBar';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { submitAssessment } from '../../api/assessments';
@@ -68,24 +72,15 @@ export function QuizScreen({ navigation }: Props) {
       ]}
     >
       <View style={styles.header}>
-        <Pressable
-          accessibilityRole="button"
-          accessibilityLabel="Voltar"
-          onPress={goBack}
-          style={[styles.backButton, { backgroundColor: theme.colors.surface, borderColor: theme.colors.border }]}
-        >
-          <Icon glyph="back" size={20} color={theme.colors.text} />
-        </Pressable>
+        <IconButton glyph="back" accessibilityLabel="Voltar" onPress={goBack} />
         <View style={styles.progressBlock}>
           <View style={styles.progressLabels}>
-            <Text style={[styles.progressTitle, { color: theme.colors.text2, fontSize: 11 * theme.fontScale }]}>TESTE DE PRONTIDÃO</Text>
-            <Text style={[styles.progressCount, { color: theme.colors.text2, fontSize: 12 * theme.fontScale }]}>
+            <Text style={[styles.progressTitle, { color: theme.colors.text2, fontSize: theme.typography.sectionLabel.size * theme.fontScale }]}>TESTE DE PRONTIDÃO</Text>
+            <Text style={[styles.progressCount, { color: theme.colors.text2, fontSize: theme.typography.small.size * theme.fontScale }]}>
               {String(index + 1).padStart(2, '0')}/{String(QUESTIONS.length).padStart(2, '0')}
             </Text>
           </View>
-          <View style={[styles.progressTrack, { backgroundColor: theme.colors.soft }]} accessibilityRole="progressbar" accessibilityValue={{ min: 0, max: QUESTIONS.length, now: index }}>
-            <View style={[styles.progressFill, { backgroundColor: theme.colors.blue, width: `${(index / QUESTIONS.length) * 100}%` }]} />
-          </View>
+          <ProgressBar value={index} max={QUESTIONS.length} />
         </View>
       </View>
 
@@ -93,15 +88,15 @@ export function QuizScreen({ navigation }: Props) {
         <View>
           <View style={[styles.categoryChip, { backgroundColor: theme.colors.tint }]}>
             <Icon glyph={category.glyph} size={15} color={theme.colors.blueInk} />
-            <Text style={[styles.categoryLabel, { color: theme.colors.blueInk, fontSize: 11.5 * theme.fontScale }]}>{category.name}</Text>
+            <Text style={[styles.categoryLabel, { color: theme.colors.blueInk, fontSize: theme.typography.small.size * theme.fontScale }]}>{category.name}</Text>
           </View>
-          <Text style={[styles.question, { color: theme.colors.text, fontFamily: theme.typography.screenTitle.family, fontSize: 25 * theme.fontScale, lineHeight: 34 * theme.fontScale }]}>{question.text}</Text>
+          <Text style={[styles.question, { color: theme.colors.text, fontFamily: theme.typography.screenTitle.family, fontSize: theme.typography.screenTitle.size * theme.fontScale, lineHeight: 34 * theme.fontScale }]}>{question.text}</Text>
         </View>
         <View style={styles.options} accessibilityRole="radiogroup">
           {ANSWER_OPTIONS.map((option, optionIndex) => {
             const isChecked = checked === optionIndex;
             return (
-              <Pressable
+              <PressableFeedback
                 key={option.key}
                 accessibilityRole="radio"
                 accessibilityLabel={option.label}
@@ -118,14 +113,14 @@ export function QuizScreen({ navigation }: Props) {
                 <View style={[styles.radio, { borderColor: isChecked ? theme.colors.blue : theme.colors.border }]}>
                   {isChecked ? <View style={[styles.radioDot, { backgroundColor: theme.colors.blue }]} /> : null}
                 </View>
-                <Text style={[styles.optionText, { color: isChecked ? theme.colors.blueInk : theme.colors.text, fontFamily: theme.typography.listItem.family, fontSize: 15 * theme.fontScale }]}>{option.label}</Text>
-              </Pressable>
+                <Text style={[styles.optionText, { color: isChecked ? theme.colors.blueInk : theme.colors.text, fontFamily: theme.typography.listItem.family, fontSize: theme.typography.body.size * theme.fontScale }]}>{option.label}</Text>
+              </PressableFeedback>
             );
           })}
         </View>
       </View>
 
-      <Text style={[styles.footer, { color: theme.colors.text2, fontSize: 12 * theme.fontScale }]}>
+      <Text style={[styles.footer, { color: theme.colors.text2, fontSize: theme.typography.small.size * theme.fontScale }]}>
         Não existe resposta errada — o resultado guia seu plano.
       </Text>
     </ScrollView>
@@ -135,21 +130,18 @@ export function QuizScreen({ navigation }: Props) {
 const styles = StyleSheet.create({
   container: { flexGrow: 1 },
   header: { flexDirection: 'row', alignItems: 'center', gap: 14 },
-  backButton: { width: 44, height: 44, borderRadius: 14, borderWidth: 1, alignItems: 'center', justifyContent: 'center' },
   progressBlock: { flex: 1 },
   progressLabels: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 7 },
   progressTitle: { fontWeight: '600', letterSpacing: 1.6 },
   progressCount: { fontWeight: '500' },
-  progressTrack: { height: 5, borderRadius: 99, overflow: 'hidden' },
-  progressFill: { height: 5, borderRadius: 99 },
-  body: { flexGrow: 1, justifyContent: 'center', gap: 28, paddingBottom: 20 },
-  categoryChip: { alignSelf: 'flex-start', flexDirection: 'row', alignItems: 'center', gap: 8, paddingHorizontal: 13, paddingVertical: 8, borderRadius: 99, marginBottom: 18 },
+  body: { flexGrow: 1, justifyContent: 'center', gap: spacing.blockGap, paddingBottom: 20 },
+  categoryChip: { alignSelf: 'flex-start', flexDirection: 'row', alignItems: 'center', gap: 8, paddingHorizontal: 13, paddingVertical: 8, borderRadius: radii.pill, marginBottom: 18 },
   categoryLabel: { fontWeight: '500' },
   question: { letterSpacing: -0.5 },
-  options: { gap: 11 },
-  option: { minHeight: 58, flexDirection: 'row', alignItems: 'center', gap: 13, paddingHorizontal: 18, paddingVertical: 14, borderWidth: 1.5, borderRadius: 18 },
-  radio: { width: 22, height: 22, borderRadius: 11, borderWidth: 2, alignItems: 'center', justifyContent: 'center' },
-  radioDot: { width: 10, height: 10, borderRadius: 5 },
+  options: { gap: spacing.listGap },
+  option: { minHeight: 58, flexDirection: 'row', alignItems: 'center', gap: 13, paddingHorizontal: 18, paddingVertical: 14, borderWidth: 1.5, borderRadius: radii.field },
+  radio: { width: 22, height: 22, borderRadius: radii.pill, borderWidth: 2, alignItems: 'center', justifyContent: 'center' },
+  radioDot: { width: 10, height: 10, borderRadius: radii.pill },
   optionText: { flex: 1 },
   footer: { lineHeight: 18, textAlign: 'center' },
 });

@@ -1,8 +1,12 @@
 import React from 'react';
+import { radii, spacing } from '../../theme/tokens';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Button } from '../../components/Button';
+import { Badge } from '../../components/Badge';
+import { Card } from '../../components/Card';
+import { SectionTitle } from '../../components/SectionTitle';
 import { Icon } from '../../theme/Icon';
 import { useTheme } from '../../theme/ThemeProvider';
 import { useAppStore } from '../../state/store';
@@ -44,47 +48,45 @@ export function ReadyScreen({ navigation }: Props) {
     >
       <View style={styles.header}>
         <View style={[styles.avatar, { backgroundColor: theme.colors.deep }]}>
-          <Text style={[styles.avatarText, { fontSize: 19 * theme.fontScale }]}>{name.charAt(0).toUpperCase()}</Text>
+          <Text style={[styles.avatarText, { fontSize: theme.typography.sectionTitle.size * theme.fontScale }]}>{name.charAt(0).toUpperCase()}</Text>
         </View>
         <View style={styles.headerCopy}>
-          <Text style={{ color: theme.colors.text, fontFamily: theme.typography.sectionTitle.family, fontSize: 16.5 * theme.fontScale, lineHeight: 24 * theme.fontScale }}>
+          <Text style={{ color: theme.colors.text, fontFamily: theme.typography.sectionTitle.family, fontSize: theme.typography.compactHeading.size * theme.fontScale, lineHeight: 24 * theme.fontScale }}>
             Tudo pronto, {name}
           </Text>
-          {email ? <Text numberOfLines={1} style={[styles.email, { color: theme.colors.text2, fontSize: 12.5 * theme.fontScale }]}>{email}</Text> : null}
+          {email ? <Text numberOfLines={1} style={[styles.email, { color: theme.colors.text2, fontSize: theme.typography.secondary.size * theme.fontScale }]}>{email}</Text> : null}
         </View>
-        {user?.guest ? (
-          <Text style={[styles.guestBadge, { backgroundColor: theme.colors.tint, color: theme.colors.blueInk, fontSize: 10.5 * theme.fontScale }]}>Visitante</Text>
-        ) : null}
+        {user?.guest ? <Badge label="Visitante" color={theme.colors.blue} glyph="user" style={styles.guestBadge} /> : null}
       </View>
 
       <View style={[styles.introCard, { backgroundColor: theme.colors.deep }]}>
-        <Text style={[styles.eyebrow, { fontSize: 10 * theme.fontScale }]}>PRIMEIRO PASSO</Text>
-        <Text style={[styles.cardTitle, { fontFamily: theme.typography.screenTitle.family, fontSize: 24 * theme.fontScale, lineHeight: 30 * theme.fontScale }]}>Teste de Prontidão Digital</Text>
-        <Text style={[styles.cardDescription, { fontFamily: theme.typography.secondary.family, fontSize: 14 * theme.fontScale, lineHeight: 23 * theme.fontScale }]}>
+        <Text style={[styles.eyebrow, { color: theme.colors.onDeepSubtle, fontSize: theme.typography.micro.size * theme.fontScale }]}>PRIMEIRO PASSO</Text>
+        <Text style={[styles.cardTitle, { fontFamily: theme.typography.screenTitle.family, fontSize: theme.typography.cardTitle.size * theme.fontScale, lineHeight: 30 * theme.fontScale }]}>Teste de Prontidão Digital</Text>
+        <Text style={[styles.cardDescription, { color: theme.colors.onDeepMuted, fontFamily: theme.typography.secondary.family, fontSize: theme.typography.bodySmall.size * theme.fontScale, lineHeight: 23 * theme.fontScale }]}>
           Responda algumas perguntas para descobrir o quanto você está preparado para recuperar sua vida digital.
         </Text>
         <View style={styles.facts}>
           {([['10', 'perguntas'], ['3 min', 'duração'], ['5', 'áreas']] as const).map(([value, label]) => (
-            <View key={label} style={styles.fact}>
-              <Text style={[styles.factValue, { fontSize: 15 * theme.fontScale }]}>{value}</Text>
-              <Text style={[styles.factLabel, { fontSize: 10.5 * theme.fontScale }]}>{label}</Text>
+            <View key={label} style={[styles.fact, { backgroundColor: theme.colors.onDeepTile, borderColor: theme.colors.onDeepBorder }]}>
+              <Text style={[styles.factValue, { fontSize: theme.typography.body.size * theme.fontScale }]}>{value}</Text>
+              <Text style={[styles.factLabel, { color: theme.colors.onDeepSubtle, fontSize: theme.typography.sectionLabel.size * theme.fontScale }]}>{label}</Text>
             </View>
           ))}
         </View>
       </View>
 
       <View style={styles.nextSection}>
-        <Text style={[styles.sectionLabel, { color: theme.colors.text2, fontSize: 10 * theme.fontScale }]}>O QUE VEM DEPOIS</Text>
+        <SectionTitle style={styles.sectionLabel}>O QUE VEM DEPOIS</SectionTitle>
         {NEXT_STEPS.map((step) => (
-          <View key={step.title} style={[styles.step, { backgroundColor: theme.colors.surface, borderColor: theme.colors.border }]}>
+          <Card key={step.title} style={styles.step}>
             <View style={[styles.stepIcon, { backgroundColor: theme.colors.tint }]}>
               <Icon glyph={step.glyph} size={19} color={theme.colors.blueInk} />
             </View>
             <View style={styles.stepCopy}>
-              <Text style={{ color: theme.colors.text, fontFamily: theme.typography.listItem.family, fontSize: 14 * theme.fontScale, lineHeight: 20 * theme.fontScale }}>{step.title}</Text>
-              <Text style={[styles.stepDescription, { color: theme.colors.text2, fontFamily: theme.typography.secondary.family, fontSize: 12 * theme.fontScale, lineHeight: 18 * theme.fontScale }]}>{step.description}</Text>
+              <Text style={{ color: theme.colors.text, fontFamily: theme.typography.listItem.family, fontSize: theme.typography.bodySmall.size * theme.fontScale, lineHeight: 20 * theme.fontScale }}>{step.title}</Text>
+              <Text style={[styles.stepDescription, { color: theme.colors.text2, fontFamily: theme.typography.secondary.family, fontSize: theme.typography.small.size * theme.fontScale, lineHeight: 18 * theme.fontScale }]}>{step.description}</Text>
             </View>
-          </View>
+          </Card>
         ))}
       </View>
 
@@ -99,24 +101,24 @@ export function ReadyScreen({ navigation }: Props) {
 const styles = StyleSheet.create({
   container: { flexGrow: 1 },
   header: { flexDirection: 'row', alignItems: 'center', gap: 13, marginBottom: 30 },
-  avatar: { width: 52, height: 52, borderRadius: 18, alignItems: 'center', justifyContent: 'center' },
+  avatar: { width: 52, height: 52, borderRadius: radii.card, alignItems: 'center', justifyContent: 'center' },
   avatarText: { color: '#fff', fontWeight: '600' },
   headerCopy: { flex: 1, minWidth: 0 },
   email: { marginTop: 3 },
-  guestBadge: { paddingHorizontal: 10, paddingVertical: 6, borderRadius: 99, fontWeight: '600', letterSpacing: 1 },
-  introCard: { borderRadius: 24, paddingHorizontal: 24, paddingVertical: 26 },
-  eyebrow: { color: 'rgba(234,242,255,.7)', fontWeight: '600', letterSpacing: 2.4, marginBottom: 14 },
+  guestBadge: { paddingHorizontal: 10, paddingVertical: 6 },
+  introCard: { borderRadius: radii.heroCard, paddingHorizontal: 24, paddingVertical: 26 },
+  eyebrow: { fontWeight: '600', letterSpacing: 2.4, marginBottom: 14 },
   cardTitle: { color: '#fff' },
-  cardDescription: { color: 'rgba(234,242,255,.86)', marginTop: 12 },
+  cardDescription: { marginTop: 12 },
   facts: { flexDirection: 'row', gap: 8, marginTop: 20 },
-  fact: { flex: 1, alignItems: 'center', paddingVertical: 11, paddingHorizontal: 4, borderRadius: 14, backgroundColor: 'rgba(255,255,255,.09)', borderColor: 'rgba(255,255,255,.12)', borderWidth: 1 },
+  fact: { flex: 1, alignItems: 'center', paddingVertical: 11, paddingHorizontal: 4, borderRadius: radii.iconSquare, borderWidth: 1 },
   factValue: { color: '#fff', fontWeight: '600' },
-  factLabel: { color: 'rgba(234,242,255,.78)', marginTop: 3 },
+  factLabel: { marginTop: 3 },
   nextSection: { gap: 12, marginTop: 26 },
-  sectionLabel: { fontWeight: '600', letterSpacing: 2.4, marginBottom: 2 },
-  step: { flexDirection: 'row', alignItems: 'center', gap: 13, padding: 15, borderRadius: 18, borderWidth: 1 },
-  stepIcon: { width: 38, height: 38, borderRadius: 13, alignItems: 'center', justifyContent: 'center' },
+  sectionLabel: { marginBottom: 2 },
+  step: { flexDirection: 'row', alignItems: 'center', gap: 13, padding: 15 },
+  stepIcon: { width: 38, height: 38, borderRadius: radii.iconSquare, alignItems: 'center', justifyContent: 'center' },
   stepCopy: { flex: 1, minWidth: 0 },
   stepDescription: { marginTop: 2 },
-  actions: { gap: 10, marginTop: 'auto', paddingTop: 24 },
+  actions: { gap: spacing.listGap, marginTop: 'auto', paddingTop: 24 },
 });

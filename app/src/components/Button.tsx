@@ -1,5 +1,6 @@
 import React from 'react';
-import { ActivityIndicator, Pressable, StyleSheet, Text } from 'react-native';
+import { PressableFeedback } from './PressableFeedback';
+import { ActivityIndicator, StyleSheet, Text } from 'react-native';
 import { useTheme } from '../theme/ThemeProvider';
 
 export interface ButtonProps {
@@ -16,9 +17,10 @@ export function Button({ label, onPress, variant = 'primary', disabled, loading 
   const isDashed = variant === 'dashed';
 
   return (
-    <Pressable
+    <PressableFeedback
       accessibilityRole="button"
       accessibilityLabel={label}
+      accessibilityState={{ disabled: !!(disabled || loading), busy: !!loading }}
       onPress={onPress}
       disabled={disabled || loading}
       style={[
@@ -36,19 +38,19 @@ export function Button({ label, onPress, variant = 'primary', disabled, loading 
       ]}
     >
       {loading ? (
-        <ActivityIndicator color={isPrimary ? '#fff' : theme.colors.text} />
+        <ActivityIndicator color={isPrimary ? theme.colors.onPrimary : theme.colors.text} />
       ) : (
         <Text
           style={{
-            color: isPrimary ? '#fff' : theme.colors.text,
+            color: isPrimary ? theme.colors.onPrimary : theme.colors.text,
             fontFamily: theme.typography.listItem.family,
-            fontSize: 15 * theme.fontScale,
+            fontSize: theme.typography.listItem.size * theme.fontScale,
           }}
         >
           {label}
         </Text>
       )}
-    </Pressable>
+    </PressableFeedback>
   );
 }
 
