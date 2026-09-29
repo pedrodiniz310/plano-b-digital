@@ -12,8 +12,6 @@ const AUTO_ADVANCE_MS = 2400;
 
 export function SplashScreen({ navigation }: Props) {
   const theme = useTheme();
-  const obDone = useAppStore((s) => s.obDone);
-  const user = useAppStore((s) => s.user);
   // Identidade estável via useState (não useRef) — Animated.Value não é uma
   // ref de DOM, mas a regra react-hooks/refs trata .current de useRef como
   // inacessível durante o render, o que .interpolate() faria logo abaixo.
@@ -27,15 +25,27 @@ export function SplashScreen({ navigation }: Props) {
     loop.start();
     Animated.timing(progress, { toValue: 1, duration: AUTO_ADVANCE_MS, easing: Easing.linear, useNativeDriver: false }).start();
 
-    const timer = setTimeout(() => {
+    let active = true;
+    let unsubscribeHydration = () => {};
+    const hydrated = new Promise<void>((resolve) => {
+      if (useAppStore.persist.hasHydrated()) resolve();
+      else unsubscribeHydration = useAppStore.persist.onFinishHydration(() => resolve());
+    });
+    let timer: ReturnType<typeof setTimeout>;
+    const delay = new Promise<void>((resolve) => { timer = setTimeout(resolve, AUTO_ADVANCE_MS); });
+    void Promise.all([hydrated, delay]).then(() => {
+      if (!active) return;
+      const { obDone, user } = useAppStore.getState();
       if (!obDone) navigation.replace('Onboarding');
       else if (user) navigation.replace('MainTabs');
       else navigation.replace('Auth');
-    }, AUTO_ADVANCE_MS);
+    });
 
     return () => {
       loop.stop();
+      active = false;
       clearTimeout(timer);
+      unsubscribeHydration();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps -- só deve rodar uma vez no boot da tela.
   }, []);

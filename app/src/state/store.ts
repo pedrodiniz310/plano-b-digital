@@ -5,6 +5,7 @@ import type { User } from '../types/auth';
 import type { Answers } from '../lib/scoring';
 import { asyncStorageAdapter, PERSIST_KEY } from './persist';
 import { secureStore } from './secureStore';
+import type { Op } from '../lib/outbox';
 
 interface PrefsSlice {
   theme: ThemeName;
@@ -50,7 +51,28 @@ interface ContactSlice {
   setHasTrustedContact: (value: boolean) => void;
 }
 
-type AppStore = PrefsSlice & SessionSlice & AssessmentSlice & PlanSlice & SimulationSlice & ContactSlice;
+export interface LocalIncident {
+  id: string;
+  scenarioId: string;
+  startedAtLocal: string;
+  actions: Record<string, { clientTimestamp: string; completedAt?: string }>;
+  closedAtLocal?: string;
+  startedAtServer?: string;
+  closedAtServer?: string;
+}
+
+interface IncidentSlice {
+  activeIncident: LocalIncident | null;
+  lastReport: LocalIncident | null;
+  outbox: Op[];
+  startIncident: (id: string, scenarioId: string, now: string) => void;
+  completeAction: (actionId: string, now: string) => void;
+  finishIncident: (now: string) => void;
+  applyIncidentSync: (id: string, patch: Partial<LocalIncident>) => void;
+  acknowledgeOutbox: (snapshot: readonly Op[], remaining: Op[]) => void;
+}
+
+type AppStore = PrefsSlice & SessionSlice & AssessmentSlice & PlanSlice & SimulationSlice & ContactSlice & IncidentSlice;
 
 export const useAppStore = create<AppStore>()(
   persist(
@@ -78,6 +100,43 @@ export const useAppStore = create<AppStore>()(
       })),
       setCompletedSimulations: (ids) => set({ completedSimulationIds: [...new Set(ids)] }),
       hasTrustedContact: false,
+      activeIncident: null,
+      lastReport: null,
+      outbox: [],
+      startIncident: (id, scenarioId, now) => set((s) => {
+        if (s.activeIncident && !s.activeIncident.closedAtLocal) return s;
+        return {
+          activeIncident: { id, scenarioId, startedAtLocal: now, actions: {} },
+          outbox: [...s.outbox, { kind: 'create', incidentId: id, scenarioId }],
+        };
+      }),
+      completeAction: (actionId, now) => set((s) => {
+        const incident = s.activeIncident;
+        if (!incident || incident.closedAtLocal || incident.actions[actionId]) return s;
+        return {
+          activeIncident: { ...incident, actions: { ...incident.actions, [actionId]: { clientTimestamp: now } } },
+          outbox: [...s.outbox, { kind: 'action', incidentId: incident.id, actionId, clientTimestamp: now }],
+        };
+      }),
+      finishIncident: (now) => set((s) => {
+        const incident = s.activeIncident;
+        if (!incident || incident.closedAtLocal) return s;
+        return {
+          activeIncident: null,
+          lastReport: { ...incident, closedAtLocal: now },
+          outbox: [...s.outbox, { kind: 'close', incidentId: incident.id }],
+        };
+      }),
+      applyIncidentSync: (id, patch) => set((s) => {
+        const apply = (incident: LocalIncident | null) => incident?.id === id ? {
+          ...incident, ...patch,
+          actions: patch.actions ? { ...incident.actions, ...patch.actions } : incident.actions,
+        } : incident;
+        return { activeIncident: apply(s.activeIncident), lastReport: apply(s.lastReport) };
+      }),
+      acknowledgeOutbox: (snapshot, remaining) => set((s) => ({
+        outbox: [...remaining, ...s.outbox.slice(snapshot.length)],
+      })),
       setHasTrustedContact: (hasTrustedContact) => set({ hasTrustedContact }),
       setTaskCompleted: (id, completed) => set((s) => ({
         completedTaskIds: completed
@@ -96,12 +155,12 @@ export const useAppStore = create<AppStore>()(
           user,
           status: 'authenticated',
           obDone: true,
-          ...(s.user?.id !== user.id ? { answers: null, baseScore: null, completedTaskIds: [], completedSimulationIds: [], hasTrustedContact: false } : {}),
+          ...(s.user?.id !== user.id ? { answers: null, baseScore: null, completedTaskIds: [], completedSimulationIds: [], hasTrustedContact: false, activeIncident: null, lastReport: null, outbox: [] } : {}),
         }));
       },
       logout: async () => {
         await secureStore.clearSession();
-        set({ user: null, status: 'idle', answers: null, baseScore: null, completedTaskIds: [], completedSimulationIds: [], hasTrustedContact: false });
+        set({ user: null, status: 'idle', answers: null, baseScore: null, completedTaskIds: [], completedSimulationIds: [], hasTrustedContact: false, activeIncident: null, lastReport: null, outbox: [] });
       },
     }),
     {
@@ -119,6 +178,9 @@ export const useAppStore = create<AppStore>()(
         completedTaskIds: s.completedTaskIds,
         completedSimulationIds: s.completedSimulationIds,
         hasTrustedContact: s.hasTrustedContact,
+        activeIncident: s.activeIncident,
+        lastReport: s.lastReport,
+        outbox: s.outbox,
       }),
     }
   )

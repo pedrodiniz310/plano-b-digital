@@ -32,7 +32,7 @@ soma/subtrai pontos em 4 pontos do código; produção deriva sempre do mesmo da
 fonte, eliminando a classe de bug "pontos dessincronizam"). Só o **log do
 incidente** (`IncidentAction`) precisa de sincronização de verdade: fila local
 (outbox) em AsyncStorage grava ação + timestamp otimista enquanto offline; ao
-reconectar (`@react-native-community/netinfo`), sincroniza com o servidor, que
+surge uma oportunidade de nova tentativa, sincroniza com o servidor, que
 carimba `completedAt` autoritativo na chegada — é esse timestamp que sustenta o
 relatório final.
 
@@ -51,6 +51,11 @@ relatório final.
   têm o requisito explícito de "funcionar sem rede" que o Modo Emergência tem.
 
 ## Consequências
+
+- Nota de implementação (Marco 6): a fila é reenviada após cada operação,
+  durante a verificação de sessão e quando o app volta ao primeiro plano.
+  Essa estratégia de tentativas dispensa um observador de rede;
+  o app não espera pela conexão para iniciar, concluir ações ou encerrar o atendimento.
 
 - Fica mais fácil: atualizar conteúdo (nova pergunta, nova tarefa) é PR só no app,
   sem migration; pontuação nunca fica inconsistente com os fatos que a compõem.

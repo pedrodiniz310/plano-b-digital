@@ -15,6 +15,9 @@ import { ContactScreen } from '../screens/contact/ContactScreen';
 import { SimulationPlayScreen } from '../screens/simulations/SimulationPlayScreen';
 import { SimulationResultScreen } from '../screens/simulations/SimulationResultScreen';
 import { PlaceholderScreen } from '../screens/shared/PlaceholderScreen';
+import { EmergencyPickScreen } from '../screens/emergency/EmergencyPickScreen';
+import { EmergencyRunScreen } from '../screens/emergency/EmergencyRunScreen';
+import { ReportScreen } from '../screens/emergency/ReportScreen';
 import { TabNavigator } from './TabNavigator';
 import type { RootStackParamList } from './types';
 
@@ -40,9 +43,9 @@ export function RootNavigator() {
       <Stack.Screen name="FamilyProtocol" component={PlaceholderScreen} />
       <Stack.Screen name="SimulationPlay" component={SimulationPlayScreen} />
       <Stack.Screen name="SimulationResult" component={SimulationResultScreen} />
-      <Stack.Screen name="EmergencyPick" component={PlaceholderScreen} />
-      <Stack.Screen name="EmergencyRun" component={PlaceholderScreen} />
-      <Stack.Screen name="Report" component={PlaceholderScreen} />
+      <Stack.Screen name="EmergencyPick" component={EmergencyPickScreen} />
+      <Stack.Screen name="EmergencyRun" component={EmergencyRunScreen} />
+      <Stack.Screen name="Report" component={ReportScreen} />
     </Stack.Navigator>
   );
 }
