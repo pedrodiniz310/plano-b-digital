@@ -39,7 +39,12 @@ interface PlanSlice {
   setCompletedTasks: (ids: string[]) => void;
 }
 
-type AppStore = PrefsSlice & SessionSlice & AssessmentSlice & PlanSlice;
+interface ContactSlice {
+  hasTrustedContact: boolean;
+  setHasTrustedContact: (value: boolean) => void;
+}
+
+type AppStore = PrefsSlice & SessionSlice & AssessmentSlice & PlanSlice & ContactSlice;
 
 export const useAppStore = create<AppStore>()(
   persist(
@@ -59,6 +64,8 @@ export const useAppStore = create<AppStore>()(
       baseScore: null,
       setAssessment: (answers, baseScore) => set({ answers, baseScore }),
       completedTaskIds: [],
+      hasTrustedContact: false,
+      setHasTrustedContact: (hasTrustedContact) => set({ hasTrustedContact }),
       setTaskCompleted: (id, completed) => set((s) => ({
         completedTaskIds: completed
           ? s.completedTaskIds.includes(id) ? s.completedTaskIds : [...s.completedTaskIds, id]
@@ -76,12 +83,12 @@ export const useAppStore = create<AppStore>()(
           user,
           status: 'authenticated',
           obDone: true,
-          ...(s.user?.id !== user.id ? { answers: null, baseScore: null, completedTaskIds: [] } : {}),
+          ...(s.user?.id !== user.id ? { answers: null, baseScore: null, completedTaskIds: [], hasTrustedContact: false } : {}),
         }));
       },
       logout: async () => {
         await secureStore.clearSession();
-        set({ user: null, status: 'idle', answers: null, baseScore: null, completedTaskIds: [] });
+        set({ user: null, status: 'idle', answers: null, baseScore: null, completedTaskIds: [], hasTrustedContact: false });
       },
     }),
     {
@@ -97,6 +104,7 @@ export const useAppStore = create<AppStore>()(
         answers: s.answers,
         baseScore: s.baseScore,
         completedTaskIds: s.completedTaskIds,
+        hasTrustedContact: s.hasTrustedContact,
       }),
     }
   )
