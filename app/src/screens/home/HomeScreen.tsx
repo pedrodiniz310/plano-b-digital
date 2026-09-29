@@ -28,9 +28,9 @@ export function HomeScreen({ navigation }: Props) {
   const theme = useTheme();
   const user = useAppStore((s) => s.user);
   const baseScore = useAppStore((s) => s.baseScore);
+  const completedTaskIds = useAppStore((s) => s.completedTaskIds);
 
-  // Tarefas e simulações reais chegam nos próximos marcos.
-  const completedTaskCount = 0;
+  const completedTaskCount = completedTaskIds.length;
   const completedSimulationCount = 0;
   const score = readinessScore({ baseScore, completedTaskCount, completedSimulationCount });
   const level = levelOf(score);
@@ -40,7 +40,7 @@ export function HomeScreen({ navigation }: Props) {
     hasTrustedContact: false,
     completedSimulationCount,
   });
-  const pendingTasks = TASKS.slice(0, 3);
+  const pendingTasks = TASKS.filter((task) => !completedTaskIds.includes(task.id)).slice(0, 3);
 
   const quickAccess: { label: string; glyph: 'lock' | 'users' | 'play' | 'doc'; onPress: () => void }[] = [
     { label: 'Cofre', glyph: 'lock', onPress: () => navigation.navigate('Vault') },
@@ -96,7 +96,7 @@ export function HomeScreen({ navigation }: Props) {
               key={task.id}
               accessibilityRole="button"
               accessibilityLabel={task.title}
-              onPress={() => navigation.navigate('Plan')}
+              onPress={() => navigation.navigate('TaskDetail', { taskId: task.id })}
               style={[styles.taskRow, { borderColor: theme.colors.border, backgroundColor: theme.colors.surface }]}
             >
               <View style={{ flex: 1 }}>

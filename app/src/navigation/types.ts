@@ -1,4 +1,5 @@
 import type { NavigatorScreenParams } from '@react-navigation/native';
+import type { PlanCategoryId } from '../content/plan';
 
 export type MainTabParamList = {
   Home: undefined;
@@ -20,6 +21,8 @@ export type RootStackParamList = {
   Processing: undefined;
   Result: undefined;
   MainTabs: NavigatorScreenParams<MainTabParamList> | undefined;
+  PlanCategory: { categoryId: PlanCategoryId };
+  TaskDetail: { taskId: string };
   Vault: undefined;
   Contact: undefined;
   FamilyProtocol: undefined;

@@ -33,7 +33,13 @@ interface AssessmentSlice {
   setAssessment: (answers: Answers, baseScore: number) => void;
 }
 
-type AppStore = PrefsSlice & SessionSlice & AssessmentSlice;
+interface PlanSlice {
+  completedTaskIds: string[];
+  setTaskCompleted: (id: string, completed: boolean) => void;
+  setCompletedTasks: (ids: string[]) => void;
+}
+
+type AppStore = PrefsSlice & SessionSlice & AssessmentSlice & PlanSlice;
 
 export const useAppStore = create<AppStore>()(
   persist(
@@ -52,6 +58,13 @@ export const useAppStore = create<AppStore>()(
       answers: null,
       baseScore: null,
       setAssessment: (answers, baseScore) => set({ answers, baseScore }),
+      completedTaskIds: [],
+      setTaskCompleted: (id, completed) => set((s) => ({
+        completedTaskIds: completed
+          ? s.completedTaskIds.includes(id) ? s.completedTaskIds : [...s.completedTaskIds, id]
+          : s.completedTaskIds.filter((taskId) => taskId !== id),
+      })),
+      setCompletedTasks: (ids) => set({ completedTaskIds: [...new Set(ids)] }),
       setAuthenticating: () => set({ status: 'authenticating' }),
       setSession: async (user, tokens) => {
         await Promise.all([
@@ -63,12 +76,12 @@ export const useAppStore = create<AppStore>()(
           user,
           status: 'authenticated',
           obDone: true,
-          ...(s.user?.id !== user.id ? { answers: null, baseScore: null } : {}),
+          ...(s.user?.id !== user.id ? { answers: null, baseScore: null, completedTaskIds: [] } : {}),
         }));
       },
       logout: async () => {
         await secureStore.clearSession();
-        set({ user: null, status: 'idle', answers: null, baseScore: null });
+        set({ user: null, status: 'idle', answers: null, baseScore: null, completedTaskIds: [] });
       },
     }),
     {
@@ -83,6 +96,7 @@ export const useAppStore = create<AppStore>()(
         user: s.user,
         answers: s.answers,
         baseScore: s.baseScore,
+        completedTaskIds: s.completedTaskIds,
       }),
     }
   )

@@ -7,6 +7,7 @@ import { registerPrisma } from './plugins/prisma.js';
 import { registerRateLimit } from './plugins/rateLimit.js';
 import { authRoutes } from './routes/auth.js';
 import { assessmentRoutes } from './routes/assessments.js';
+import { planRoutes } from './routes/plan.js';
 
 export interface BuildAppOptions {
   /**
@@ -70,6 +71,7 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
   app.get('/health', async () => ({ ok: true }));
   await app.register(authRoutes);
   await app.register(assessmentRoutes);
+  await app.register(planRoutes);
 
   return app;
 }
