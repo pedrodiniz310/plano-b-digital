@@ -5,6 +5,7 @@ import { useTheme } from '../../theme/ThemeProvider';
 import type { RootStackParamList } from '../../navigation/types';
 import { fetchLatestAssessment } from '../../api/assessments';
 import { fetchPlan } from '../../api/plan';
+import { fetchSimulationResults } from '../../api/simulations';
 import { fetchContact } from '../../api/contact';
 import { useAppStore } from '../../state/store';
 
@@ -17,6 +18,7 @@ export function VerifyingScreen({ route, navigation }: Props) {
   const label = route.params?.label ?? 'Carregando';
   const setAssessment = useAppStore((s) => s.setAssessment);
   const setCompletedTasks = useAppStore((s) => s.setCompletedTasks);
+  const setCompletedSimulations = useAppStore((s) => s.setCompletedSimulations);
   const setHasTrustedContact = useAppStore((s) => s.setHasTrustedContact);
 
   useEffect(() => {
@@ -49,6 +51,14 @@ export function VerifyingScreen({ route, navigation }: Props) {
         })(),
         (async () => {
           try {
+            const { results } = await fetchSimulationResults();
+            if (active) setCompletedSimulations(results.map((result) => result.simulationId));
+          } catch {
+            // Sem rede ou falha do servidor: mantemos as simulações locais.
+          }
+        })(),
+        (async () => {
+          try {
             const contact = await fetchContact();
             if (active) setHasTrustedContact(contact !== null);
           } catch {
@@ -62,7 +72,7 @@ export function VerifyingScreen({ route, navigation }: Props) {
 
     void verify();
     return () => { active = false; };
-  }, [navigation, setAssessment, setCompletedTasks, setHasTrustedContact]);
+  }, [navigation, setAssessment, setCompletedTasks, setCompletedSimulations, setHasTrustedContact]);
 
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.bg }]}>

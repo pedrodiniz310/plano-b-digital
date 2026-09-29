@@ -29,10 +29,11 @@ export function HomeScreen({ navigation }: Props) {
   const user = useAppStore((s) => s.user);
   const baseScore = useAppStore((s) => s.baseScore);
   const completedTaskIds = useAppStore((s) => s.completedTaskIds);
+  const completedSimulationIds = useAppStore((s) => s.completedSimulationIds);
   const hasTrustedContact = useAppStore((s) => s.hasTrustedContact);
 
   const completedTaskCount = completedTaskIds.length;
-  const completedSimulationCount = 0;
+  const completedSimulationCount = completedSimulationIds.length;
   const score = readinessScore({ baseScore, completedTaskCount, completedSimulationCount });
   const level = levelOf(score);
   const points = totalPoints({

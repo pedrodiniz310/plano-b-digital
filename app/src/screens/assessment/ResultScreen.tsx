@@ -20,6 +20,7 @@ export function ResultScreen({ navigation }: Props) {
   const answers = useAppStore((s) => s.answers);
   const baseScore = useAppStore((s) => s.baseScore);
   const completedTaskIds = useAppStore((s) => s.completedTaskIds);
+  const completedSimulationIds = useAppStore((s) => s.completedSimulationIds);
 
   useEffect(() => {
     if (!answers || baseScore === null) navigation.replace('Ready');
@@ -27,7 +28,7 @@ export function ResultScreen({ navigation }: Props) {
 
   if (!answers || baseScore === null) return null;
 
-  const score = readinessScore({ baseScore, completedTaskCount: completedTaskIds.length, completedSimulationCount: 0 });
+  const score = readinessScore({ baseScore, completedTaskCount: completedTaskIds.length, completedSimulationCount: completedSimulationIds.length });
   const level = levelOf(score);
   const levelColor = score >= 85 ? theme.colors.green : score >= 70 ? theme.colors.blue : score >= 40 ? theme.colors.amber : theme.colors.red;
   const scores = categoryScores(answers);

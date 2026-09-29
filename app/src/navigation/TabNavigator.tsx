@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { HomeScreen } from '../screens/home/HomeScreen';
 import { PlanScreen } from '../screens/plan/PlanScreen';
+import { SimulationsScreen } from '../screens/simulations/SimulationsScreen';
 import { PlaceholderScreen } from '../screens/shared/PlaceholderScreen';
 import { Icon } from '../theme/Icon';
 import { useTheme } from '../theme/ThemeProvider';
@@ -74,7 +75,7 @@ export function TabNavigator() {
       />
       <Tab.Screen
         name="Simulations"
-        component={PlaceholderScreen}
+        component={SimulationsScreen}
         options={{
           title: 'Simulações',
           tabBarIcon: ({ color, size }) => <Icon glyph="play" color={color} size={size} />,

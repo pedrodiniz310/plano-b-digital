@@ -145,3 +145,11 @@ export const ROUBO_STEPS: SimulationStep[] = [
     feedbackNo: 'Preservar evidências e registrar o ocorrido é o que sustenta contestações no banco e nas plataformas.',
   },
 ];
+
+/** Quatro aprendizados do resultado (`vSimResult` no protótipo). */
+export const ROUBO_LEARNINGS = [
+  'O e-mail principal é a primeira conta a proteger.',
+  'Bloquear o chip interrompe os códigos por SMS.',
+  'Nenhum banco pede senha por telefone.',
+  'Registro e evidências sustentam contestações.',
+] as const;
