@@ -62,6 +62,12 @@ async function rawRequest<T>(path: string, options: RequestOptions, accessToken?
  */
 let refreshInFlight: Promise<AuthSession | null> | null = null;
 
+/** Chamado quando a sessão morreu de vez (renovação devolveu `null`) — a store derruba o login local. */
+let onSessionExpired: () => void = () => {};
+export function setSessionExpiredHandler(handler: () => void): void {
+  onSessionExpired = handler;
+}
+
 export async function refreshSession(): Promise<AuthSession | null> {
   if (!refreshInFlight) {
     refreshInFlight = (async () => {
@@ -107,6 +113,8 @@ export async function apiRequest<T>(path: string, options: RequestOptions = {}):
       // substitui o 401: é a causa atual e é a que a tela sabe explicar.
       const renewed = await refreshSession();
       if (renewed) return rawRequest<T>(path, options, renewed.accessToken);
+      // Sem credencial válida, ficar "logado" só gera 401 em toda chamada.
+      onSessionExpired();
     }
     throw err;
   }

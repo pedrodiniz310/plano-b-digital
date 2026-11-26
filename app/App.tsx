@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { ActivityIndicator, AppState, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, createNavigationContainerRef } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import {
   useFonts,
@@ -14,11 +14,18 @@ import { ThemeProvider } from './src/theme/ThemeProvider';
 import { RootNavigator } from './src/navigation/RootNavigator';
 import { syncOutbox } from './src/state/syncIncidents';
 import { useAppStore } from './src/state/store';
+import type { RootStackParamList } from './src/navigation/types';
+
+const navigationRef = createNavigationContainerRef<RootStackParamList>();
 
 export default function App() {
   useEffect(() => {
     const unsubscribeStore = useAppStore.subscribe((state, previous) => {
       if (state.outbox.length > previous.outbox.length) void syncOutbox();
+      // Saída manual ou sessão expirada: qualquer tela logada volta pro login.
+      if (previous.user && !state.user && navigationRef.isReady()) {
+        navigationRef.reset({ index: 0, routes: [{ name: 'Auth', params: { mode: 'login' } }] });
+      }
     });
     const unsubscribeHydration = useAppStore.persist.onFinishHydration(() => { void syncOutbox(); });
     const appState = AppState.addEventListener('change', (state) => {
@@ -45,7 +52,7 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <ThemeProvider>
-        <NavigationContainer>
+        <NavigationContainer ref={navigationRef}>
           <RootNavigator />
           <StatusBar style="auto" />
         </NavigationContainer>

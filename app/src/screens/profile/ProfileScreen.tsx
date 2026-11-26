@@ -5,7 +5,7 @@ import { Alert, ScrollView, StyleSheet, Switch, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { CompositeScreenProps } from '@react-navigation/native';
 import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import type { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Icon } from '../../theme/Icon';
 import { useTheme } from '../../theme/ThemeProvider';
 import { useAppStore } from '../../state/store';
@@ -50,7 +50,7 @@ export function ProfileScreen({ navigation }: Props) {
     Alert.alert('Sair da conta?', warning, [
       { text: 'Cancelar', style: 'cancel' },
       { text: 'Sair', style: 'destructive', onPress: () => {
-        void logout().then(() => navigation.getParent<NativeStackNavigationProp<RootStackParamList>>()?.reset({ index: 0, routes: [{ name: 'Auth', params: { mode: 'login' } }] }));
+        void logout(); // App.tsx leva pro login quando `user` vira null.
       } },
     ]);
   }

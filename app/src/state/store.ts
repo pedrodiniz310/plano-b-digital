@@ -6,7 +6,7 @@ import type { Answers } from '../lib/scoring';
 import { asyncStorageAdapter, PERSIST_KEY } from './persist';
 import { secureStore } from './secureStore';
 import { logoutRemote } from '../api/auth';
-import { ApiError } from '../api/client';
+import { ApiError, setSessionExpiredHandler } from '../api/client';
 import { updateMe, type Me } from '../api/me';
 import type { Op } from '../lib/outbox';
 
@@ -248,3 +248,9 @@ export const useAppStore = create<AppStore>()(
     }
   )
 );
+
+// Refresh recusado pelo servidor = sessão encerrada: sai localmente (tokens já
+// foram apagados, então `logout` não chama a rede) e preserva o outbox do dono.
+setSessionExpiredHandler(() => {
+  if (useAppStore.getState().user) void useAppStore.getState().logout();
+});
